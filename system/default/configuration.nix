@@ -83,6 +83,7 @@
     extraGroups = [ "docker" "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
       slack
+      spotify
       firefox
       vivaldi
     ];

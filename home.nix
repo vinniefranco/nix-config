@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
@@ -21,26 +19,8 @@
     repgrep
     fd
     lua-language-server
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -96,8 +76,8 @@
       ll = "ls -al";
       v = "nvim";
       update-lock = "cd ~/.dotfiles && nix flake update";
-      rebuild-sys = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#default";
-      rebuild-home = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
+      r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#default";
+      r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
     };
 
     oh-my-zsh.enable = true;
@@ -127,6 +107,11 @@
 
     plugins = with pkgs.vimPlugins; [
       {
+        plugin = Navigator-nvim;
+        config = toLuaFile ./nvim/plugin/navigator.lua;
+      }
+
+      {
         plugin = oil-nvim;
         config = toLuaFile ./nvim/plugin/oil.lua;
       }
@@ -141,14 +126,8 @@
         config = toLua "require(\"Comment\").setup()";
       }
 
-      {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
-      }
-
       neodev-nvim
 
-      nvim-cmp 
       {
         plugin = nvim-cmp;
         config = toLuaFile ./nvim/plugin/cmp.lua;
@@ -166,7 +145,6 @@
 
       luasnip
       friendly-snippets
-
 
       lualine-nvim
       nvim-web-devicons
@@ -188,10 +166,10 @@
 
       vim-nix
 
-      # {
-      #   plugin = vimPlugins.own-onedark-nvim;
-      #   config = "colorscheme onedark";
-      # }
+      {
+        plugin = onedarker-nvim;
+        config = "colorscheme onedarker";
+      }
     ];
 
     extraLuaConfig = ''
@@ -222,11 +200,46 @@
 
   programs.kitty = {
     enable = true;
-    theme = "Falcon";
+    theme = "One Dark";
     font.name = "FiraCodeNFM-Med";
     font.size = 9;
   };
-  programs.tmux.enable = true;
+  programs.tmux = {
+    baseIndex = 1;
+    escapeTime = 0;
+    enable = true;
+    extraConfig = ''
+    set-option -g focus-events on
+    set-window-option -g xterm-keys on
+
+    # Smart pane switching with awareness of vim splits
+    is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|(n)?vim?)(diff)?$"'
+    bind -n M-n if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+    bind -n M-e if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+    bind -n M-i if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+    bind -n M-o if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+
+    # act like vim
+    bind n select-pane -L
+    bind e select-pane -D
+    bind i select-pane -U
+    bind o select-pane -R
+    bind-key -r C-l select-window -t :-
+    bind-key -r C-u select-window -t :+
+
+    bind Up resize-pane -U 15
+    bind Down resize-pane -D 15
+    bind Left resize-pane -L 25
+    bind Right resize-pane -R 25
+    '';
+    historyLimit = 10000;
+    keyMode = "vi";
+    prefix = "C-x";
+    plugins = with pkgs; [
+      tmuxPlugins.dracula
+    ];
+    terminal = "tmux-256color";
+  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
