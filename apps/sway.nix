@@ -24,6 +24,9 @@
         "${modifier}+Shift+Up" = "move down";
         "${modifier}+Shift+Down" = "move up";
         "${modifier}+Shift+Right" = "move right";
+
+        "${modifier}+Shift+c" = "reload";
+        "${modifier}+Shift+w" = "exec vivaldi";
       };
       output = {
         "*" = {
@@ -40,6 +43,9 @@
       };
       modifier = "Mod4";
       terminal = "kitty";
+      window = {
+        titlebar = false;
+      };
     };
   };
 }
