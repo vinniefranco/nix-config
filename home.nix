@@ -123,6 +123,10 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
+      {
+        plugin = vimplugin-oil.nvim;
+        config = toLuaFile ./nvim/plugin/oil.lua;
+      }
 
       {
         plugin = nvim-lspconfig;
