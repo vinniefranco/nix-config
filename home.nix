@@ -17,7 +17,10 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
+    repgrep
+    fd
+    lua-language-server
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -124,7 +127,7 @@
 
     plugins = with pkgs.vimPlugins; [
       {
-        plugin = vimplugin-oil.nvim;
+        plugin = oil-nvim;
         config = toLuaFile ./nvim/plugin/oil.lua;
       }
 
@@ -170,12 +173,15 @@
 
       {
         plugin = (nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-nix
-          p.tree-sitter-vim
           p.tree-sitter-bash
-          p.tree-sitter-lua
-          p.tree-sitter-python
+          p.tree-sitter-comment
+          p.tree-sitter-dockerfile
           p.tree-sitter-json
+          p.tree-sitter-lua
+          p.tree-sitter-nix
+          p.tree-sitter-make
+          p.tree-sitter-python
+          p.tree-sitter-vim
         ]));
         config = toLuaFile ./nvim/plugin/treesitter.lua;
       }
