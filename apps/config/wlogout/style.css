@@ -24,7 +24,7 @@ button:focus, button:active, button:hover {
 }
 
 #logout {
-    background-image: image(url("icons/logout.png"), url("/usr/share/wlogout/icons/logout.png"));
+    background-image: image(url("~/.dotfiles/apps/config/wlogout/icons/logout.png"), url("/usr/share/wlogout/icons/logout.png"));
 }
 
 #suspend {

@@ -2,7 +2,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji

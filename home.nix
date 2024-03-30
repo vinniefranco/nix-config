@@ -28,6 +28,13 @@
     # ".screenrc".source = dotfiles/screenrc;
   };
 
+  xdg.enable = true;
+  xdg.userDirs = {
+    enable = true;
+  };
+  xdg.mime.enable = true;
+  xdg.mimeApps.enable = true;
+
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome.adwaita-icon-theme;
@@ -41,7 +48,6 @@
     NIXOS_OZONE_WL = "1";
     EDITOR = "nvim";
   };
-  
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

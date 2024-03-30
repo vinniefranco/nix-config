@@ -32,6 +32,7 @@
         "${modifier}+Shift+Down" = "move up";
         "${modifier}+Shift+Right" = "move right";
 
+        "${modifier}+x" = "exec wlogout";
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+w" = "exec vivaldi";
         "XF86MonBrightnessDown" = "exec light -U 10";
