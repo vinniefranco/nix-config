@@ -1,6 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
+  xdg.portal = {
+    enable = true;
+    extraPortals =  [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+    config = { sway.default = ["wlr" "gtk"]; };
+  };
 
   wayland.windowManager.sway = {
     enable = true;

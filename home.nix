@@ -15,12 +15,6 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  xdg.portal = {
-    enable = true;
-    extraPortals =  [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
-    config = { sway.default = ["wlr" "gtk"]; };
-  };
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
