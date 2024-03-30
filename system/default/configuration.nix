@@ -99,6 +99,7 @@
     kitty
     killall
     neovim
+    pulseaudio
     swaynotificationcenter
     vulkan-tools
     unzip
@@ -137,4 +138,5 @@
   services.gnome.gnome-keyring.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
+  xdg.portal.wlr.enable = true;
 }

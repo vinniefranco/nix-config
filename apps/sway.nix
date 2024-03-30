@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+
   wayland.windowManager.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     config = rec {
       keybindings = let 
         modifier = config.wayland.windowManager.sway.config.modifier;
@@ -27,7 +29,18 @@
 
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+w" = "exec vivaldi";
+        "XF86MonBrightnessDown" = "exec light -U 10";
+        "XF86MonBrightnessUp" = "exec light -A 10";
+        "XF86AudioRaiseVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'";
+        "XF86AudioLowerVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'";
+        "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
       };
+      gaps = {
+        inner = 50;
+        outer = 0;
+        smartBorders = "off";
+      };
+      bars = [];
       output = {
         "*" = {
           bg = "~/Pictures/dystopia.jpg fill";
@@ -43,6 +56,9 @@
       };
       modifier = "Mod4";
       terminal = "kitty";
+      startup = [
+        { command = "waybar"; }
+      ];
       window = {
         titlebar = false;
       };
