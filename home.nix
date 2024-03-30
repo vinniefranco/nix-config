@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     repgrep
     fd
+    networkmanagerapplet
     lua-language-server
   ];
 

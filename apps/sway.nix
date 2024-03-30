@@ -39,9 +39,9 @@
         "XF86AudioRaiseVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'";
         "XF86AudioLowerVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'";
         "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
-      };
+     };
       gaps = {
-        inner = 50;
+        inner = 30;
         outer = 0;
         smartBorders = "off";
       };
@@ -63,6 +63,8 @@
       terminal = "kitty";
       startup = [
         { command = "waybar"; }
+        { command = "blueman-applet"; }
+        { command = "swaync"; }
       ];
       window = {
         titlebar = false;

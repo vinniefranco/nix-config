@@ -23,10 +23,6 @@ button:focus, button:active, button:hover {
 	outline-style: none;
 }
 
-#lock {
-    background-image: image(url("icons/lock.png"), url("/usr/share/wlogout/icons/lock.png"));
-}
-
 #logout {
     background-image: image(url("icons/logout.png"), url("/usr/share/wlogout/icons/logout.png"));
 }

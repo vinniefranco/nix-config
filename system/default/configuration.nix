@@ -98,6 +98,7 @@
     git-lfs
     kitty
     killall
+    libnotify
     neovim
     pulseaudio
     swaynotificationcenter

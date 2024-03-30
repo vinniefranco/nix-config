@@ -8,6 +8,7 @@
     ./sway.nix
     ./tmux.nix
     ./waybar.nix
+    ./wlogout.nix
     ./zsh.nix
   ];
 }
