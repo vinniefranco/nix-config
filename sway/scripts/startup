@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Kill already running process
+_ps=(waybar xfce-polkit kdeconnect-indicator blueman-applet nm-applet wlsunset rot8)
+
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+export LIBVA_DRI3_DISABLE=1
+export MOZ_ENABLE_WAYLAND=1
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Polkit agent
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Lauch statusbar (waybar)
+~/.config/sway/scripts/statusbar &
+
+# Lauch kdeconnect
+kdeconnect-indicator &
+
+# Lauch bluetooth
+blueman-applet &
+
+# Start that VPN BS.
+nm-applet &
+
+# Avoid harsh light at night
+wlsunset -l 43.145500 -L -88.277010 -t 3000  &
+
+# Display rotation
+rot8 &

@@ -1,0 +1,36 @@
+#-- Style -------------------------------
+default_border pixel 1
+default_floating_border none
+smart_borders off
+
+titlebar_border_thickness 1
+titlebar_padding 9 9
+title_align center
+
+gaps inner 30
+gaps outer 0
+
+corner_radius 10
+
+
+##-- Colors ------------------------------
+
+client.background       	#1E2128
+
+# class                 	border  backgr. text    indicator child_border
+client.focused          #00e8c6 #00e8c6 #00e8c6 #00e8c6 #00e8c6
+client.unfocused        #1e1e2e #1e1e2e #1e1e2e #1e1e2e #1e1e2e
+client.focused_inactive #313244 #313244 #313244 #313244 #313244
+
+##-- Gtk themes ------------------------------
+set $gnome-schema org.gnome.desktop.interface
+
+seat * xcursor_theme Adwaita 32
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Sweet-Dark'
+    gsettings set $gnome-schema icon-theme 'Tela-nord'
+    gsettings set $gnome-schema cursor-theme 'Adwaita'
+    gsettings set $gnome-schema cursor-size 32
+    gsettings set $gnome-schema font-name 'NotoSansMono Nerd Font 9'
+}

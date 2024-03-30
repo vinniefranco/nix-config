@@ -1,0 +1,36 @@
+##-- Input configuration -----------------
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+## Touchpad / Mouse
+# input "*" {
+#     dwt enabled
+#     tap enabled
+#     natural_scroll disabled
+#     middle_emulation enabled
+#     accel_profile adaptive
+#     pointer_accel 0.2
+#     tap_button_map lrm
+# }
+input "43256:6198:Bastard_Keyboards_Dilemma_(3x5+3)_Assembled_Consumer_Control" {
+    dwt enabled
+    tap enabled
+    drag enabled
+    natural_scroll disabled
+    accel_profile adaptive
+    pointer_accel 0.2
+    tap_button_map lrm
+}
+
+## Tablet
+## use swaymsg -t get_outputs to get the names of your outputs
+## use swaymsg -t get_inputs to get the names of your inputs
+input "1118:3154:IPTS_Stylus" map_to_output "LG Display 0x0719 0x000013A1"
+input "1118:3154:IPTS_Touch" map_to_output "LG Display 0x0719 0x000013A1"
+
+## Keyboard Layout
+input "type:keyboard" {
+    xkb_layout us
+    xkb_options caps:escape
+}
