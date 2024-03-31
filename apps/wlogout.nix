@@ -3,7 +3,6 @@
 {
   programs.wlogout = {
     enable = true;
-    style = ./config/wlogout/style.css;
     layout = [
       {
         label = "logout";

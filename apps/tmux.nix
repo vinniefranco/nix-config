@@ -6,6 +6,7 @@
     escapeTime = 0;
     enable = true;
     extraConfig = ''
+    set-option -sa terminal-features ',xterm-kitty:RGB'
     set-option -g focus-events on
     set-window-option -g xterm-keys on
 

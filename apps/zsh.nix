@@ -3,6 +3,8 @@
 {
   programs.zsh = {
     enable = true;
+    autosuggestion.enable = true;
+    enableCompletion = true;
     shellAliases = {
       ll = "ls -al";
       v = "nvim";

@@ -1,5 +1,16 @@
 { pkgs, lib, ... }:
 
+let
+  oil-gitstatus = pkgs.vimUtils.buildVimPlugin {
+    name = "oil-gitstatus";
+    src = pkgs.fetchFromGitHub {
+      owner = "refractalize";
+      repo = "oil-git-status.nvim";
+      rev = "839a1a287f5eb3ce1b07b50323032398e63f7ffa";
+      hash = "sha256-pTAvkJPmT3eD3XWrYl6nyKSzeRFEHOi8iDCamF1D1Cg=";
+    };
+  };
+in
 {
   programs.neovim = 
   let
@@ -8,8 +19,8 @@
   in
   {
     enable = true;
-
     viAlias = true;
+
     vimAlias = true;
     vimdiffAlias = true;
 
@@ -18,6 +29,27 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
+      lsp-zero-nvim
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp_luasnip
+      friendly-snippets
+      lualine-nvim
+      luasnip
+      neodev-nvim
+      nvim-web-devicons
+      vim-nix
+      {
+        plugin = flash-nvim;
+        config = toLuaFile ./nvim/plugin/flash-nvim.lua;
+      }
+
+      {
+        plugin = nvim-comment;
+        config = toLuaFile ./nvim/plugin/nvim-comment.lua;
+      }
+
       {
         plugin = Navigator-nvim;
         config = toLuaFile ./nvim/plugin/navigator.lua;
@@ -26,6 +58,11 @@
       {
         plugin = oil-nvim;
         config = toLuaFile ./nvim/plugin/oil.lua;
+      }
+
+      {
+        plugin = oil-gitstatus;
+        config = toLuaFile ./nvim/plugin/oil-gitstatus.lua;
       }
 
       {
@@ -38,8 +75,6 @@
         config = toLua "require(\"Comment\").setup()";
       }
 
-      neodev-nvim
-
       {
         plugin = nvim-cmp;
         config = toLuaFile ./nvim/plugin/cmp.lua;
@@ -49,17 +84,6 @@
         plugin = telescope-nvim;
         config = toLuaFile ./nvim/plugin/telescope.lua;
       }
-
-      telescope-fzf-native-nvim
-
-      cmp_luasnip
-      cmp-nvim-lsp
-
-      luasnip
-      friendly-snippets
-
-      lualine-nvim
-      nvim-web-devicons
 
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -76,8 +100,6 @@
         config = toLuaFile ./nvim/plugin/treesitter.lua;
       }
 
-      vim-nix
-
       {
         plugin = onedarker-nvim;
         config = "colorscheme onedarker";
@@ -87,14 +109,5 @@
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/options.lua}
     '';
-
-    # extraLuaConfig = ''
-    #   ${builtins.readFile ./nvim/options.lua}
-    #   ${builtins.readFile ./nvim/plugin/lsp.lua}
-    #   ${builtins.readFile ./nvim/plugin/cmp.lua}
-    #   ${builtins.readFile ./nvim/plugin/telescope.lua}
-    #   ${builtins.readFile ./nvim/plugin/treesitter.lua}
-    #   ${builtins.readFile ./nvim/plugin/other.lua}
-    # '';
   };
 }

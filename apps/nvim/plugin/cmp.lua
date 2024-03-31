@@ -4,7 +4,12 @@ local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
-cmp.setup {
+cmp.setup({
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+      { name = 'buffer' },
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -39,8 +44,4 @@ cmp.setup {
             end
         end, { 'i', 's' }),
     },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-    },
-}
+})
