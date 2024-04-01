@@ -58,6 +58,16 @@ require('oil-git-status').setup({
     };
     keymaps = [
       {
+        mode = [ "n" ];
+        key = "<leader>tt";
+        action = ":TestFile<CR>";
+      }
+      {
+        mode = [ "n" ];
+        key = "<leader>ts";
+        action = ":TestNearest<CR>";
+      }
+      {
         mode = [ "n" "x" "o" ];
         key = "s";
         action = "function() require'flash'.jump() end";
@@ -205,6 +215,15 @@ EOF
       {
         plugin = oil-gitstatus;
       }
+      {
+        plugin = vim-test;
+        config = ''
+lua << EOF
+vim.g["test#strategy"] = "vimux"
+EOF
+        '';
+      }
+      { plugin = vimux; }
     ];
   };
 }
