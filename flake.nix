@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    lexical-lsp.url = "github:lexical-lsp/lexical";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +36,9 @@
         inherit pkgs;
         modules = [ ./home.nix ];
 
-	extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { 
+          inherit inputs; 
+        };
       };
     };
   };
