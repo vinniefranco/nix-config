@@ -24,7 +24,6 @@
     ripgrep
     fd
     networkmanagerapplet
-    lua-language-server
   ];
 
   home.file = {

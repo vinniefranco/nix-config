@@ -2,7 +2,6 @@
   description = "Nixos config flake";
 
   inputs = {
-    lexical-lsp.url = "github:lexical-lsp/lexical";
     nix-colors.url = "github:misterio77/nix-colors";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

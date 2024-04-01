@@ -152,13 +152,14 @@ require('oil-git-status').setup({
       cmp-treesitter.enable = true;
       comment.enable = true;
       direnv.enable = true;
-      gitsigns.enable = true;
+      friendly-snippets.enable = true;
       flash = {
         enable = true; 
         modes = {
           char.jumpLabels = true;
         };
       };
+      gitsigns.enable = true;
       telescope = {
         enable = true;
         defaults = {
@@ -184,6 +185,7 @@ require('oil-git-status').setup({
         servers = {
           lua-ls.enable = true;
           nixd.enable = true;
+          elixirls.enable = true;
         };
 
       }; 
@@ -205,31 +207,4 @@ EOF
       }
     ];
   };
-  #     friendly-snippets
-  #     lualine-nvim
-  #     luasnip
-  #     neodev-nvim
-  #     nvim-web-devicons
-  #     vim-nix
-  #
-  #     {
-  #       plugin = (nvim-treesitter.withPlugins (p: [
-  #         p.tree-sitter-bash
-  #         p.tree-sitter-comment
-  #         p.tree-sitter-dockerfile
-  #         p.tree-sitter-json
-  #         p.tree-sitter-lua
-  #         p.tree-sitter-nix
-  #         p.tree-sitter-make
-  #         p.tree-sitter-python
-  #         p.tree-sitter-vim
-  #       ]));
-  #       config = toLuaFile ./nvim/plugin/treesitter.lua;
-  #     }
-  #
-  #     {
-  #       plugin = onedarker-nvim;
-  #       config = "colorscheme onedarker";
-  #     }
-  #   ];
 }
