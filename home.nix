@@ -1,7 +1,10 @@
-{ pkgs, lib, ... }:
+{ pkgs, inputs, lib, ... }:
 
 {
-  imports = [ ./apps ];
+  imports = [ 
+    inputs.nix-colors.homeManagerModules.default
+    ./apps 
+  ];
 
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
