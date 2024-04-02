@@ -102,11 +102,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    nss
+    nss.tools
     devbox
     direnv
     git
     git-lfs
+    kicad
+    kicadAddons.kikit
+    kikit
     kitty
     killall
     libnotify
@@ -148,6 +151,7 @@
 
   # For zee secrets
   services.gnome.gnome-keyring.enable = true;
+  programs.dconf.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }

@@ -7,6 +7,33 @@
     config = { sway.default = ["wlr" "gtk"]; };
   };
 
+   home.packages = with pkgs; [ 
+    bibata-cursors
+  ];
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "blue" ];
+        size = "compact";
+        tweaks = [ "rimless" "black" ];
+        variant = "latte";
+      };
+    };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -35,6 +62,7 @@
         "${modifier}+x" = "exec wlogout";
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+w" = "exec vivaldi";
+        "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
         "XF86MonBrightnessDown" = "exec light -U 10";
         "XF86MonBrightnessUp" = "exec light -A 10";
         "XF86AudioRaiseVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'";
@@ -52,12 +80,12 @@
           bg = "~/Pictures/dystopia.jpg fill";
         };
         eDP-1 = {
-          pos = "1080 1680 res 2880x1920";
+          pos = "1080 1600 res 2880x1920";
           scale = "1.5";
         };
         DP-2 = {
           pos = "0 0 res 3456x2160";
-          scale = "1.4";
+          scale = "1.5";
         };
       };
       modifier = "Mod4";
