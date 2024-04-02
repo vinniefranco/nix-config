@@ -110,12 +110,13 @@
     kicad
     kicadAddons.kikit
     kikit
-    kitty
     killall
+    kitty
     libnotify
     neovim
     pulseaudio
     swaynotificationcenter
+    tela-circle-icon-theme
     vulkan-tools
     unzip
     wget
