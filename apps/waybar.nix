@@ -138,7 +138,7 @@
 
         "sway/window" = {
           format = "{app_id}";
-          max-length = 5;
+          max-length = 15;
         };
 
         "sway/workspaces" = {

@@ -20,7 +20,10 @@ in
   programs.nixvim = {
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
-    colorschemes.rose-pine.enable = true;
+    colorschemes.base16 = {
+      enable = true;
+      colorscheme = "tomorrow-night";
+    };
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
