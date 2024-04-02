@@ -3,7 +3,7 @@
 {
   programs.kitty = {
     enable = true;
-    theme = "One Dark";
+    theme = "Square";
     font.name = "FiraCodeNFM-Med";
     font.size = 10;
     settings = {

@@ -2,15 +2,6 @@
 
 let
   toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  nvim-tundra = pkgs.vimUtils.buildVimPlugin {
-    name = "nvim-tundra";
-    src = pkgs.fetchFromGitHub {
-      owner = "sam4llis";
-      repo = "nvim-tundra";
-      rev = "374ec2e2075ebe699a20d29e0c141cf5113adf0c";
-      hash = "sha256-pTAvkJPmT3eD3XWrYl6nyKSzeRFEHOi8iDCamF1D1Cg=";
-    };
-  };
   oil-gitstatus = pkgs.vimUtils.buildVimPlugin {
     name = "oil-gitstatus";
     src = pkgs.fetchFromGitHub {
@@ -27,10 +18,9 @@ in
   ];
 
   programs.nixvim = {
-    globals = {
-      mapleader = " ";
-    };
-    colorschemes.tokyonight.enable = true;
+    globals.mapleader = " ";
+    clipboard.register = "unnamedplus";
+    colorschemes.rose-pine.enable = true;
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
