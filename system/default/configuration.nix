@@ -32,6 +32,10 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ 80 443 ];
+      extraCommands = ''
+        iptables -t nat -I OUTPUT 1 -o lo -p tcp --dport 443 -j REDIRECT --to-port 8443
+        iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+      '';
     };
     hostName = "surface"; # Define your hostname.
     networkmanager.enable = true;
