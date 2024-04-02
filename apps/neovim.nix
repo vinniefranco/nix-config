@@ -24,9 +24,25 @@ in
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
-require('oil-git-status').setup({
-  show_ignored = true
-})
+      require('oil-git-status').setup({
+      show_ignored = true
+    })
+     -- gray
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
+    -- blue
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
+    -- light blue
+    vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg='NONE', fg='#9CDCFE' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link='CmpItemKindVariable' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindText', { link='CmpItemKindVariable' })
+    -- pink
+    vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg='NONE', fg='#C586C0' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link='CmpItemKindFunction' })
+    -- front
+    vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
     '';
     opts = {
       cursorline = true;
@@ -45,89 +61,93 @@ require('oil-git-status').setup({
       tabstop = 2;
       termguicolors = true;
       updatetime = 250;
+      undofile = true;
     };
     keymaps = [
       {
-        mode = [ "n" ];
-        key = "<leader>tt";
         action = ":TestFile<CR>";
-      }
-      {
+        key = "<leader>tt";
         mode = [ "n" ];
-        key = "<leader>ts";
-        action = ":TestNearest<CR>";
       }
       {
-        mode = [ "n" "x" "o" ];
-        key = "s";
+        action = ":TestNearest<CR>";
+        key = "<leader>ts";
+        mode = [ "n" ];
+      }
+      {
         action = "function() require'flash'.jump() end";
+        key = "s";
         lua = true;
+        mode = [ "n" "x" "o" ];
       }
       {
         action = "<CMD>Oil<CR>";
         key = "-";
         mode = ["n"];
+        options.desc = "Open File Navigator";
       }
       {
         action = "<CMD>NavigatorLeft<CR>";
         key = "<C-h>";
         mode = ["n" "t"];
+        options.desc = "Navigate Left";
       }
       {
         action = "<CMD>NavigatorRight<CR>";
         key = "<C-l>";
         mode = ["n" "t"];
+        options.desc = "Navigate Right";
       }
       {
         action = "<CMD>NavigatorUp<CR>";
         key = "<C-k>";
         mode = ["n" "t"];
+        options.desc = "Navigate Up";
       }
       {
         action = "<CMD>NavigatorDown<CR>";
         key = "<C-j>";
         mode = ["n" "t"];
+        options.desc = "Navigate Down";
       }
       {
-        mode = "n";
-        key = "<leader>ff";
         action = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>";
+        key = "<leader>ff";
+        mode = "n";
         options.desc = "Find Files";
       }
       {
-        mode = "n";
-        key = "<leader>fg";
         action = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>";
+        key = "<leader>fg";
+        mode = "n";
         options.desc = "Grep Files";
       }
       {
-        mode = "n";
-        key = "<leader>fb";
         action = "<cmd>lua require('telescope.builtin').buffers()<CR>";
+        key = "<leader>fb";
+        mode = "n";
         options.desc = "Find Buffer";
       }
       {
-        mode = "n";
-        key = "<leader>fd";
         action = "<cmd>lua require('telescope.builtin').diagnostics()<CR>";
+        key = "<leader>fd";
+        mode = "n";
         options.desc = "Find Diagnostics";
       }
       {
-        mode = "n";
-        key = "<leader>ft";
         action = "<cmd>lua require('telescope.builtin').treesitter()<CR>";
+        key = "<leader>ft";
+        mode = "n";
         options.desc = "Find Treesitter";
       }
     ];
     plugins = {
-      nvim-autopairs.enable = true;
       cmp = {
         enable = true;
         settings = {
           snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           completion.completeopt = "noselect";
           preselect = "None";
-
           mapping = {
             "<C-d>" = "cmp.mapping.scroll_docs(-4)";
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
@@ -139,10 +159,11 @@ require('oil-git-status').setup({
           };
 
           sources = [
-            {name = "path";}
-            {name = "nvim_lsp";}
-            {name = "luasnip";}
-            {name = "buffer";}
+            { name = "codeium"; }
+            { name = "path"; }
+            { name = "nvim_lsp"; }
+            { name = "luasnip"; }
+            { name = "buffer"; }
           ];
         };
       };
@@ -150,6 +171,7 @@ require('oil-git-status').setup({
       cmp-nvim-lsp.enable = true;
       cmp-spell.enable = true;
       cmp-treesitter.enable = true;
+      codeium-nvim.enable = true;
       comment.enable = true;
       direnv.enable = true;
       friendly-snippets.enable = true;
@@ -160,6 +182,7 @@ require('oil-git-status').setup({
         };
       };
       gitsigns.enable = true;
+      nvim-autopairs.enable = true;
       telescope = {
         enable = true;
         defaults = {
@@ -169,6 +192,29 @@ require('oil-git-status').setup({
             "^_build/"
             "node_modules"
           ];
+          prompt_prefix = "   ";
+          selection_caret = "  ";
+          entry_prefix = "  ";
+          initial_mode = "insert";
+          selection_strategy = "reset";
+          sorting_strategy = "ascending";
+          layout_strategy = "horizontal";
+          layout_config = {
+            horizontal = {
+              prompt_position = "top";
+              preview_width = 0.55;
+            };
+            vertical = {
+              mirror = false;
+            };
+            width = 0.87;
+            height = 0.80;
+            preview_cutoff = 120;
+          };
+          winblend = 0;
+          border = {};
+          borderchars = [ "─" "│" "─" "│" "╭" "╮" "╯" "╰" ];
+          color_devicons = true;
         };
       };
       treesitter = {
