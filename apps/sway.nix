@@ -112,5 +112,24 @@
         titlebar = false;
       };
     };
+    extraConfig = ''
+      ##-- Rules -------------------------------
+      assign [app_id="Slack"] → workspace number 4
+      assign [app_id="jamesdsp"] → workspace number 3
+      assign [app_id="spotify"] → workspace number 3
+      for_window [app_id="blueman-manager"] floating enable, floating_maximum_size 600 x 400
+      for_window [app_id="pavucontrol"] floating enable, sticky enable, resize set width 550 px height 600px, move position cursor, move down 35
+      for_window [app_id="org.kde.kde-connect-indicator"] floating enable, floating_maximum_size 800 x 600
+      for_window [app_id="com.moonlight_stream.Moonlight"] floating enable, floating_maximum_size 800 x 600
+
+      for_window [window_role="pop-up"] floating enable, floating_maximum_size 600 x 400
+      for_window [window_role="task_dialog"] floating enable
+      for_window [app_id="foot-float"] floating enable
+      for_window [app_id="yad|nm-connection-editor|pavucontrol"] floating enable
+      for_window [app_id="xfce-polkit|kvantummanager|qt5ct"] floating enable
+      for_window [class="feh|Viewnior|Gpicview|Gimp|MPlayer"] floating enable
+      for_window [class="VirtualBox Manager|qemu|Qemu-system-x86_64"] floating enable
+      for_window [title="Open File"] floating enable, floating_maximum_size 600 x 400
+    '';
   };
 }
