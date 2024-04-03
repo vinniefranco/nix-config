@@ -13,6 +13,9 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
   boot.loader.efi.canTouchEfiVariables = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -118,6 +121,7 @@
     libsForQt5.qt5.qtquickcontrols2   
     neovim
     nss.tools
+    pciutils
     pulseaudio
     swaynotificationcenter
     tela-circle-icon-theme

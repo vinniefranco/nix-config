@@ -1,5 +1,10 @@
 { pkgs, inputs, lib, ... }:
-
+  let
+    gdk = pkgs.google-cloud-sdk.withExtraComponents( with pkgs.google-cloud-sdk.components; [
+      gke-gcloud-auth-plugin
+      kubectl
+    ]);
+  in
 {
   imports = [ 
     inputs.nix-colors.homeManagerModules.default
@@ -21,7 +26,9 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    discord
     fd
+    gdk
     networkmanagerapplet
     obsidian
     pavucontrol
