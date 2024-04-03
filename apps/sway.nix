@@ -8,23 +8,34 @@
   };
 
    home.packages = with pkgs; [ 
+    sweet
     bibata-cursors
   ];
 
   gtk = {
     enable = true;
     theme = {
-      name = "Arc-Dark";
+      name = "Sweet-Dark";
       package = pkgs.arc-theme;
     };
     cursorTheme = {
       package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
+      name = "Adwaita";
       size = 24;
     };
     iconTheme = {
       name = "Tela-circle-dark";
       package = pkgs.tela-circle-icon-theme;
+    };
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application--prefer-dark-theme=1
+      '';
+    };
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application--prefer-dark-theme=1
+      '';
     };
   };
 

@@ -184,6 +184,7 @@ in
           char.jumpLabels = true;
         };
       };
+      luasnip.enable = true;
       gitsigns.enable = true;
       nvim-autopairs.enable = true;
       telescope = {

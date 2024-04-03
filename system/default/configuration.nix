@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../common/fonts.nix
+      ../common/fonts.nix
     ];
 
   # Bootloader.
@@ -104,7 +104,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    nss.tools
     devbox
     direnv
     git
@@ -115,12 +114,15 @@
     killall
     kitty
     libnotify
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2   
     neovim
+    nss.tools
     pulseaudio
     swaynotificationcenter
     tela-circle-icon-theme
-    vulkan-tools
     unzip
+    vulkan-tools
     wget
     wl-clipboard
   ];
