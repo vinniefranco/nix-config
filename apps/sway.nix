@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
-
+let 
+  screenshoter = import ./screenshoter.nix { inherit pkgs; };
+in
 {
+
   xdg.portal = {
     enable = true;
     extraPortals =  [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
@@ -8,8 +11,13 @@
   };
 
    home.packages = with pkgs; [ 
-    sweet
-    bibata-cursors
+     bibata-cursors
+     grim
+     screenshoter
+     satty
+     slurp
+     sweet
+     xdg-user-dirs
   ];
 
   gtk = {
@@ -72,6 +80,7 @@
         "${modifier}+x" = "exec wlogout";
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+w" = "exec vivaldi";
+        "${modifier}+Shift+p" = "exec screenshoter";
         "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
         "XF86AudioLowerVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'";
         "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
