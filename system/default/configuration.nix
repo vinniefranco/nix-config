@@ -98,6 +98,7 @@
     pulseaudio
     swaynotificationcenter
     tela-circle-icon-theme
+    traceroute
     unzip
     vulkan-tools
     wget
@@ -145,5 +146,18 @@
   services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
 
+  services.xserver.enable = true;
+  services.xserver.displayManager = {
+    sddm = {
+      enable = true;
+      theme = "${import ../common/sddm-theme.nix { inherit pkgs; }}";
+    };
+    sessionPackages = [ pkgs.sway ];
+  };
+
   system.stateVersion = "23.11"; # Did you read the comment?
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
 }

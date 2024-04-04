@@ -5,11 +5,13 @@
     ./git.nix
     ./kitty.nix
     ./neovim.nix
+    ./portals.nix
     ./sway.nix
+    ./theme.nix
     ./tmux.nix
     ./waybar.nix
-    ./wofi.nix
     ./wlogout.nix
+    ./wofi.nix
     ./zsh.nix
   ];
 }

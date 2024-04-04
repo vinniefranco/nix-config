@@ -26,9 +26,11 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    btop
     discord
     fd
     gdk
+    htop
     networkmanagerapplet
     obsidian
     pavucontrol
@@ -39,39 +41,9 @@
     # ".screenrc".source = dotfiles/screenrc;
   };
 
-  xdg.enable = true;
-  xdg.userDirs = {
-    enable = true;
-  };
-  xdg.mime.enable = true;
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "x-scheme-handler/http" = "vivaldi-stable.desktop";
-      "x-scheme-handler/https" = "vivaldi-stable.desktop";
-    };
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
-
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
-  };
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    EDITOR = "nvim";
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.kdeconnect.enable = true;
+  services.kdeconnect.indicator = true;
 }

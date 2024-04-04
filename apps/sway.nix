@@ -1,57 +1,6 @@
 { config, pkgs, lib, ... }:
-let 
-  screenshoter = import ./screenshoter.nix { inherit pkgs; };
-in
+
 {
-
-  xdg.portal = {
-    enable = true;
-    extraPortals =  [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
-    config = { sway.default = ["wlr" "gtk"]; };
-  };
-
-   home.packages = with pkgs; [ 
-     bibata-cursors
-     grim
-     satty
-     screenshoter
-     slurp
-     sweet
-     xdg-user-dirs
-  ];
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Sweet-Dark";
-      package = pkgs.arc-theme;
-    };
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Adwaita";
-      size = 24;
-    };
-    iconTheme = {
-      name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-plus-icons;
-    };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application--prefer-dark-theme=1
-      '';
-    };
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application--prefer-dark-theme=1
-      '';
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-  };
-
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -99,7 +48,7 @@ in
       bars = [];
       output = {
         "*" = {
-          bg = "~/Pictures/dystopia.jpg fill";
+          bg = "~/Pictures/wallpapers/space-flower.png fill";
         };
         eDP-1 = {
           pos = "1080 1600 res 2880x1920";
