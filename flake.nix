@@ -12,34 +12,31 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: 
+  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-    in 
-  {
-    nixosConfigurations = {
-      default = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./system/default/configuration.nix
-          nixos-hardware.nixosModules.microsoft-surface-pro-intel
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      vinnie = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
+    in {
+      nixosConfigurations = {
+        default = nixpkgs.lib.nixosSystem {
           inherit system;
-          config.allowUnfree = true;
+          modules = [
+            ./system/default/configuration.nix
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+          ];
         };
-        modules = [ ./home.nix ];
+      };
 
-        extraSpecialArgs = { 
-          inherit inputs; 
+      homeConfigurations = {
+        vinnie = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          modules = [ ./home.nix ];
+
+          extraSpecialArgs = { inherit inputs; };
         };
       };
     };
-  };
 }

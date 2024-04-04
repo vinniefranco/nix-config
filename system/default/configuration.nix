@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../common/fonts.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../common/fonts.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -14,9 +13,12 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.polkit.enable = true;
-  security.pam.loginLimits = [
-    { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
-  ];
+  security.pam.loginLimits = [{
+    domain = "@users";
+    item = "rtprio";
+    type = "-";
+    value = 1;
+  }];
 
   # Enable networking
   networking = {
@@ -55,9 +57,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security = {
-    rtkit.enable = true;
-  };
+  security = { rtkit.enable = true; };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -70,12 +70,7 @@
     isNormalUser = true;
     description = "Vincent Franco";
     extraGroups = [ "docker" "networkmanager" "wheel" "video" ];
-    packages = with pkgs; [
-      slack
-      spotify
-      firefox
-      vivaldi
-    ];
+    packages = with pkgs; [ slack spotify firefox vivaldi ];
   };
 
   # Allow unfree packages
@@ -91,8 +86,9 @@
     kitty
     libnotify
     libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2   
+    libsForQt5.qt5.qtquickcontrols2
     neovim
+    nixfmt
     nss.tools
     pciutils
     pulseaudio
@@ -109,10 +105,7 @@
     enable = true;
     driSupport = true;
 
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-      intel-media-driver
-    ];
+    extraPackages = with pkgs; [ intel-compute-runtime intel-media-driver ];
   };
 
   # Bluetooth

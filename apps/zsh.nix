@@ -15,10 +15,6 @@
 
     oh-my-zsh.enable = true;
     oh-my-zsh.theme = "robbyrussell";
-    oh-my-zsh.plugins = [ 
-      "direnv"
-      "git" 
-      "sudo" 
-    ];
+    oh-my-zsh.plugins = [ "direnv" "git" "sudo" ];
   };
 }

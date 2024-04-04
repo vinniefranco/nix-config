@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
-let 
-  screenshoter = import ./screenshoter.nix { inherit pkgs; };
-in
-{
-  home.packages = with pkgs; [ 
+let screenshoter = import ./screenshoter.nix { inherit pkgs; };
+in {
+  home.packages = with pkgs; [
     grim
     satty
     screenshoter
@@ -24,15 +22,14 @@ in
     };
     portal = {
       enable = true;
-      extraPortals =  [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
-      config = { sway.default = ["wlr" "gtk"]; };
+      extraPortals =
+        [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+      config = { sway.default = [ "wlr" "gtk" ]; };
     };
     userDirs.enable = true;
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
+    "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
   };
 }

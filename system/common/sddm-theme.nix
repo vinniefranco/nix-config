@@ -7,8 +7,7 @@ let
     url = imgLink;
     sha256 = "sha256-uFMw5nEUWZbK6B9VXjEu1PNzt1AM0O+HDH933vP35uQ=";
   };
-in
-pkgs.stdenv.mkDerivation {
+in pkgs.stdenv.mkDerivation {
   name = "sddm-theme";
   src = pkgs.fetchFromGitHub {
     owner = "MarianArlt";
@@ -22,5 +21,5 @@ pkgs.stdenv.mkDerivation {
     cd $out/
     rm Background.jpg
     cp -r ${image} $out/Background.jpg
-   '';
+  '';
 }
