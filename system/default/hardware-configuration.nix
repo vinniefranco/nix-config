@@ -49,15 +49,4 @@
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-      intel-media-driver
-    ];
-  };
-
-  #environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 }
