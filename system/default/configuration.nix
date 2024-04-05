@@ -7,8 +7,18 @@
   ];
 
   # Bootloader.
+  boot.tmp.cleanOnBoot = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.plymouth = {
+    enable = true;
+    theme = "hexagon_dots";
+    themePackages = with pkgs; [(
+      adi1090x-plymouth-themes.override {
+        selected_themes = [ "hexagon_dots" ];
+      }
+    )];
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -143,7 +153,7 @@
   services.xserver.displayManager = {
     sddm = {
       enable = true;
-      theme = "${import ../common/sddm-theme.nix { inherit pkgs; }}";
+      theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
     };
     sessionPackages = [ pkgs.sway ];
   };

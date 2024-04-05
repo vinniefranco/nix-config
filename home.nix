@@ -26,6 +26,7 @@ in {
     gdk
     htop
     networkmanagerapplet
+    neofetch
     obsidian
     pavucontrol
     ripgrep
