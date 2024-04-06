@@ -80,7 +80,7 @@
     isNormalUser = true;
     description = "Vincent Franco";
     extraGroups = [ "docker" "networkmanager" "wheel" "video" ];
-    packages = with pkgs; [ slack spotify firefox vivaldi ];
+    packages = with pkgs; [ slack spotify firefox vivaldi vivaldi-ffmpeg-codecs ];
   };
 
   # Allow unfree packages
@@ -114,8 +114,21 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-
-    extraPackages = with pkgs; [ intel-compute-runtime intel-media-driver ];
+    driSupport32Bit = true;
+  };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      sync.enable = true;
+      allowExternalGpu = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:125:0:0";
+    };
   };
 
   # Bluetooth
