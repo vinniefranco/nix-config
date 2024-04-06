@@ -13,11 +13,12 @@
   boot.plymouth = {
     enable = true;
     theme = "hexagon_dots";
-    themePackages = with pkgs; [(
-      adi1090x-plymouth-themes.override {
-        selected_themes = [ "hexagon_dots" ];
-      }
-    )];
+    themePackages = with pkgs;
+      [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "hexagon_dots" ];
+        })
+      ];
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -80,7 +81,13 @@
     isNormalUser = true;
     description = "Vincent Franco";
     extraGroups = [ "docker" "networkmanager" "wheel" "video" ];
-    packages = with pkgs; [ slack spotify firefox vivaldi vivaldi-ffmpeg-codecs ];
+    packages = with pkgs; [
+      slack
+      spotify
+      firefox
+      vivaldi
+      vivaldi-ffmpeg-codecs
+    ];
   };
 
   # Allow unfree packages

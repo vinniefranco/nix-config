@@ -1,7 +1,5 @@
 { pkgs, ... }:
 
 {
-  programs.chromium.extensions = [
-    "oldceeleldhonbafppcapldpdifcinji"
-  ];
+  programs.chromium.extensions = [ "oldceeleldhonbafppcapldpdifcinji" ];
 }
