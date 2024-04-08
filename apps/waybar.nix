@@ -144,9 +144,9 @@
 
         "sway/workspaces" = {
           persistent_workspaces = {
-            "1" = [ "DP-4" "DP-2" ];
-            "2" = [ "DP-4" "DP-2" ];
-            "3" = [ "DP-4" "DP-2" ];
+            "1" = [ "DP-2" ];
+            "2" = [ "DP-2" ];
+            "3" = [ "DP-2" ];
             "4" = [ "eDP-1" ];
             "5" = [ "eDP-1" ];
             "6" = [ "eDP-1" ];

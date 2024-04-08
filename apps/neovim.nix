@@ -247,11 +247,6 @@ in {
       };
       lspkind.enable = true;
     };
-    files = {
-      "~/Sandbox/tsplay/lua/tsplay.lua" = {
-
-      };
-    };
     extraPlugins = with pkgs.vimPlugins; [
       {
         plugin = Navigator-nvim;

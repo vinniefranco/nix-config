@@ -25,11 +25,17 @@
           "${modifier}+Shift+Up" = "move down";
           "${modifier}+Shift+Down" = "move up";
           "${modifier}+Shift+Right" = "move right";
-
           "${modifier}+x" = "exec wlogout";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+w" = "exec vivaldi";
           "${modifier}+Shift+p" = "exec screenshoter";
+          "${modifier}+b" = "splith";
+          "${modifier}+v" = "splitv";
+          "${modifier}+s" = "layout stacking";
+          "${modifier}+w" = "layout tabbled";
+          "${modifier}+t" = "layout toggle split";
+          "${modifier}+space" = "floating toggle";
+
           "${modifier}+d" =
             "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
           "XF86AudioLowerVolume" =
@@ -52,6 +58,18 @@
         smartBorders = "off";
       };
       bars = [ ];
+      input = {
+        "1118:3154:IPTS_Stylus" = {
+          map_to_output = "'LG Display 0x0719 0x000013A1'";
+        };
+        "1118:3154:IPTS_Touch" = {
+          map_to_output = "'LG Display 0x0719 0x000013A1'";
+        };
+        "type:keyboard" = {
+          xkb_layout = "us";
+          xkb_options = "caps:escape";
+        };
+      };
       output = {
         "*" = { bg = "~/Pictures/wallpapers/space-flower.png fill"; };
         eDP-1 = {
