@@ -110,4 +110,7 @@
       for_window [title="Open File"] floating enable, floating_maximum_size 800 x 600
     '';
   };
+
+  services.wob.enable = true;
+  services.wob.systemd = true;
 }

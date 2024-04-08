@@ -30,6 +30,7 @@ in {
     obsidian
     pavucontrol
     ripgrep
+    wob
   ];
 
   home.file = {
