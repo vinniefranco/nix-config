@@ -38,19 +38,17 @@
 
           "${modifier}+d" =
             "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
-          "XF86AudioLowerVolume" =
-            "exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'";
-          "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
+          "XF86AudioLowerVolume" = "exec volumectl -u down";
+          "XF86AudioMute" = "exec volumectl -u toggle-mute";
+          "XF86AudioRaiseVolume" = "exec volumectl -u up";
           "XF86AudioNext" =
             "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
           "XF86AudioPlay" =
             "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
           "XF86AudioPrev" =
             "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
-          "XF86AudioRaiseVolume" =
-            "exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'";
-          "XF86MonBrightnessDown" = "exec light -U 10";
-          "XF86MonBrightnessUp" = "exec light -A 10";
+          "XF86MonBrightnessDown" = "exec lightctl up";
+          "XF86MonBrightnessUp" = "exec lightctl up";
         };
       gaps = {
         inner = 30;
@@ -87,6 +85,7 @@
         { command = "waybar"; }
         { command = "blueman-applet"; }
         { command = "swaync"; }
+        { command = "avizo-service"; }
       ];
       window = { titlebar = false; };
     };
@@ -111,6 +110,5 @@
     '';
   };
 
-  services.wob.enable = true;
-  services.wob.systemd = true;
+  services.avizo.enable = true;
 }

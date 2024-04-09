@@ -24,13 +24,14 @@ in {
     discord
     fd
     gdk
+    gimp
     htop
     networkmanagerapplet
     neofetch
     obsidian
     pavucontrol
+    pika-backup
     ripgrep
-    wob
   ];
 
   home.file = {

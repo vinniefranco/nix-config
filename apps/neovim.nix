@@ -32,7 +32,7 @@ in {
     clipboard.register = "unnamedplus";
     colorschemes.base16 = {
       enable = true;
-      colorscheme = "tomorrow-night";
+      colorscheme = "catppuccin";
     };
     enable = true;
     enableMan = true;

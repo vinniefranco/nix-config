@@ -10,6 +10,7 @@
   boot.tmp.cleanOnBoot = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.blacklistedKernelModules = [ "nouveau" ];
   boot.plymouth = {
     enable = true;
     theme = "hexagon_dots";
@@ -105,7 +106,7 @@
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
     neovim
-    nixfmt
+    nixfmt-rfc-style
     nss.tools
     pciutils
     pulseaudio
