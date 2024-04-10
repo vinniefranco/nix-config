@@ -186,8 +186,10 @@ in {
       };
       cmp-buffer.enable = true;
       cmp-nvim-lsp.enable = true;
+      cmp-nvim-lsp-signature-help.enable = true;
       cmp-spell.enable = true;
       cmp-treesitter.enable = true;
+      cmp-clippy.enable = true;
       codeium-nvim.enable = true;
       comment.enable = true;
       direnv.enable = true;
@@ -241,8 +243,15 @@ in {
       lsp = {
         enable = true;
         servers = {
+          bashls.enable = true;
+          clangd.enable = true;
+          cssls.enable = true;
+          eslint.enable = true;
           lua-ls.enable = true;
           nixd.enable = true;
+          taplo.enable = true;
+          tailwindcss.enable = true;
+          terraformls.enable = true;
           lexical = {
             enable = true;
             filetypes = [ "elixir" "eelixir" "heex" ];
@@ -255,6 +264,7 @@ in {
         };
       };
       lspkind.enable = true;
+      rust-tools.enable = true;
     };
     extraPlugins = with pkgs.vimPlugins; [
       {
