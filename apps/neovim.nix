@@ -201,30 +201,32 @@ in {
       nvim-autopairs.enable = true;
       telescope = {
         enable = true;
-        defaults = {
-          file_ignore_patterns =
-            [ "^.git/" "^output/" "^_build/" "node_modules" ];
-          prompt_prefix = "   ";
-          selection_caret = "  ";
-          entry_prefix = "  ";
-          initial_mode = "insert";
-          selection_strategy = "reset";
-          sorting_strategy = "ascending";
-          layout_strategy = "horizontal";
-          layout_config = {
-            horizontal = {
-              prompt_position = "top";
-              preview_width = 0.55;
+        settings = {
+          defaults = {
+            file_ignore_patterns =
+              [ "^.git/" "^output/" "^_build/" "node_modules" ];
+            prompt_prefix = "   ";
+            selection_caret = "  ";
+            entry_prefix = "  ";
+            initial_mode = "insert";
+            selection_strategy = "reset";
+            sorting_strategy = "ascending";
+            layout_strategy = "horizontal";
+            layout_config = {
+              horizontal = {
+                prompt_position = "top";
+                preview_width = 0.55;
+              };
+              vertical = { mirror = false; };
+              width = 0.87;
+              height = 0.8;
+              preview_cutoff = 120;
             };
-            vertical = { mirror = false; };
-            width = 0.87;
-            height = 0.8;
-            preview_cutoff = 120;
+            winblend = 0;
+            border = { };
+            borderchars = [ "─" "│" "─" "│" "╭" "╮" "╯" "╰" ];
+            color_devicons = true;
           };
-          winblend = 0;
-          border = { };
-          borderchars = [ "─" "│" "─" "│" "╭" "╮" "╯" "╰" ];
-          color_devicons = true;
         };
       };
       treesitter = {
@@ -241,9 +243,16 @@ in {
         servers = {
           lua-ls.enable = true;
           nixd.enable = true;
-          elixirls.enable = true;
+          lexical = {
+            enable = true;
+            filetypes = [ "elixir" "eelixir" "heex" ];
+            rootDir = ''function(fname)
+              local lspconfig = require('lspconfig')
+              return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+            end'';
+            cmd = [ "${pkgs.lexical}/bin/lexical" ];
+          };
         };
-
       };
       lspkind.enable = true;
     };

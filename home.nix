@@ -26,8 +26,9 @@ in {
     gdk
     gimp
     htop
-    networkmanagerapplet
+    lexical
     neofetch
+    networkmanagerapplet
     obsidian
     pavucontrol
     pika-backup
