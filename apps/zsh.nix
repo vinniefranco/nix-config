@@ -22,8 +22,8 @@
     ];
   };
   programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
+    enable = false;
+    enableZshIntegration = false;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
 
