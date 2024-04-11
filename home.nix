@@ -1,9 +1,23 @@
-{ pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
-  gdk = pkgs.google-cloud-sdk.withExtraComponents
-    (with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin kubectl ]);
-in {
-  imports = [ inputs.nix-colors.homeManagerModules.default ./apps ];
+  gdk = pkgs.google-cloud-sdk.withExtraComponents (
+    with pkgs.google-cloud-sdk.components;
+    [
+      gke-gcloud-auth-plugin
+      kubectl
+    ]
+  );
+in
+{
+  imports = [
+    inputs.nix-colors.homeManagerModules.default
+    ./apps
+  ];
 
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";

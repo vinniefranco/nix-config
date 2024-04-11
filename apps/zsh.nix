@@ -84,7 +84,6 @@
         };
       };
 
-
       c = {
         format = "[; $symbol ($version) ]($style)";
         style = "bg:#86BBD8";

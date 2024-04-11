@@ -5,7 +5,8 @@ let
     url = imgLink;
     sha256 = "sha256-O4LTuDNv4cjwbcBspnoU8Lt5ggWc/0SVsnMZTycWFY0=";
   };
-in pkgs.stdenv.mkDerivation {
+in
+pkgs.stdenv.mkDerivation {
   name = "sddm-sugar-dark-theme";
   src = pkgs.fetchFromGitHub {
     owner = "MarianArlt";

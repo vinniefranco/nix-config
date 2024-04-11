@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   wayland.windowManager.sway = {
@@ -6,8 +11,10 @@
     wrapperFeatures.gtk = true;
     config = rec {
       keybindings =
-        let modifier = config.wayland.windowManager.sway.config.modifier;
-        in lib.mkOptionDefault {
+        let
+          modifier = config.wayland.windowManager.sway.config.modifier;
+        in
+        lib.mkOptionDefault {
           "${modifier}+Control+q" = "kill";
           "${modifier}+n" = "focus left";
           "${modifier}+e" = "focus down";
@@ -36,17 +43,13 @@
           "${modifier}+t" = "layout toggle split";
           "${modifier}+space" = "floating toggle";
 
-          "${modifier}+d" =
-            "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
+          "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
           "XF86AudioLowerVolume" = "exec volumectl -u down";
           "XF86AudioMute" = "exec volumectl -u toggle-mute";
           "XF86AudioRaiseVolume" = "exec volumectl -u up";
-          "XF86AudioNext" =
-            "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
-          "XF86AudioPlay" =
-            "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
-          "XF86AudioPrev" =
-            "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
+          "XF86AudioNext" = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
+          "XF86AudioPlay" = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
+          "XF86AudioPrev" = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
           "XF86MonBrightnessDown" = "exec lightctl up";
           "XF86MonBrightnessUp" = "exec lightctl up";
         };
@@ -69,7 +72,9 @@
         };
       };
       output = {
-        "*" = { bg = "~/Pictures/wallpapers/space-flower.png fill"; };
+        "*" = {
+          bg = "~/Pictures/wallpapers/space-flower.png fill";
+        };
         eDP-1 = {
           pos = "1080 1600 res 2880x1920";
           scale = "1.5";
@@ -87,7 +92,9 @@
         { command = "swaync"; }
         { command = "avizo-service"; }
       ];
-      window = { titlebar = false; };
+      window = {
+        titlebar = false;
+      };
     };
     extraConfig = ''
       ##-- Rules -------------------------------

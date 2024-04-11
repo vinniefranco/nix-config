@@ -12,11 +12,18 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-hardware,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-    in {
+    in
+    {
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -35,7 +42,9 @@
           };
           modules = [ ./home.nix ];
 
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = {
+            inherit inputs;
+          };
         };
       };
     };

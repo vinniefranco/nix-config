@@ -1,9 +1,14 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
       (nerdfonts.override {
-        fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ];
+        fonts = [
+          "FiraCode"
+          "DroidSansMono"
+          "JetBrainsMono"
+        ];
       })
       noto-fonts
       noto-fonts-cjk
@@ -14,8 +19,14 @@
       source-han-serif-japanese
     ];
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Source Han Serif" ];
-      sansSerif = [ "Noto Sans" "Source Han Sans" ];
+      serif = [
+        "Noto Serif"
+        "Source Han Serif"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Source Han Sans"
+      ];
     };
   };
 }

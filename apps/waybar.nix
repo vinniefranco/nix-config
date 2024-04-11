@@ -14,7 +14,12 @@
         spacing = 4;
         ipc = false;
         tray.spacing = 4;
-        modules-left = [ "sway/workspaces" "clock" "sway/mode" "cpu" ];
+        modules-left = [
+          "sway/workspaces"
+          "clock"
+          "sway/mode"
+          "cpu"
+        ];
         modules-center = [ "sway/window" ];
         modules-right = [
           "custom/notification"
@@ -35,11 +40,9 @@
             none = "";
             dnd-notification = "<span foreground='red'><sup></sup></span>";
             dnd-none = "";
-            inhibited-notification =
-              "<span foreground='red'><sup></sup></span>";
+            inhibited-notification = "<span foreground='red'><sup></sup></span>";
             inhibited-none = "";
-            dnd-inhibited-notification =
-              "<span foreground='red'><sup></sup></span>";
+            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
             dnd-inhibited-none = "";
           };
           return-type = "json";
@@ -53,7 +56,15 @@
         "backlight" = {
           interval = 2;
           format = "{icon} {percent}%";
-          format-icons = [ "󱩎" "󱩐" "󱩐" "󱩒" "󱩒" "󱩔" "󱩖" ];
+          format-icons = [
+            "󱩎"
+            "󱩐"
+            "󱩐"
+            "󱩒"
+            "󱩒"
+            "󱩔"
+            "󱩖"
+          ];
           on-scroll-up = "light -A 5";
           on-scroll-down = "light -U 5";
           smooth-scrolling-threshold = 1;
@@ -72,7 +83,17 @@
           format-charging = "󰂄";
           format-plugged = "ﮣ";
           format-full = "󰁹 100%";
-          format-icons = [ "󰂎" "󰁺" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" ];
+          format-icons = [
+            "󰂎"
+            "󰁺"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+          ];
           format-time = "{H}h {M}min";
           tooltip = true;
           tooltip-format = "{power} {timeTo}";
@@ -93,7 +114,13 @@
         "network" = {
           interval = 5;
           #"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
-          format-icons = [ "󰣾" "󰣴" "󰣶" "󰣸" "󰣺" ];
+          format-icons = [
+            "󰣾"
+            "󰣴"
+            "󰣶"
+            "󰣸"
+            "󰣺"
+          ];
           format-wifi = "{icon} {essid}";
           format-ethernet = "󰈀";
           format-linked = "󱛆";
@@ -101,10 +128,8 @@
           format-disabled = "󰤭";
           format-alt = " {bandwidthUpBits} |  {bandwidthDownBits}";
           tooltip-format = "󰖩 {ifname} via {gwaddr}";
-          tooltip-format-wifi =
-            "{essid}({signalStrength}%) |  {bandwidthUpBytes}  {bandwidthDownBytes}";
-          on-click =
-            "[[ ! `pidof nm-connection-editor` ]] && nm-connection-editor || pkill nm-connection-e";
+          tooltip-format-wifi = "{essid}({signalStrength}%) |  {bandwidthUpBytes}  {bandwidthDownBytes}";
+          on-click = "[[ ! `pidof nm-connection-editor` ]] && nm-connection-editor || pkill nm-connection-e";
         };
 
         "pulseaudio" = {
@@ -121,7 +146,11 @@
             phone = "";
             portable = "󰲑";
             car = "󰄋";
-            default = [ "" "" "" ];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           scroll-step = 5.0;
           #/ Commands to execute on events

@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 let
   toLuaFile = file: ''
@@ -24,7 +29,8 @@ let
       hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     };
   };
-in {
+in
+{
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
   programs.nixvim = {
@@ -56,6 +62,8 @@ in {
       vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
       vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
       vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
+       -- transparent bg                                                                
+      vim.api.nvim_set_hl(0, "Normal", {guibg=NONE, ctermbg=NONE})
     '';
     opts = {
       cursorline = true;
@@ -91,7 +99,11 @@ in {
         action = "function() require'flash'.jump() end";
         key = "s";
         lua = true;
-        mode = [ "n" "x" "o" ];
+        mode = [
+          "n"
+          "x"
+          "o"
+        ];
       }
       {
         action = "<CMD>Oil<CR>";
@@ -102,37 +114,47 @@ in {
       {
         action = "<CMD>NavigatorLeft<CR>";
         key = "<C-h>";
-        mode = [ "n" "t" ];
+        mode = [
+          "n"
+          "t"
+        ];
         options.desc = "Navigate Left";
       }
       {
         action = "<CMD>NavigatorRight<CR>";
         key = "<C-l>";
-        mode = [ "n" "t" ];
+        mode = [
+          "n"
+          "t"
+        ];
         options.desc = "Navigate Right";
       }
       {
         action = "<CMD>NavigatorUp<CR>";
         key = "<C-k>";
-        mode = [ "n" "t" ];
+        mode = [
+          "n"
+          "t"
+        ];
         options.desc = "Navigate Up";
       }
       {
         action = "<CMD>NavigatorDown<CR>";
         key = "<C-j>";
-        mode = [ "n" "t" ];
+        mode = [
+          "n"
+          "t"
+        ];
         options.desc = "Navigate Down";
       }
       {
-        action =
-          "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>";
+        action = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>";
         key = "<leader>ff";
         mode = "n";
         options.desc = "Find Files";
       }
       {
-        action =
-          "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>";
+        action = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>";
         key = "<leader>fg";
         mode = "n";
         options.desc = "Grep Files";
@@ -160,8 +182,7 @@ in {
       cmp = {
         enable = true;
         settings = {
-          snippet.expand =
-            "function(args) require('luasnip').lsp_expand(args.body) end";
+          snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           completion.completeopt = "noselect";
           preselect = "None";
           mapping = {
@@ -171,8 +192,7 @@ in {
             "<C-e>" = "cmp.mapping.abort()";
             "<CR>" = "cmp.mapping.confirm({ select = true })";
             "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-            "<S-Tab>" =
-              "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+            "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
           };
 
           sources = [
@@ -196,7 +216,9 @@ in {
       friendly-snippets.enable = true;
       flash = {
         enable = true;
-        modes = { char.jumpLabels = true; };
+        modes = {
+          char.jumpLabels = true;
+        };
       };
       luasnip.enable = true;
       gitsigns.enable = true;
@@ -205,8 +227,12 @@ in {
         enable = true;
         settings = {
           defaults = {
-            file_ignore_patterns =
-              [ "^.git/" "^output/" "^_build/" "node_modules" ];
+            file_ignore_patterns = [
+              "^.git/"
+              "^output/"
+              "^_build/"
+              "node_modules"
+            ];
             prompt_prefix = "   ";
             selection_caret = "  ";
             entry_prefix = "  ";
@@ -219,14 +245,25 @@ in {
                 prompt_position = "top";
                 preview_width = 0.55;
               };
-              vertical = { mirror = false; };
+              vertical = {
+                mirror = false;
+              };
               width = 0.87;
               height = 0.8;
               preview_cutoff = 120;
             };
             winblend = 0;
             border = { };
-            borderchars = [ "─" "│" "─" "│" "╭" "╮" "╯" "╰" ];
+            borderchars = [
+              "─"
+              "│"
+              "─"
+              "│"
+              "╭"
+              "╮"
+              "╯"
+              "╰"
+            ];
             color_devicons = true;
           };
         };
@@ -254,11 +291,16 @@ in {
           terraformls.enable = true;
           lexical = {
             enable = true;
-            filetypes = [ "elixir" "eelixir" "heex" ];
-            rootDir = ''function(fname)
-              local lspconfig = require('lspconfig')
-              return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-            end'';
+            filetypes = [
+              "elixir"
+              "eelixir"
+              "heex"
+            ];
+            rootDir = ''
+              function(fname)
+                            local lspconfig = require('lspconfig')
+                            return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+                          end'';
             cmd = [ "${pkgs.lexical}/bin/lexical" ];
           };
         };

@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common/fonts.nix
   ];
@@ -14,29 +15,34 @@
   boot.plymouth = {
     enable = true;
     theme = "hexagon_dots";
-    themePackages = with pkgs;
-      [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "hexagon_dots" ];
-        })
-      ];
+    themePackages = with pkgs; [
+      (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+    ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   security.polkit.enable = true;
-  security.pam.loginLimits = [{
-    domain = "@users";
-    item = "rtprio";
-    type = "-";
-    value = 1;
-  }];
+  security.pam.loginLimits = [
+    {
+      domain = "@users";
+      item = "rtprio";
+      type = "-";
+      value = 1;
+    }
+  ];
 
   # Enable networking
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 443 ];
+      allowedTCPPorts = [
+        80
+        443
+      ];
       extraCommands = ''
         iptables -t nat -I OUTPUT 1 -o lo -p tcp --dport 443 -j REDIRECT --to-port 8443
         iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
@@ -69,7 +75,9 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security = { rtkit.enable = true; };
+  security = {
+    rtkit.enable = true;
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -81,7 +89,12 @@
   users.users.vinnie = {
     isNormalUser = true;
     description = "Vincent Franco";
-    extraGroups = [ "docker" "networkmanager" "wheel" "video" ];
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+      "video"
+    ];
     packages = with pkgs; [
       slack
       spotify
@@ -169,6 +182,15 @@
   # For zee secrets
   services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-dropbox-plugin
+      thunar-media-tags-plugin
+      thunar-volman
+    ];
+  };
 
   services.xserver.enable = true;
   services.xserver.displayManager = {
