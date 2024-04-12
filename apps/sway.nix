@@ -34,7 +34,7 @@
           "${modifier}+Shift+Right" = "move right";
           "${modifier}+x" = "exec wlogout";
           "${modifier}+Shift+c" = "reload";
-          "${modifier}+Shift+w" = "exec vivaldi";
+          "${modifier}+Shift+w" = "exec chromium";
           "${modifier}+Shift+p" = "exec screenshoter";
           "${modifier}+b" = "splith";
           "${modifier}+v" = "splitv";

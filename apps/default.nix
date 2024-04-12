@@ -7,9 +7,11 @@
 
 {
   imports = [
+    ./chromium.nix
     ./git.nix
     ./kitty.nix
     ./neovim.nix
+    ./obs.nix
     ./portals.nix
     ./sway.nix
     ./theme.nix

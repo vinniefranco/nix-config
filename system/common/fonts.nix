@@ -17,6 +17,8 @@
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
+      corefonts
+      vistafonts
     ];
     fontconfig.defaultFonts = {
       serif = [
