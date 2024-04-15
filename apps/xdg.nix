@@ -18,8 +18,8 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = "vivaldi-stable.desktop";
-        "x-scheme-handler/https" = "vivaldi-stable.desktop";
+        "x-scheme-handler/http" = "chromium.desktop";
+        "x-scheme-handler/https" = "chromium.desktop";
       };
     };
     portal = {

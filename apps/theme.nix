@@ -8,13 +8,12 @@
       package = pkgs.arc-theme;
     };
     cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Adwaita";
+      name = "WhiteSur-cursors";
       size = 24;
     };
     iconTheme = {
-      name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-plus-icons;
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
     gtk3.extraConfig = {
       Settings = ''
@@ -34,16 +33,12 @@
   };
 
   home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
+    name = "WhiteSur-cursors";
+    package = pkgs.whitesur-cursors;
     size = 24;
     x11 = {
       enable = true;
-      defaultCursor = "Adwaita";
+      defaultCursor = "WhiteSur";
     };
-  };
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    EDITOR = "nvim";
   };
 }

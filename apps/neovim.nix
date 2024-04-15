@@ -43,9 +43,7 @@ in
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
-        require('oil-git-status').setup({
-        show_ignored = true
-      })
+      require('oil-git-status').setup({ show_ignored = true })
        -- gray
       vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
       -- blue
@@ -62,15 +60,18 @@ in
       vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
       vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
       vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
-       -- transparent bg                                                                
-      vim.api.nvim_set_hl(0, "Normal", {guibg=NONE, ctermbg=NONE})
+       -- transparent bg
+      vim.api.nvim_set_hl(0, 'Normal', {guibg=NONE, ctermbg=NONE})
+      -- Spelling is good
+      vim.api.nvim_set_hl(0, 'SpellBad', { reverse=true, undercurl=true, force })
     '';
     opts = {
       cursorline = true;
       expandtab = true;
       ignorecase = true;
       laststatus = 3;
-      listchars = "tab:>-,trail:●,nbsp:+";
+      list = true;
+      listchars = "tab:󰌒,trail:󱁐,nbsp:󰌑";
       number = true;
       numberwidth = 2;
       relativenumber = true;
@@ -79,6 +80,8 @@ in
       smartcase = true;
       smartindent = true;
       softtabstop = 2;
+      spell = true;
+      spelllang = "en_us";
       tabstop = 2;
       termguicolors = true;
       updatetime = 250;

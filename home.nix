@@ -53,6 +53,11 @@ in
     # ".screenrc".source = dotfiles/screenrc;
   };
 
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    EDITOR = "nvim";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 

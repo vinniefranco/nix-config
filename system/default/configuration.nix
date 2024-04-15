@@ -99,8 +99,6 @@
       slack
       spotify
       firefox
-      vivaldi
-      vivaldi-ffmpeg-codecs
     ];
   };
 
