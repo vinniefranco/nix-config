@@ -6,7 +6,8 @@
     autosuggestion.enable = true;
     enableCompletion = true;
     shellAliases = {
-      ll = "ls -al";
+      la = "eza -a --icons --grid --git";
+      ll = "eza -al --icons --grid --git";
       r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
       r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#default";
       r-u = "cd ~/.dotfiles && nix flake update";
@@ -22,5 +23,10 @@
         "sudo"
       ];
     };
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   boot.tmp.cleanOnBoot = true;
 
   nix.settings.experimental-features = [
@@ -71,7 +70,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    bat
     direnv
+    eza
+    fzf
     git
     git-lfs
     kicad
@@ -89,6 +91,7 @@
     pulseaudio
     swaynotificationcenter
     tela-circle-icon-theme
+    tldr
     traceroute
     unzip
     vulkan-tools
@@ -121,7 +124,6 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-  programs.zsh.ohMyZsh.enable = true;
 
   # For zee secrets
   services.gnome.gnome-keyring.enable = true;
