@@ -22,6 +22,34 @@
     ];
   };
 
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };
+
+  # Virtualization
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [(pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd];
+        };
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  services.spice-vdagentd.enable = true;
+  programs.virt-manager.enable = true;
+
+
   # Enable networking
   networking.hostName = "surface"; # Define your hostname.
 
@@ -30,10 +58,12 @@
     isNormalUser = true;
     description = "Vincent Franco";
     extraGroups = [
+      "audio"
       "docker"
+      "libvirtd"
       "networkmanager"
-      "wheel"
       "video"
+      "wheel"
     ];
     packages = with pkgs; [
       slack

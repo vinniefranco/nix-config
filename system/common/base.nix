@@ -89,13 +89,20 @@
     nss.tools
     pciutils
     pulseaudio
+    spice
+    spice-gtk
+    spice-protocol
     swaynotificationcenter
     tela-circle-icon-theme
     tldr
     traceroute
     unzip
+    virt-manager
+    virt-viewer
     vulkan-tools
     wget
+    win-spice
+    win-virtio
     wl-clipboard
   ];
 
@@ -139,7 +146,7 @@
   };
 
   services.xserver.enable = true;
-  services.xserver.displayManager = {
+  services.displayManager = {
     sddm = {
       enable = true;
       theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";

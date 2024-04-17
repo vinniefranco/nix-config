@@ -46,7 +46,9 @@ in
     obsidian
     pavucontrol
     pika-backup
+    quickemu
     ripgrep
+    xorg.xhost
   ];
 
   home.file = {
@@ -56,6 +58,13 @@ in
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     EDITOR = "nvim";
+  };
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
 
   # Let Home Manager install and manage itself.
