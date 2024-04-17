@@ -52,7 +52,7 @@ in
   ];
 
   home.file = {
-    # ".screenrc".source = dotfiles/screenrc;
+    ".config/swaync".source = ./apps/config/swaync;
   };
 
   home.sessionVariables = {
