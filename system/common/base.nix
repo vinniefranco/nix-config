@@ -152,7 +152,10 @@
       wayland.enable = true;
       theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
     };
-    sessionPackages = [ pkgs.sway pkgs.hyprland ];
+    sessionPackages = [
+      pkgs.sway
+      pkgs.hyprland
+    ];
   };
 
   programs.kdeconnect = {

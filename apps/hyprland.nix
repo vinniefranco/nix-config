@@ -3,6 +3,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    enableNvidiaPatches = true;
 
     settings = {
       exec-once = [
@@ -87,7 +88,7 @@
         swallow_regex = "^(kitty)$";
       };
 
-      bind= [
+      bind = [
         "SUPER,Return,exec,$term"
         "SUPER_SHIFT,Return,exec,$term -f"
         "SUPERALT,Return,exec,$term -s"

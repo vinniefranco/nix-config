@@ -37,10 +37,12 @@
         swtpm.enable = true;
         ovmf = {
           enable = true;
-          packages = [(pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd];
+          packages = [
+            (pkgs.OVMF.override {
+              secureBoot = true;
+              tpmSupport = true;
+            }).fd
+          ];
         };
       };
     };
@@ -48,7 +50,6 @@
   };
   services.spice-vdagentd.enable = true;
   programs.virt-manager.enable = true;
-
 
   # Enable networking
   networking.hostName = "surface"; # Define your hostname.
@@ -79,9 +80,9 @@
   };
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
@@ -91,6 +92,7 @@
       nvidiaBusId = "PCI:125:0:0";
     };
   };
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }

@@ -21,7 +21,10 @@
           "sway/mode"
           "cpu"
         ];
-        modules-center = [ "sway/window" ];
+        modules-center = [
+          "sway/window"
+          "hyprland/window"
+        ];
         modules-right = [
           "custom/notification"
           "idle_inhibitor"
@@ -54,7 +57,7 @@
           escape = true;
         };
 
-        "backlight" = {
+        backlight = {
           interval = 2;
           format = "{icon} {percent}%";
           format-icons = [
@@ -71,7 +74,7 @@
           smooth-scrolling-threshold = 1;
         };
 
-        "battery" = {
+        battery = {
           interval = 60;
           full-at = 100;
           design-capacity = false;
@@ -100,19 +103,21 @@
           tooltip-format = "{power} {timeTo}";
         };
 
-        "clock" = {
+        clock = {
           format = " {:%R    %d/%m}";
           timezone = "America/Chicago";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
         };
-        "cpu" = {
+
+        cpu = {
           interval = 10;
-          format = " {avg_frequency}GHz";
+          format = " {usage}%";
           max-length = 10;
         };
-        "network" = {
+
+        network = {
           interval = 5;
           #"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
           format-icons = [
@@ -133,7 +138,7 @@
           on-click = "[[ ! `pidof nm-connection-editor` ]] && nm-connection-editor || pkill nm-connection-e";
         };
 
-        "pulseaudio" = {
+        pulseaudio = {
           format = "{icon} {volume}%";
           format-muted = "";
           format-bluetooth = "󰦢 {volume}%";
@@ -159,7 +164,8 @@
           on-click-right = "pavucontrol";
           smooth-scrolling-threshold = 1;
         };
-        "idle_inhibitor" = {
+
+        idle_inhibitor = {
           format = "{icon}";
           format-icons = {
             activated = "";
@@ -175,7 +181,7 @@
         "hyprland/window" = {
           format = "👉 {}";
           rewrite = {
-            "(.*) — Chromium" = "🌎 $1";
+            "(.*) - Chromium" = "🌎 $1";
             "(.*) - zsh" = "> [$1]";
           };
           separate-outputs = true;
