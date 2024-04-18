@@ -40,7 +40,9 @@ in
     gdk
     gimp
     htop
+    hyprpaper
     lexical
+    moonlight-qt
     neofetch
     networkmanagerapplet
     obsidian
@@ -53,6 +55,7 @@ in
 
   home.file = {
     ".config/swaync".source = ./apps/config/swaync;
+    ".config/hypr/hyprpaper.conf".source = ./apps/config/hyprpaper.conf;
   };
 
   home.sessionVariables = {

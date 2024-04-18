@@ -9,6 +9,7 @@
   imports = [
     ./chromium.nix
     ./git.nix
+    ./hyprland.nix
     ./kitty.nix
     ./neovim.nix
     ./obs.nix

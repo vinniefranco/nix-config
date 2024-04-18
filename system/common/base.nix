@@ -149,9 +149,10 @@
   services.displayManager = {
     sddm = {
       enable = true;
+      wayland.enable = true;
       theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
     };
-    sessionPackages = [ pkgs.sway ];
+    sessionPackages = [ pkgs.sway pkgs.hyprland ];
   };
 
   programs.kdeconnect = {
