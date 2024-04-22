@@ -7,10 +7,10 @@
     enableCompletion = true;
     shellAliases = {
       ff = "fzf | xargs nvim";
-      la = "eza -a --icons --grid --git";
-      ll = "eza -al --icons --grid --git";
+      la = "eza -a --icons --git";
+      ll = "eza -al --icons --git";
       r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
-      r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#default";
+      r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#surface";
       r-u = "cd ~/.dotfiles && nix flake update";
       v = "nvim";
     };

@@ -24,7 +24,6 @@
 
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "performance";
   };
 
   # Virtualization
@@ -77,6 +76,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
   hardware.nvidia = {
     modesetting.enable = true;
@@ -84,7 +84,7 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     prime = {
       sync.enable = true;
       allowExternalGpu = true;

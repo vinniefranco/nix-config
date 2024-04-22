@@ -3,9 +3,9 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
 
     settings = {
+      env = "LR_DRM_DEVICES,$HOME/.config/hypr/card:$HOME/.config/hypr/otherCard";
       exec-once = [
         "systemctl --user import-environment &"
         "hash dbus-update-activation-environment 2>/dev/null &"
@@ -31,7 +31,7 @@
         "$browser" = "chromium";
         "$files" = "thunar";
         "$term" = "kitty";
-        "$menu" = "wofi";
+        "$menu" = "${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colors -s ~/.dotfiles/apps/config/wofi/style.css";
         "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
         border_size = 1;
         gaps_in = 5;
@@ -58,6 +58,15 @@
         pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true;
       };
+
+      workspace = [
+        "1,monitor:DP-2"
+        "2,monitor:DP-2"
+        "3,monitor:DP-2"
+        "4,monitor:eDP-1"
+        "5,monitor:eDP-1"
+        "6,monitor:eDP-1"
+      ];
 
       animations = {
         enabled = true;
@@ -88,7 +97,10 @@
         swallow_regex = "^(kitty)$";
       };
 
+      bindm = [ "SUPER,mouse:272,movewindow" ];
+
       bind = [
+        "SUPER_SHIFT,P,exec,screenshotter"
         "SUPER,Return,exec,$term"
         "SUPER_SHIFT,Return,exec,$term -f"
         "SUPERALT,Return,exec,$term -s"
@@ -177,7 +189,7 @@
         "size 800 600, title:^(Volume Control)$"
         "move 75 44%, title:^(Volume Control)$"
         "float,kitty-float"
-        "float,yad|nm-connection-editor|pavucontrolk"
+        "float,yad|nm-connection-editor|pavucontrolk|blueman-manager"
         "float,xfce-polkit|kvantummanager|qt5ct"
         "float,feh|Viewnior|Gpicview|Gimp|MPlayer"
         "float,VirtualBox Manager|qemu|Qemu-system-x86_64"
@@ -191,7 +203,7 @@
       ];
 
       monitor = [
-        "eDP-1,highres,0x1452,1.6"
+        "eDP-1,2880x1920@60,0x1452,1.6"
         "DP-2,highres,0x0,1.5"
       ];
     };

@@ -15,7 +15,6 @@ let
 in
 {
   imports = [
-    inputs.nix-colors.homeManagerModules.default
     ./apps
   ];
 
@@ -47,6 +46,7 @@ in
     networkmanagerapplet
     obsidian
     pavucontrol
+    pgcli
     pika-backup
     quickemu
     ripgrep

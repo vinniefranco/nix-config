@@ -42,8 +42,7 @@
           "${modifier}+w" = "layout tabbled";
           "${modifier}+t" = "layout toggle split";
           "${modifier}+space" = "floating toggle";
-
-          "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colorsi -s ~/.dotfiles/apps/config/wofi/style.css";
+          "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colors -s ~/.dotfiles/apps/config/wofi/style.css";
           "XF86AudioLowerVolume" = "exec volumectl -u down";
           "XF86AudioMute" = "exec volumectl -u toggle-mute";
           "XF86AudioRaiseVolume" = "exec volumectl -u up";

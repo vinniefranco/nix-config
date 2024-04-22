@@ -20,6 +20,7 @@
       corefonts
       vistafonts
     ];
+    fontconfig.subpixel.rgba = "rgb";
     fontconfig.defaultFonts = {
       serif = [
         "Noto Serif"

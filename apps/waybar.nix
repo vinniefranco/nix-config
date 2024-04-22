@@ -179,10 +179,10 @@
         };
 
         "hyprland/window" = {
-          format = "👉 {}";
+          format = "󱢶 {} 󰩔";
           rewrite = {
-            "(.*) - Chromium" = "🌎 $1";
-            "(.*) - zsh" = "> [$1]";
+            "(.*) - Chromium" = "󰖟 $1";
+            "(.*) - zsh" = " [$1]";
           };
           separate-outputs = true;
         };
