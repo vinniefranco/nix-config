@@ -9,10 +9,8 @@
   };
 
   inputs = {
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     rock5b-nixos.url = "github:aciceri/rock5b-nixos";
     rock5b-nixos.inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +37,6 @@
           inherit system;
           modules = [
             ./system/surface/configuration.nix
-            nixos-hardware.nixosModules.microsoft-surface-pro-intel
           ];
         };
 

@@ -82,6 +82,7 @@
     killall
     kitty
     libnotify
+    libqalculate
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
     neovim
@@ -97,6 +98,8 @@
     tldr
     traceroute
     unzip
+    usbutils
+    v4l-utils
     virt-manager
     virt-viewer
     vulkan-tools

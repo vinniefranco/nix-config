@@ -71,9 +71,6 @@
         };
       };
       output = {
-        "*" = {
-          bg = "~/Pictures/wallpapers/space-flower.png fill";
-        };
         eDP-1 = {
           pos = "1080 1600 res 2880x1920";
           scale = "1.5";

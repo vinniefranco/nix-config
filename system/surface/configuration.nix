@@ -92,7 +92,13 @@
       nvidiaBusId = "PCI:125:0:0";
     };
   };
+
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  # 12th Gen Intel fun
+  services.fstrim.enable = true;# Just set the console font, don't mess with the font settings
+  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+  console.earlySetup = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
