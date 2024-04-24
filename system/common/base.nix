@@ -85,6 +85,7 @@
     libqalculate
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
+    lm_sensors
     neovim
     nixfmt-rfc-style
     nss.tools

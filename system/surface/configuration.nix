@@ -6,13 +6,18 @@
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/fonts.nix
+    ../common/thermald.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.kernelParams = [
+    "i915.enable_psr=0"
+  ];
+
+  boot.blacklistedKernelModules = [ "nouveau" "surface_gpe" ];
 
   boot.plymouth = {
     enable = true;
@@ -82,7 +87,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     prime = {
       sync.enable = true;
@@ -90,14 +95,13 @@
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:125:0:0";
     };
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # 12th Gen Intel fun
   services.fstrim.enable = true;# Just set the console font, don't mess with the font settings
-  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
-  console.earlySetup = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
