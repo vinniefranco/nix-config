@@ -9,8 +9,12 @@
   };
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     rock5b-nixos.url = "github:aciceri/rock5b-nixos";
     rock5b-nixos.inputs.nixpkgs.follows = "nixpkgs";
@@ -37,7 +41,13 @@
           inherit system;
           modules = [
             ./system/surface/configuration.nix
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
           ];
+        };
+
+        cubuerto = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./system/cubuerto/configuration.nix ];
         };
 
         rocky = nixpkgs.lib.nixosSystem {

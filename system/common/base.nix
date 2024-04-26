@@ -128,9 +128,6 @@
       setSocketVariable = true;
     };
   };
-
-  programs.light.enable = true;
-
   # I use ZSH, btw.
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;

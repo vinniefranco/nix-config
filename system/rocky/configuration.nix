@@ -7,9 +7,9 @@
 }:
 
 {
-  imports = [
-    inputs.rock5b.nixosModules.apply-overlay
-    inputs.rock5b.nixosModules.kernel
+  imports = with inputs.rock5b; [
+    nixosModules.apply-overlay
+    nixosModules.kernel
   ];
 
   nixpkgs.hostPlatform.system = "aarch64-linux";

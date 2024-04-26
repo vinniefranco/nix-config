@@ -5,7 +5,7 @@
     enable = true;
 
     settings = {
-      env = "LR_DRM_DEVICES,$HOME/.config/hypr/card:$HOME/.config/hypr/otherCard";
+      env = [ "XDG_SESSION_TYPE,wayland" ];
       exec-once = [
         "systemctl --user import-environment &"
         "hash dbus-update-activation-environment 2>/dev/null &"
@@ -203,8 +203,8 @@
       ];
 
       monitor = [
-        "eDP-1,2880x1920@60,0x1452,1.6"
-        "DP-2,highres,0x0,1.5"
+        "HDMI-A-1,2560x1600@60,0x1452,1.6"
+        "DP-3,highres,0x0,1.5"
       ];
     };
   };

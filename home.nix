@@ -14,9 +14,7 @@ let
   );
 in
 {
-  imports = [
-    ./apps
-  ];
+  imports = [ ./apps ];
 
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
