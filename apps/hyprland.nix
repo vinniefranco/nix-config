@@ -1,6 +1,9 @@
 { pkgs, ... }:
 
 {
+  # Notification Daemon
+  services.avizo.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -60,12 +63,12 @@
       };
 
       workspace = [
-        "1,monitor:DP-2"
-        "2,monitor:DP-2"
-        "3,monitor:DP-2"
-        "4,monitor:eDP-1"
-        "5,monitor:eDP-1"
-        "6,monitor:eDP-1"
+        "1,monitor:DP-3"
+        "2,monitor:DP-3"
+        "3,monitor:DP-3"
+        "4,monitor:HDMI-A-1"
+        "5,monitor:HDMI-A-1"
+        "6,monitor:HDMI-A-1"
       ];
 
       animations = {

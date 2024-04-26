@@ -13,7 +13,6 @@
     ./kitty.nix
     ./neovim.nix
     ./obs.nix
-    ./sway.nix
     ./theme.nix
     ./tmux.nix
     ./waybar.nix

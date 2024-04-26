@@ -189,12 +189,12 @@
 
         "sway/workspaces" = {
           persistent_workspaces = {
-            "1" = [ "DP-2" ];
-            "2" = [ "DP-2" ];
-            "3" = [ "DP-2" ];
-            "4" = [ "eDP-1" ];
-            "5" = [ "eDP-1" ];
-            "6" = [ "eDP-1" ];
+            "1" = [ "DP-3" ];
+            "2" = [ "DP-3" ];
+            "3" = [ "DP-3" ];
+            "4" = [ "HDMI-A-1" ];
+            "5" = [ "HDMI-A-1" ];
+            "6" = [ "HDMI-A-1" ];
           };
           disable-scroll = false;
           disable-click = false;
@@ -222,12 +222,12 @@
 
         "hyprland/workspaces" = {
           persistent_workspaces = {
-            "1" = [ "DP-2" ];
-            "2" = [ "DP-2" ];
-            "3" = [ "DP-2" ];
-            "4" = [ "eDP-1" ];
-            "5" = [ "eDP-1" ];
-            "6" = [ "eDP-1" ];
+            "1" = [ "DP-3" ];
+            "2" = [ "DP-3" ];
+            "3" = [ "DP-3" ];
+            "4" = [ "HDMI-A-1" ];
+            "5" = [ "HDMI-A-1" ];
+            "6" = [ "HDMI-A-1" ];
           };
           disable-scroll = false;
           disable-click = false;
