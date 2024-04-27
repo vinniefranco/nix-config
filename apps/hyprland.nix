@@ -103,7 +103,7 @@
       bindm = [ "SUPER,mouse:272,movewindow" ];
 
       bind = [
-        "SUPER_SHIFT,P,exec,screenshotter"
+        "SUPER_SHIFT,P,exec,screenshoter"
         "SUPER,Return,exec,$term"
         "SUPER_SHIFT,Return,exec,$term -f"
         "SUPERALT,Return,exec,$term -s"
@@ -115,15 +115,14 @@
         "SUPER,X,exec,wlogout"
         ",XF86MonBrightnessUp,exec,light --inc"
         ",XF86MonBrightnessDown,exec,light --dec"
-        ",XF86AudioRaiseVolume,exec,volume --inc"
-        ",XF86AudioLowerVolume,exec,volume --dec"
-        ",XF86AudioMute,exec,volume --toggle"
+        ",XF86AudioRaiseVolume,exec,volumectl up"
+        ",XF86AudioLowerVolume,exec,volumectl down"
+        ",XF86AudioMute,exec,volumectl toggle-mute"
         ",XF86AudioMicMute,exec,volume --toggle-mic"
         ",XF86AudioNext,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
         ",XF86AudioPrev,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
         ",XF86AudioPlay,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
         "SUPER,Q,killactive,"
-        "SUPER,C,killactive,"
         "CTRLALT,Delete,exit,"
         "SUPER,F,fullscreen,"
         "SUPER,Space,togglefloating,"

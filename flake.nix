@@ -53,7 +53,7 @@
         rocky = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
-            ./system/rocky/configuration.nixpkgs
+            ./system/rocky/configuration.nix
             rock5b-nixos.nixosModules.kernel
             rock5b-nixos.nixosModules.fan-control
           ];

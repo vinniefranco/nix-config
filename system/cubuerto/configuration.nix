@@ -110,5 +110,8 @@
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+  services.udev.packages = with pkgs; [
+    via
+  ];
   system.stateVersion = "24.05"; # Did you read the comment?
 }

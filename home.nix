@@ -36,6 +36,7 @@ in
     fd
     gdk
     gimp
+    gnome.file-roller
     htop
     hyprpaper
     lexical
