@@ -2,7 +2,17 @@
 
 {
   # Notification Daemon
-  services.avizo.enable = true;
+  services.avizo = {
+    enable = true;
+    settings = {
+      default = {
+        background = "rgba(45, 45, 65, 0.8)";
+        border-color = "rgba(45, 45, 65, 0.9)";
+        bar-fg-color = "rgba(200, 200, 200, 0.9)";
+        y-offset = 0.5;
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -37,11 +47,13 @@
         "$menu" = "${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colors -s ~/.dotfiles/apps/config/wofi/style.css";
         "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
         border_size = 1;
-        gaps_in = 5;
-        gaps_out = 5;
+        gaps_in = 10;
+        gaps_out = 10;
         layout = "dwindle";
         no_border_on_floating = true;
       };
+
+      xwayland.force_zero_scaling = true;
 
       decoration = {
         rounding = 6;
@@ -100,7 +112,10 @@
         swallow_regex = "^(kitty)$";
       };
 
-      bindm = [ "SUPER,mouse:272,movewindow" ];
+      bindm = [
+        "SUPER,mouse:272,movewindow"
+        "SUPER,mouse:273,resizewindow"
+      ];
 
       bind = [
         "SUPER_SHIFT,P,exec,screenshoter"
@@ -115,10 +130,9 @@
         "SUPER,X,exec,wlogout"
         ",XF86MonBrightnessUp,exec,light --inc"
         ",XF86MonBrightnessDown,exec,light --dec"
-        ",XF86AudioRaiseVolume,exec,volumectl up"
-        ",XF86AudioLowerVolume,exec,volumectl down"
-        ",XF86AudioMute,exec,volumectl toggle-mute"
-        ",XF86AudioMicMute,exec,volume --toggle-mic"
+        ",XF86AudioRaiseVolume,exec,volumectl -d up"
+        ",XF86AudioLowerVolume,exec,volumectl -d down"
+        ",XF86AudioMute,exec,volumectl -d toggle-mute"
         ",XF86AudioNext,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
         ",XF86AudioPrev,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
         ",XF86AudioPlay,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -189,7 +203,7 @@
         "float, title:^(Volume Control)$"
         "float, title:^(Picture-in-Picture)$"
         "size 800 600, title:^(Volume Control)$"
-        "move 75 44%, title:^(Volume Control)$"
+        "move 75 4%, title:^(Volume Control)$"
         "float,kitty-float"
         "float,yad|nm-connection-editor|pavucontrolk|blueman-manager"
         "float,xfce-polkit|kvantummanager|qt5ct"

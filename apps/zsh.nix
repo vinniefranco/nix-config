@@ -14,7 +14,12 @@
       r-u = "cd ~/.dotfiles && nix flake update";
       v = "nvim";
     };
-
+    syntaxHighlighting = {
+      enable = true;
+      patterns = {"rm -rf *" = "fg=black,bg=red";};
+      styles = {"alias" = "fg=magenta";};
+      highlighters = ["main" "brackets" "pattern"];
+    };
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";

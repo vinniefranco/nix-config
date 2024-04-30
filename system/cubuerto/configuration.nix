@@ -13,17 +13,26 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  networking.hostName = "cubuerto"; # Define your hostname.
-  boot.plymouth = {
-    enable = true;
-    theme = "hexagon_dots";
-    themePackages = with pkgs; [
-      (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+  boot = {
+    consoleLogLevel = 3;
+    kernelParams = [
+      "quiet"
+      "systemd.show_status=auto"
+      "rd.udev.log_level=3"
     ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    plymouth = {
+      enable = true;
+      theme = "hexagon_dots";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+      ];
+    };
   };
+  networking.hostName = "cubuerto"; # Define your hostname.
 
   # Virtualization
   virtualisation = {
@@ -79,8 +88,10 @@
     extraGroups = [
       "audio"
       "docker"
+      "input"
       "libvirtd"
       "networkmanager"
+      "plugdev"
       "video"
       "wheel"
     ];
@@ -103,13 +114,12 @@
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
   services.udev.packages = with pkgs; [
     via
   ];
