@@ -173,11 +173,6 @@
           };
         };
 
-        "sway/window" = {
-          format = "{app_id}";
-          max-length = 15;
-        };
-
         "hyprland/window" = {
           format = "󱢶 {} 󰩔";
           rewrite = {
@@ -187,47 +182,14 @@
           separate-outputs = true;
         };
 
-        "sway/workspaces" = {
-          persistent_workspaces = {
-            "1" = [ "DP-3" ];
-            "2" = [ "DP-3" ];
-            "3" = [ "DP-3" ];
-            "4" = [ "HDMI-A-1" ];
-            "5" = [ "HDMI-A-1" ];
-            "6" = [ "HDMI-A-1" ];
-          };
-          disable-scroll = false;
-          disable-click = false;
-          all-outputs = false;
-          format = "{icon}";
-          format-icons = {
-            "1" = "";
-            "2" = "󰧑";
-            "3" = "";
-            "4" = "";
-            "5" = "󰊕";
-            "6" = "󰯜";
-            "7" = "";
-            "8" = "";
-            "9" = "";
-            urgent = "";
-            default = "";
-          };
-          smooth-scrolling-threshold = 1;
-          disable-scroll-wraparound = false;
-          enable-bar-scroll = false;
-          disable-markup = false;
-          current-only = false;
-        };
-
         "hyprland/workspaces" = {
           persistent_workspaces = {
             "1" = [ "DP-3" ];
             "2" = [ "DP-3" ];
             "3" = [ "DP-3" ];
-            "4" = [ "HDMI-A-1" ];
-            "5" = [ "HDMI-A-1" ];
-            "6" = [ "HDMI-A-1" ];
+            "4" = [ "eDP-1" ];
+            "5" = [ "eDP-1" ];
+            "6" = [ "eDP-1" ];
           };
           disable-scroll = false;
           disable-click = false;

@@ -9,10 +9,17 @@
       hide_cursor = false;
     };
 
-    background = [
+    backgrounds = [
       {
         monitor = "";
         path = "${config.home.homeDirectory}/Pictures/wallpapers/space-flower.png";
+        blur_passes = 1; # 0 disables blurring
+        blur_size = 7;
+        noise = 0.0117;
+        contrast = 0.8916;
+        brightness = 0.8172;
+        vibrancy = 0.1696;
+        vibrancy_darkness = 0.0;
       }
     ];
 

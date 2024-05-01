@@ -16,6 +16,8 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    hyprlock.url = "github:hyprwm/hyprlock";
+
     rock5b-nixos.url = "github:aciceri/rock5b-nixos";
     rock5b-nixos.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -57,6 +59,11 @@
             rock5b-nixos.nixosModules.kernel
             rock5b-nixos.nixosModules.fan-control
           ];
+        };
+
+        v3 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./system/v3/configuration.nix ];
         };
       };
 

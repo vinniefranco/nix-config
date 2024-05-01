@@ -1,5 +1,6 @@
 { pkgs, ... }:
 
+
 {
   # Notification Daemon
   services.avizo = {
@@ -27,7 +28,6 @@
       env = [ "XDG_SESSION_TYPE,wayland" ];
       exec-once = [
         "blueman-applet"
-        "hyprlock"
         "hyprpaper"
         "nm-applet"
         "waybar"
@@ -82,9 +82,9 @@
         "1,monitor:DP-3"
         "2,monitor:DP-3"
         "3,monitor:DP-3"
-        "4,monitor:HDMI-A-1"
-        "5,monitor:HDMI-A-1"
-        "6,monitor:HDMI-A-1"
+        "4,monitor:eDP-1"
+        "5,monitor:eDP-1"
+        "6,monitor:eDP-1"
       ];
 
       animations = {
@@ -223,8 +223,8 @@
       ];
 
       monitor = [
-        "HDMI-A-1,2560x1600@60,0x1452,1.6"
-        "DP-3,highres,0x0,1.5"
+        "DP-3,3840x2160@60,0x0,1.6"
+        "eDP-1,highres,0x1452,1.333"
       ];
     };
   };

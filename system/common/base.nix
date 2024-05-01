@@ -190,11 +190,6 @@
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
   };
-  # enable location service
-  location.provider = "geoclue2";
-
-  # provide location
-  services.geoclue2.enable = true;
 
   # For zee secrets
   programs.dconf.enable = true;
@@ -216,7 +211,6 @@
       theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
     };
     sessionPackages = [
-      pkgs.sway
       pkgs.hyprland
     ];
   };

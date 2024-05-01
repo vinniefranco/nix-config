@@ -2,11 +2,13 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
 {
   imports = [
+    inputs.hyprlock.homeManagerModules.default
     ./chromium.nix
     ./git.nix
     ./hyprland.nix
