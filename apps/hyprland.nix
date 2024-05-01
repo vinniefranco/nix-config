@@ -26,10 +26,10 @@
     settings = {
       env = [ "XDG_SESSION_TYPE,wayland" ];
       exec-once = [
-        "nm-applet"
         "blueman-applet"
-        "hyprpaper"
         "hyprlock"
+        "hyprpaper"
+        "nm-applet"
         "waybar"
       ];
       input = {

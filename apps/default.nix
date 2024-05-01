@@ -10,6 +10,7 @@
     ./chromium.nix
     ./git.nix
     ./hyprland.nix
+    ./hyprlock.nix
     ./kitty.nix
     ./neovim.nix
     ./obs.nix
