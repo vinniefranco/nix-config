@@ -64,11 +64,11 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -113,15 +113,11 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-    ];
+    extraPackages = with pkgs; [ rocmPackages.clr.icd ];
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   services.xserver.videoDrivers = [ "modesetting" ];
-  services.udev.packages = with pkgs; [
-    via
-  ];
+  services.udev.packages = with pkgs; [ via ];
   system.stateVersion = "24.05"; # Did you read the comment?
 }

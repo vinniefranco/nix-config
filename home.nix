@@ -40,6 +40,7 @@ in
     htop
     hyprpaper
     lexical
+    libreoffice
     moonlight-qt
     neofetch
     networkmanagerapplet

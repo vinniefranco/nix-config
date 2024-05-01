@@ -16,17 +16,21 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-
+    systemd = {
+      variables = [ "--all" ];
+      extraCommands = [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start hyprland-session.target"
+      ];
+    };
     settings = {
       env = [ "XDG_SESSION_TYPE,wayland" ];
       exec-once = [
-        "systemctl --user import-environment &"
-        "hash dbus-update-activation-environment 2>/dev/null &"
-        "dbus-update-activation-environment --systemd &"
-        "nm-applet &"
-        "blueman-applet &"
-        "hyprpaper &"
-        "waybar &"
+        "nm-applet"
+        "blueman-applet"
+        "hyprpaper"
+        "hyprlock"
+        "waybar"
       ];
       input = {
         kb_options = "caps:escape";
@@ -98,7 +102,7 @@
           "border, 1, 10, default"
           "fade, 1, 10, smoothIn"
           "fadeDim, 1, 10, smoothIn"
-          "workspaces, 1, 6, default"
+          "workspaces, 1, 6, default, fade"
           "borderangle, 1, 20, default, loop"
         ];
       };
