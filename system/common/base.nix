@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   boot.tmp.cleanOnBoot = true;
@@ -94,7 +94,10 @@
   security = {
     # allow wayland lockers to unlock the screen
     pam = {
-      services.hyprlock.text = "auth include login";
+      services.hyprlock = {
+        text = "auth include login";
+        fprintAuth = if config.networking.hostName == "v3" then true else false;
+      };
       loginLimits = [
         {
           domain = "@users";
@@ -197,6 +200,7 @@
 
   # For zee secrets
   programs.dconf.enable = true;
+
   programs.thunar = {
     enable = true;
     plugins = with pkgs.xfce; [
@@ -207,6 +211,11 @@
     ];
   };
 
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
   services.xserver.enable = true;
   services.displayManager = {
     sddm = {
@@ -215,10 +224,5 @@
       theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
     };
     sessionPackages = [ pkgs.hyprland ];
-  };
-
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
   };
 }
