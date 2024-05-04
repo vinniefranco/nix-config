@@ -14,8 +14,7 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
+    hyprland.url = "github:hyprwm/Hyprland";
     hyprlock.url = "github:hyprwm/hyprlock";
 
     rock5b-nixos.url = "github:aciceri/rock5b-nixos";
@@ -26,32 +25,12 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nixos-hardware,
-      rock5b-nixos,
-      ...
-    }@inputs:
+    { nixpkgs, rock5b-nixos, ... }@inputs:
     let
-      lib = nixpkgs.lib;
       system = "x86_64-linux";
     in
     {
       nixosConfigurations = {
-        surface = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./system/surface/configuration.nix
-            nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          ];
-        };
-
-        cubuerto = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./system/cubuerto/configuration.nix ];
-        };
-
         rocky = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
@@ -64,6 +43,9 @@
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [ ./system/v3/configuration.nix ];
+          specialArgs = {
+            inherit inputs;
+          };
         };
       };
 

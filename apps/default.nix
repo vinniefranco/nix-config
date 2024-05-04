@@ -1,15 +1,10 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 
 {
   imports = [
     inputs.hyprlock.homeManagerModules.default
     ./chromium.nix
+    ./freecad.nix
     ./git.nix
     ./hyprland.nix
     ./hyprlock.nix

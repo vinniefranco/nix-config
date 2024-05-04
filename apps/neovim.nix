@@ -1,16 +1,6 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 
 let
-  toLuaFile = file: ''
-    lua << EOF
-    ${builtins.readFile file}
-    EOF
-  '';
   oil-gitstatus = pkgs.vimUtils.buildVimPlugin {
     name = "oil-gitstatus";
     src = pkgs.fetchFromGitHub {
@@ -302,9 +292,9 @@ in
       lspkind.enable = true;
       rust-tools.enable = true;
     };
-    extraPlugins = with pkgs.vimPlugins; [
+    extraPlugins = [
       {
-        plugin = Navigator-nvim;
+        plugin = pkgs.vimPlugins.Navigator-nvim;
         optional = true;
         config = ''
           packadd! Navigator.nvim
@@ -315,14 +305,14 @@ in
       }
       { plugin = oil-gitstatus; }
       {
-        plugin = vim-test;
+        plugin = pkgs.vimPlugins.vim-test;
         config = ''
           lua << EOF
           vim.g["test#strategy"] = "vimux"
           EOF
         '';
       }
-      { plugin = vimux; }
+      { plugin = pkgs.vimPlugins.vimux; }
     ];
   };
 }

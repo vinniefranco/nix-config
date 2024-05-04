@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{ inputs, pkgs, ... }:
 
 {
   # Notification Daemon
@@ -17,6 +16,8 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+
     systemd = {
       variables = [ "--all" ];
       extraCommands = [
@@ -223,7 +224,7 @@
       ];
 
       monitor = [
-        "DP-3,3840x2160@60,0x0,1.6"
+        "DP-3,3840x2160@60,0x0,1.5"
         "eDP-1,highres,0x1452,1.333"
       ];
     };

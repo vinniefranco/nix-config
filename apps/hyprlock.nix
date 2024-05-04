@@ -15,7 +15,7 @@
         path = "${config.home.homeDirectory}/Pictures/wallpapers/space-flower.png";
         blur_passes = 1; # 0 disables blurring
         blur_size = 7;
-        noise = 0.0117;
+        noise = 1.17e-2;
         contrast = 0.8916;
         brightness = 0.8172;
         vibrancy = 0.1696;
