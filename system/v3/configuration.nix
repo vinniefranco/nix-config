@@ -2,10 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, ... }:
-let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
+{ pkgs, ... }:
+
 {
   imports = [
     # Include the results of the hardware scan.
@@ -118,8 +116,6 @@ in
       rocm-opencl-icd
       rocm-opencl-runtime
     ];
-    package = pkgs-unstable.mesa.drivers;
-    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
 
   services.xserver.videoDrivers = [ "modesetting" ];
@@ -132,6 +128,5 @@ in
 
   services.fstrim.enable = true;
   services.fprintd.enable = true;
-
   system.stateVersion = "23.11"; # Did you read the comment?
 }

@@ -5,6 +5,7 @@
     inputs.hyprlock.homeManagerModules.default
     ./chromium.nix
     ./freecad.nix
+    ./fuzzel.nix
     ./git.nix
     ./hyprland.nix
     ./hyprlock.nix
@@ -15,7 +16,6 @@
     ./tmux.nix
     ./waybar.nix
     ./wlogout.nix
-    ./wofi.nix
     ./xdg.nix
     ./zsh.nix
   ];

@@ -8,8 +8,6 @@
       "nix-command"
       "flakes"
     ];
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   # Enable networking
@@ -49,7 +47,6 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -94,9 +91,17 @@
   security = {
     # allow wayland lockers to unlock the screen
     pam = {
-      services.hyprlock = {
-        text = "auth include login";
-        fprintAuth = if config.networking.hostName == "v3" then true else false;
+      services = {
+        sddm = {
+          text = ''
+          auth 			[success=1 new_authtok_reqd=1 default=ignore]  	pam_unix.so try_first_pass likeauth nullok
+          auth 			sufficient  	pam_fprintd.so
+          '';
+        };
+        hyprlock = {
+          text = "auth include login";
+          fprintAuth = if config.networking.hostName == "v3" then true else false;
+        };
       };
       loginLimits = [
         {
@@ -113,18 +118,13 @@
     # don't ask for password for wheel group
     sudo.wheelNeedsPassword = false;
   };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     bat
     direnv
+    dune3d
     eza
     fzf
     git
@@ -166,13 +166,8 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
   # https://github.com/NixOS/nixpkgs/issues/114222
   systemd.user.services.telephony_client.enable = false;
-
-  # Automounts
-  services.devmon.enable = true;
-  services.udisks2.enable = true;
 
   virtualisation.docker = {
     enable = true;
@@ -188,41 +183,54 @@
   programs.zsh.enable = true;
 
   services = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    blueman.enable = true;
+
     # needed for GNOME services outside of GNOME Desktop
-    dbus.packages = with pkgs; [
-      gcr
-      gnome.gnome-settings-daemon
-    ];
-    dbus.implementation = "broker";
+    dbus = {
+      packages = with pkgs; [
+        gcr
+        gnome.gnome-settings-daemon
+      ];
+      implementation = "broker";
+    };
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
-  };
+    # Automounts
+    devmon.enable = true;
+    udisks2.enable = true;
 
-  # For zee secrets
-  programs.dconf.enable = true;
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-dropbox-plugin
-      thunar-media-tags-plugin
-      thunar-volman
-    ];
-  };
-
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-  };
-
-  services.xserver.enable = true;
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
+    xserver.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+        wayland.enable = true;
+        theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
+      };
+      sessionPackages = [ pkgs.hyprland ];
     };
-    sessionPackages = [ pkgs.hyprland ];
+  };
+
+  programs = {
+    dconf.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-dropbox-plugin
+        thunar-media-tags-plugin
+        thunar-volman
+      ];
+    };
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
   };
 }

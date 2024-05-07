@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Notification Daemon
@@ -16,7 +16,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
     systemd = {
       variables = [ "--all" ];
@@ -49,7 +48,7 @@
         "$browser" = "chromium";
         "$files" = "thunar";
         "$term" = "kitty";
-        "$menu" = "${pkgs.wofi}/bin/wofi -C ~/.dotfiles/apps/config/wofi/colors -s ~/.dotfiles/apps/config/wofi/style.css";
+        "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
         "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
         border_size = 1;
         gaps_in = 10;

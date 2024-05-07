@@ -16,13 +16,11 @@
         tray.spacing = 4;
         modules-left = [
           "hyprland/workspaces"
-          "sway/workspaces"
           "clock"
           "sway/mode"
           "cpu"
         ];
         modules-center = [
-          "sway/window"
           "hyprland/window"
         ];
         modules-right = [
