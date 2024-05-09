@@ -20,9 +20,7 @@
           "sway/mode"
           "cpu"
         ];
-        modules-center = [
-          "hyprland/window"
-        ];
+        modules-center = [ "hyprland/window" ];
         modules-right = [
           "custom/notification"
           "idle_inhibitor"

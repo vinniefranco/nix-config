@@ -94,8 +94,7 @@
       services = {
         sddm = {
           text = ''
-          auth 			[success=1 new_authtok_reqd=1 default=ignore]  	pam_unix.so try_first_pass likeauth nullok
-          auth 			sufficient  	pam_fprintd.so
+            auth 			sufficient  	pam_fprintd.so
           '';
         };
         hyprlock = {
@@ -138,6 +137,7 @@
     libqalculate
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nixfmt-rfc-style

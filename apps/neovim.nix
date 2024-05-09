@@ -207,6 +207,40 @@ in
       luasnip.enable = true;
       gitsigns.enable = true;
       nvim-autopairs.enable = true;
+      nvim-lightbulb = {
+        enable = true;
+        settings = {
+          autocmd = {
+            enabled = true;
+            updatetime = 200;
+          };
+          float = {
+            enabled = false;
+            text = " 󰌶 ";
+            win_opts = {
+              border = "rounded";
+            };
+          };
+          line = {
+            enabled = false;
+          };
+          number = {
+            enabled = false;
+          };
+          sign = {
+            enabled = false;
+            text = "󰌶";
+          };
+          status_text = {
+            enabled = false;
+            text = " 󰌶 ";
+          };
+          virtual_text = {
+            enabled = true;
+            text = "󰌶";
+          };
+        };
+      };
       telescope = {
         enable = true;
         settings = {
@@ -263,6 +297,14 @@ in
       lualine.enable = true;
       lsp = {
         enable = true;
+        keymaps.lspBuf = {
+          K = "hover";
+          gD = "references";
+          gd = "definition";
+          gi = "implementation";
+          gt = "type_definition";
+          gca = "code_action";
+        };
         servers = {
           bashls.enable = true;
           clangd.enable = true;
