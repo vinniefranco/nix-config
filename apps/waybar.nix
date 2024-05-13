@@ -186,6 +186,7 @@
             "4" = [ "eDP-1" ];
             "5" = [ "eDP-1" ];
             "6" = [ "eDP-1" ];
+            "7" = [ "DP-2" ];
           };
           disable-scroll = false;
           disable-click = false;

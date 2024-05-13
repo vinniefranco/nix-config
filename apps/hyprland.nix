@@ -85,6 +85,7 @@
         "4,monitor:eDP-1"
         "5,monitor:eDP-1"
         "6,monitor:eDP-1"
+        "7,monitor:DP-2"
       ];
 
       animations = {
@@ -163,12 +164,14 @@
         "SUPER,4,workspace,4"
         "SUPER,5,workspace,5"
         "SUPER,6,workspace,6"
+        "SUPER,7,workspace,7"
         "SUPER_SHIFT,1,movetoworkspace,1"
         "SUPER_SHIFT,2,movetoworkspace,2"
         "SUPER_SHIFT,3,movetoworkspace,3"
         "SUPER_SHIFT,4,movetoworkspace,4"
         "SUPER_SHIFT,5,movetoworkspace,5"
         "SUPER_SHIFT,6,movetoworkspace,6"
+        "SUPER_SHIFT,7,movetoworkspace,7"
       ];
 
       windowrule = [
@@ -224,7 +227,8 @@
 
       monitor = [
         "DP-3,3840x2160@60,0x0,1.5"
-        "eDP-1,highres,0x1452,1.333"
+        "DP-2,highres,0x1452,1.333,transform,3"
+        "eDP-1,highres,1200x1452,1.333"
       ];
     };
   };

@@ -34,6 +34,7 @@ in
     gnome.file-roller
     htop
     hyprpaper
+    kooha
     lexical
     libreoffice
     moonlight-qt
@@ -45,6 +46,7 @@ in
     pika-backup
     quickemu
     ripgrep
+    wf-recorder
     xorg.xhost
   ];
 
