@@ -227,8 +227,8 @@
 
       monitor = [
         "DP-3,3840x2160@60,0x0,1.5"
-        "DP-2,highres,0x1452,1.333,transform,3"
-        "eDP-1,highres,1200x1452,1.333"
+        "DP-2,highres,-1200x1452,1.333,transform,3"
+        "eDP-1,highres,0x1452,1.333"
       ];
     };
   };
