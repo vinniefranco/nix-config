@@ -14,8 +14,6 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprlock.url = "github:hyprwm/hyprlock";
-
     rock5b-nixos.url = "github:aciceri/rock5b-nixos";
     rock5b-nixos.inputs.nixpkgs.follows = "nixpkgs";
 

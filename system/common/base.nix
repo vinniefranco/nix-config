@@ -120,6 +120,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
     bat
     direnv
@@ -158,6 +159,7 @@
     virt-viewer
     vulkan-tools
     wget
+    widevine-cdm
     win-spice
     win-virtio
     wl-clipboard

@@ -1,8 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   imports = [
-    inputs.hyprlock.homeManagerModules.default
     ./chromium.nix
     ./freecad.nix
     ./fuzzel.nix

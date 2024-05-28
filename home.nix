@@ -47,6 +47,8 @@ in
     quickemu
     ripgrep
     wf-recorder
+    vivaldi
+    vivaldi-ffmpeg-codecs
     xorg.xhost
   ];
 
