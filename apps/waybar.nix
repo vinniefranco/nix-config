@@ -213,6 +213,6 @@
         };
       };
     };
-    style = ./config/waybar/style.css;
+    # style = ./config/waybar/style.css;
   };
 }

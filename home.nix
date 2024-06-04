@@ -14,6 +14,22 @@ in
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
+  stylix = {
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
+    image = ./apps/config/space-flower.png;
+    polarity = "dark";
+    fonts.sizes = {
+      terminal = 11;
+      applications = 11;
+      popups = 11;
+    };
+    opacity = {
+      desktop = 0.8;
+      terminal = 0.8;
+    };
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.

@@ -11,6 +11,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    stylix.url = "github:danth/stylix";
+
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -22,37 +24,50 @@
   };
 
   outputs =
-    { nixpkgs, rock5b-nixos, ... }@inputs:
+    { nixpkgs, rock5b-nixos, home-manager, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [
+          (final: prev: {
+            chromium = prev.chromium.override {
+              enableWideVine = true;
+            };
+         })
+        ];
+      };
     in
     {
       nixosConfigurations = {
         rocky = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
           modules = [
             ./system/rocky/configuration.nix
             rock5b-nixos.nixosModules.kernel
             rock5b-nixos.nixosModules.fan-control
           ];
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
         };
 
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./system/v3/configuration.nix ];
+          modules = [ 
+            ./system/v3/configuration.nix
+          ];
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
         };
       };
 
       homeConfigurations = {
-        vinnie = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          modules = [ ./home.nix ];
+        vinnie = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ stylix.homeManagerModules.stylix ./home.nix ];
 
           extraSpecialArgs = {
             inherit inputs;

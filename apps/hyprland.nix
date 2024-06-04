@@ -6,9 +6,9 @@
     enable = true;
     settings = {
       default = {
-        background = "rgba(45, 45, 65, 0.8)";
-        border-color = "rgba(45, 45, 65, 0.9)";
-        bar-fg-color = "rgba(200, 200, 200, 0.9)";
+        # background = "rgba(45, 45, 65, 0.8)";
+        # border-color = "rgba(45, 45, 65, 0.9)";
+        # bar-fg-color = "rgba(200, 200, 200, 0.9)";
         y-offset = 0.5;
       };
     };
@@ -35,9 +35,9 @@
       input = {
         kb_options = "caps:escape";
         follow_mouse = 1;
-        natural_scroll = 0;
-        force_no_accel = 0;
-        sensitivity = 3.0;
+        natural_scroll = false;
+        force_no_accel = false;
+        sensitivity = 0;
         touchpad = {
           disable_while_typing = true;
           clickfinger_behavior = true;
@@ -49,7 +49,7 @@
         "$files" = "thunar";
         "$term" = "kitty";
         "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
-        "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
+        # "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
         border_size = 1;
         gaps_in = 10;
         gaps_out = 10;
@@ -65,7 +65,7 @@
         inactive_opacity = 1.0;
         fullscreen_opacity = 1.0;
         drop_shadow = false;
-        "col.shadow" = "0x66000000";
+        # "col.shadow" = "0x66000000";
         blurls = [
           "gtk-layer-shell"
           "lockscreen"

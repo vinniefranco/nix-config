@@ -17,10 +17,10 @@ in
   programs.nixvim = {
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
-    colorschemes.base16 = {
-      enable = true;
-      colorscheme = "catppuccin";
-    };
+    # colorschemes.base16 = {
+    #   enable = true;
+    #   colorscheme = "catppuccin";
+    # };
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
@@ -44,7 +44,7 @@ in
        -- transparent bg
       vim.api.nvim_set_hl(0, 'Normal', { guibg=NONE, ctermbg=NONE })
       -- Spelling is good
-      vim.api.nvim_set_hl(0, 'SpellBad', { reverse=true, undercurl=true })
+      vim.api.nvim_set_hl(0, 'SpellBad', { undercurl=true })
     '';
     opts = {
       cursorline = true;
@@ -80,9 +80,8 @@ in
         mode = [ "n" ];
       }
       {
-        action = "function() require'flash'.jump() end";
+        action.__raw = "function() require'flash'.jump() end";
         key = "s";
-        lua = true;
         mode = [
           "n"
           "x"
@@ -196,7 +195,21 @@ in
       cmp-clippy.enable = true;
       codeium-nvim.enable = true;
       comment.enable = true;
+      conform-nvim = {
+        enable = true;
+        notifyOnError = true;
+        formattersByFt = {
+          javascript = ["prettier"];
+          elixir = ["mix"];
+          "_" = ["trim_whitespace"];
+        };
+        formatOnSave = {
+          lspFallback = true;
+          timeoutMs = 2000;
+        };
+      };
       direnv.enable = true;
+      emmet.enable = true;
       friendly-snippets.enable = true;
       flash = {
         enable = true;
@@ -290,6 +303,7 @@ in
         enable = true;
         nixvimInjections = true;
       };
+      typescript-tools.enable = true;
       oil = {
         enable = true;
         settings.win_options.signcolumn = "yes:2";
