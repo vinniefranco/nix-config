@@ -6,9 +6,6 @@
     enable = true;
     settings = {
       default = {
-        # background = "rgba(45, 45, 65, 0.8)";
-        # border-color = "rgba(45, 45, 65, 0.9)";
-        # bar-fg-color = "rgba(200, 200, 200, 0.9)";
         y-offset = 0.5;
       };
     };
@@ -49,7 +46,6 @@
         "$files" = "thunar";
         "$term" = "kitty";
         "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
-        # "col.active_border" = "rgba(b3ff1aee) rgba(ffccaaee)";
         border_size = 1;
         gaps_in = 10;
         gaps_out = 10;
@@ -65,7 +61,6 @@
         inactive_opacity = 1.0;
         fullscreen_opacity = 1.0;
         drop_shadow = false;
-        # "col.shadow" = "0x66000000";
         blurls = [
           "gtk-layer-shell"
           "lockscreen"

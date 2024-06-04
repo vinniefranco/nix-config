@@ -213,6 +213,5 @@
         };
       };
     };
-    # style = ./config/waybar/style.css;
   };
 }

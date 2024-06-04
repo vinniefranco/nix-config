@@ -17,10 +17,6 @@ in
   programs.nixvim = {
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
-    # colorschemes.base16 = {
-    #   enable = true;
-    #   colorscheme = "catppuccin";
-    # };
     enable = true;
     enableMan = true;
     extraConfigLuaPost = ''
