@@ -195,9 +195,9 @@ in
         enable = true;
         notifyOnError = true;
         formattersByFt = {
-          javascript = ["prettier"];
-          elixir = ["mix"];
-          "_" = ["trim_whitespace"];
+          javascript = [ "prettier" ];
+          elixir = [ "mix" ];
+          "_" = [ "trim_whitespace" ];
         };
         formatOnSave = {
           lspFallback = true;
@@ -365,6 +365,9 @@ in
         '';
       }
       { plugin = pkgs.vimPlugins.vimux; }
+      { plugin = pkgs.vimPlugins.vim-dadbod; }
+      { plugin = pkgs.vimPlugins.vim-dadbod-ui; }
+      { plugin = pkgs.vimPlugins.vim-dadbod-completion; }
     ];
   };
 }

@@ -17,12 +17,25 @@ in
   stylix = {
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
-    image = ./apps/config/space-flower.png;
+    image = builtins.fetchurl {
+      url = "https://w.wallhaven.cc/full/9d/wallhaven-9dpxew.jpg";
+      sha256 = "03sag4hsp2kvkim5l5msisj8bn5i46agcmmsgq6dqim0v4sjxn5p";
+    };
     polarity = "dark";
-    fonts.sizes = {
-      terminal = 11;
-      applications = 11;
-      popups = 11;
+    fonts = {
+      monospace = {
+        package = pkgs.nerdfonts;
+        name = "FiraCode Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerdfonts;
+        name = "Ubuntu Nerd Font";
+      };
+      sizes = {
+        terminal = 10;
+        applications = 11;
+        popups = 11;
+      };
     };
     opacity = {
       desktop = 0.8;
@@ -49,7 +62,6 @@ in
     gimp
     gnome.file-roller
     htop
-    hyprpaper
     kooha
     lexical
     libreoffice
@@ -70,7 +82,6 @@ in
 
   home.file = {
     ".config/swaync".source = ./apps/config/swaync;
-    ".config/hypr/hyprpaper.conf".source = ./apps/config/hyprpaper.conf;
   };
 
   home.sessionVariables = {

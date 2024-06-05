@@ -24,19 +24,19 @@
   };
 
   outputs =
-    { nixpkgs, rock5b-nixos, home-manager, stylix, ... }@inputs:
+    {
+      nixpkgs,
+      rock5b-nixos,
+      home-manager,
+      stylix,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          (final: prev: {
-            chromium = prev.chromium.override {
-              enableWideVine = true;
-            };
-         })
-        ];
+        overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
       };
     in
     {
@@ -55,9 +55,7 @@
 
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ 
-            ./system/v3/configuration.nix
-          ];
+          modules = [ ./system/v3/configuration.nix ];
           specialArgs = {
             inherit inputs system;
           };
@@ -67,7 +65,10 @@
       homeConfigurations = {
         vinnie = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ stylix.homeManagerModules.stylix ./home.nix ];
+          modules = [
+            stylix.homeManagerModules.stylix
+            ./home.nix
+          ];
 
           extraSpecialArgs = {
             inherit inputs;
