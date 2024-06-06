@@ -196,7 +196,6 @@ in
         notifyOnError = true;
         formattersByFt = {
           javascript = [ "prettier" ];
-          elixir = [ "mix" ];
           "_" = [ "trim_whitespace" ];
         };
         formatOnSave = {
