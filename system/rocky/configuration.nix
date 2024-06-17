@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ lib, inputs, ... }:
 
 {
   imports = with inputs.rock5b; [

@@ -47,7 +47,10 @@
             rock5b-nixos.nixosModules.kernel
             rock5b-nixos.nixosModules.fan-control
           ];
-          system = "aarch64-linux";
+          system = [
+            "aarch64-linux"
+            "x86_64-linux"
+          ];
           specialArgs = {
             inherit inputs;
           };

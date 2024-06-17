@@ -16,6 +16,7 @@ in
 
   stylix = {
     autoEnable = true;
+    enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
     image = builtins.fetchurl {
       url = "https://w.wallhaven.cc/full/9d/wallhaven-9dpxew.jpg";
