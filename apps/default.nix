@@ -3,7 +3,6 @@
 {
   imports = [
     ./chromium.nix
-    ./freecad.nix
     ./fuzzel.nix
     ./git.nix
     ./hypridle.nix

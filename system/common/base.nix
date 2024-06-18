@@ -124,14 +124,11 @@
   environment.systemPackages = with pkgs; [
     bat
     direnv
-    dune3d
     eza
     fzf
     git
     git-lfs
     kicad
-    kicadAddons.kikit
-    kikit
     killall
     kitty
     libnotify
@@ -149,7 +146,6 @@
     spice-gtk
     spice-protocol
     swaynotificationcenter
-    tela-circle-icon-theme
     tldr
     traceroute
     unzip
