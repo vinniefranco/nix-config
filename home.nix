@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
@@ -16,6 +16,11 @@ in
 
   stylix = {
     autoEnable = true;
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 20;
+    };
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
     image = builtins.fetchurl {
@@ -58,10 +63,20 @@ in
   home.packages = with pkgs; [
     btop
     discord
+    elastic
     fd
     gdk
     gimp
-    gnome.file-roller
+    gnome.gnome-themes-extra
+    gnome.gnome-tweaks
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.extension-list
+    gnomeExtensions.gsconnect
+    gnomeExtensions.forge
+    gnomeExtensions.caffeine
+    gnomeExtensions.just-perfection
+    gnomeExtensions.vitals
+    gnomeExtensions.workspace-indicator-2
     htop
     kooha
     lexical
@@ -70,19 +85,17 @@ in
     neofetch
     networkmanagerapplet
     obsidian
-    pavucontrol
     pgcli
     pika-backup
     quickemu
     ripgrep
-    wf-recorder
-    vivaldi
-    vivaldi-ffmpeg-codecs
+    switcheroo
+    tangram
     xorg.xhost
   ];
 
   home.file = {
-    ".config/swaync".source = ./apps/config/swaync;
+    # ".config/swaync".source = ./apps/config/swaync;
   };
 
   home.sessionVariables = {
@@ -93,10 +106,31 @@ in
     XDG_SESSION_TYPE = "wayland";
   };
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          blur-my-shell.extensionUuid
+          gsconnect.extensionUuid
+          just-perfection.extensionUuid
+          forge.extensionUuid
+          vitals.extensionUuid
+          caffeine.extensionUuid
+          workspace-indicator-2.extensionUuid
+        ];
+      };
+      "org/gnome/desktop/interface" = {
+        # Use dconf-editor to get this settings.
+        color-scheme = "prefer-dark";
+        cursor-theme = config.stylix.cursor.name;
+        cursor-size = config.stylix.cursor.size;
+      };
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = [ "qemu:///system" ];
+        uris = [ "qemu:///system" ];
+      };
     };
   };
 

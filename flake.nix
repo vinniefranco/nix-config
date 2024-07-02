@@ -32,6 +32,7 @@
       ...
     }@inputs:
     let
+      inherit (nixpkgs) lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -40,6 +41,11 @@
       };
     in
     {
+      overlays = lib.packagesFromDirectoryRecursive {
+        callPackage = path: overrides: import path;
+        directory = ./overlays;
+      };
+
       nixosConfigurations = {
         rocky = nixpkgs.lib.nixosSystem {
           modules = [
@@ -58,7 +64,7 @@
 
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./system/v3/configuration.nix ];
+          modules = [ stylix.nixosModules.stylix ./system/v3/configuration.nix ];
           specialArgs = {
             inherit inputs system;
           };

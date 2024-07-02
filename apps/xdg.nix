@@ -1,14 +1,8 @@
 { pkgs, ... }:
 
-let
-  screenshoter = import ./screenshoter.nix { inherit pkgs; };
-in
 {
   home.packages = with pkgs; [
-    grim
     satty
-    screenshoter
-    slurp
     sweet
     xdg-user-dirs
   ];
@@ -16,25 +10,18 @@ in
   xdg = {
     enable = true;
     mime.enable = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/http" = "chromium.desktop";
-        "x-scheme-handler/https" = "chromium.desktop";
-      };
-    };
     portal = {
+      config = {
+        common = {
+          default = [
+            "gnome"
+          ];
+        };
+      };
       enable = true;
       extraPortals = [
-        pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
       ];
-      config = {
-        sway.default = [
-          "wlr"
-          "gtk"
-        ];
-      };
     };
     userDirs.enable = true;
   };
