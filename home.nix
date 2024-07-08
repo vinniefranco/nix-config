@@ -67,13 +67,14 @@ in
     fd
     gdk
     gimp
-    gnome.gnome-themes-extra
-    gnome.gnome-tweaks
+    gnome-themes-extra
+    gnome-tweaks
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.extension-list
-    gnomeExtensions.gsconnect
-    gnomeExtensions.forge
     gnomeExtensions.caffeine
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.extension-list
+    gnomeExtensions.forge
+    gnomeExtensions.gsconnect
     gnomeExtensions.just-perfection
     gnomeExtensions.vitals
     gnomeExtensions.workspace-indicator-2
@@ -113,6 +114,7 @@ in
         disable-user-extensions = false;
         enabled-extensions = with pkgs.gnomeExtensions; [
           blur-my-shell.extensionUuid
+          dash-to-dock.extensionUuid
           gsconnect.extensionUuid
           just-perfection.extensionUuid
           forge.extensionUuid

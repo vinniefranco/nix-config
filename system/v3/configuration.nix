@@ -61,9 +61,9 @@
     };
     plymouth = {
       enable = true;
-      theme = "hexagon_dots";
+      theme = "hexa_retro";
       themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+        (adi1090x-plymouth-themes.override { selected_themes = [ "hexa_retro" ]; })
       ];
     };
   };
