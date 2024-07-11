@@ -208,9 +208,6 @@ in
       friendly-snippets.enable = true;
       flash = {
         enable = true;
-        modes = {
-          char.jumpLabels = true;
-        };
       };
       luasnip.enable = true;
       gitsigns.enable = true;

@@ -29,12 +29,6 @@ in
         pkgs.xdg-desktop-portal-wlr
         pkgs.xdg-desktop-portal-gtk
       ];
-      config = {
-        sway.default = [
-          "wlr"
-          "gtk"
-        ];
-      };
     };
     userDirs.enable = true;
   };

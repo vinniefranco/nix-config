@@ -16,6 +16,11 @@ in
 
   stylix = {
     autoEnable = true;
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 20;
+    };
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
     image = builtins.fetchurl {
