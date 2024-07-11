@@ -128,12 +128,14 @@
     fzf
     git
     git-lfs
-    gnomeExtensions.appindicator
     kicad
     killall
     kitty
     libnotify
     libqalculate
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nixfmt-rfc-style
@@ -179,7 +181,6 @@
   programs.zsh.enable = true;
 
   services = {
-    sysprof.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -187,7 +188,6 @@
       pulse.enable = true;
     };
     blueman.enable = true;
-    geoclue2.enable = true;
 
     # needed for GNOME services outside of GNOME Desktop
     dbus = {
@@ -202,22 +202,18 @@
     # Automounts
     devmon.enable = true;
     udisks2.enable = true;
-    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-    xserver = {
-      enable = true;
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
 
-      displayManager = {
-        gdm.enable = true;
-        sessionPackages = [ pkgs.hyprland ];
+    xserver.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+        wayland.enable = true;
+        theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
       };
+      sessionPackages = [ pkgs.hyprland ];
     };
   };
-
 
   programs = {
     dconf.enable = true;
