@@ -17,9 +17,9 @@ in
   stylix = {
     autoEnable = true;
     cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 20;
+      package = pkgs.vimix-cursors;
+      name = "Vimix-cursors";
+      size = 24;
     };
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
@@ -66,7 +66,7 @@ in
     fd
     gdk
     gimp
-    gnome.file-roller
+    file-roller
     htop
     kooha
     lexical

@@ -10,6 +10,43 @@
     ];
   };
 
+  stylix = {
+    autoEnable = true;
+    cursor = {
+      package = pkgs.vimix-cursors;
+      name = "Vimix-cursors";
+      size = 24;
+    };
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
+    image = builtins.fetchurl {
+      url = "https://w.wallhaven.cc/full/9d/wallhaven-9dpxew.jpg";
+      sha256 = "03sag4hsp2kvkim5l5msisj8bn5i46agcmmsgq6dqim0v4sjxn5p";
+    };
+    polarity = "dark";
+    fonts = {
+      monospace = {
+        package = pkgs.nerdfonts;
+        name = "FiraCode Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerdfonts;
+        name = "Ubuntu Nerd Font";
+      };
+      sizes = {
+        terminal = 10;
+        applications = 11;
+        popups = 11;
+      };
+    };
+    opacity = {
+      desktop = 0.8;
+      popups = 0.8;
+      terminal = 0.8;
+    };
+    targets.plymouth.enable = false;
+  };
+
   # Enable networking
   networking = {
     firewall = {
@@ -48,7 +85,6 @@
 
   # Enable CUPS to print documents.
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
 
   boot.kernel.sysctl = {

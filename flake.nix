@@ -21,19 +21,14 @@
       ...
     }@inputs:
     let
-      inherit (nixpkgs) lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
       };
     in
     {
-      overlays = lib.packagesFromDirecttoryRecursive {
-        callPackage = path: overrides: import path;
-        directory = "./overlays";
-      };
-
       nixosConfigurations = {
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
