@@ -8,9 +8,10 @@
     shellAliases = {
       ff = "fzf | xargs nvim";
       la = "eza -a --icons --git";
+      ls = "eza --icons";
       ll = "eza -al --icons --git";
       r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
-      r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#surface";
+      r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3";
       r-u = "cd ~/.dotfiles && nix flake update";
       v = "nvim";
     };

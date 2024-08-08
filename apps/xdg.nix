@@ -27,15 +27,10 @@ in
       enable = true;
       config = {
         common = {
-          default = [
-            "wlr"
-          ];
+          default = [ "wlr" ];
         };
       };
-      extraPortals = [
-        pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-gtk
-      ];
+      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     };
     userDirs.enable = true;
   };

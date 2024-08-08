@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  sddm-themes = pkgs.callPackage ./sddm/themes.nix { };
+in
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -164,6 +166,7 @@
     fzf
     git
     git-lfs
+    jq
     kicad
     killall
     kitty
@@ -178,6 +181,8 @@
     nss.tools
     pciutils
     pulseaudio
+    sddm-themes.astronaut
+    silver-searcher
     spice
     spice-gtk
     spice-protocol
@@ -245,7 +250,7 @@
         enable = true;
         enableHidpi = true;
         wayland.enable = true;
-        theme = "${import ../common/sddm/sddm-chilli.nix { inherit pkgs; }}";
+        theme = "astronaut";
       };
       sessionPackages = [ pkgs.hyprland ];
     };

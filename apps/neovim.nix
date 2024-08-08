@@ -302,7 +302,9 @@ in
       };
       treesitter-context = {
         enable = true;
-        settings = { max_line = 2; };
+        settings = {
+          max_line = 2;
+        };
       };
       typescript-tools.enable = true;
       oil = {

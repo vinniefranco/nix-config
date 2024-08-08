@@ -80,8 +80,8 @@
             critical = 1;
           };
           format = "{icon} {capacity}%";
-          format-charging = "󰂄";
-          format-plugged = "ﮣ";
+          format-charging = "󰂄 {capacity}% {power}W";
+          format-plugged = "ﮣ {capacity}";
           format-full = "󰁹 100%";
           format-icons = [
             "󰂎"

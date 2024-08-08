@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/fonts.nix
+    inputs.ucodenix.nixosModules.ucodenix
   ];
 
   # Bootloader.
@@ -33,30 +34,6 @@
   };
   networking.hostName = "v3"; # Define your hostname.
 
-  # Virtualization
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        runAsRoot = true;
-        swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = [
-            (pkgs.OVMF.override {
-              secureBoot = true;
-              tpmSupport = true;
-            }).fd
-          ];
-        };
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
-  programs.virt-manager.enable = true;
-
   # Networking
   networking.networkmanager.enable = true;
 
@@ -69,7 +46,29 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    browsing = true;
+    enable = true;
+    browsedConf = ''
+      BrowseDNSSDSubTypes _cups,_print
+      BrowseLocalProtocols all
+      BrowseRemoteProtocols all
+      CreateIPPPrinterQueues All
+
+      BrowseProtocols all
+    '';
+    drivers = [ pkgs.hplipWithPlugin ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
+
+  services.ucodenix = {
+    enable = true;
+    cpuSerialNumber = "00A7-0F52-0000-0000-0000-0000";
+  };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

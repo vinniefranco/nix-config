@@ -8,6 +8,7 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    ucodenix.url = "github:e-tho/ucodenix";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +33,10 @@
       nixosConfigurations = {
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ stylix.nixosModules.stylix ./system/v3/configuration.nix ];
+          modules = [
+            stylix.nixosModules.stylix
+            ./system/v3/configuration.nix
+          ];
           specialArgs = {
             inherit inputs system;
           };
