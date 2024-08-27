@@ -1,15 +1,19 @@
 { config, pkgs, ... }:
-let
-  sddm-themes = pkgs.callPackage ./sddm/themes.nix { };
-in
 {
   boot.tmp.cleanOnBoot = true;
 
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix = {
+    gc = {
+      automatic = true;
+      randomizedDelaySec = "14m";
+      options = "--delete-older-than 1w";
+    };
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 
   stylix = {
@@ -129,17 +133,6 @@ in
   security = {
     # allow wayland lockers to unlock the screen
     pam = {
-      services = {
-        sddm = {
-          text = ''
-            auth 			sufficient  	pam_fprintd.so
-          '';
-        };
-        hyprlock = {
-          text = "auth include login";
-          fprintAuth = if config.networking.hostName == "v3" then true else false;
-        };
-      };
       loginLimits = [
         {
           domain = "@users";
@@ -172,16 +165,12 @@ in
     kitty
     libnotify
     libqalculate
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nixfmt-rfc-style
     nss.tools
     pciutils
     pulseaudio
-    sddm-themes.astronaut
     silver-searcher
     spice
     spice-gtk
@@ -192,13 +181,9 @@ in
     unzip
     usbutils
     v4l-utils
-    virt-manager
-    virt-viewer
     vulkan-tools
     wget
     widevine-cdm
-    win-spice
-    win-virtio
     wl-clipboard
   ];
 
@@ -245,16 +230,10 @@ in
     udisks2.enable = true;
 
     xserver.enable = true;
-    displayManager = {
-      sddm = {
-        enable = true;
-        enableHidpi = true;
-        wayland.enable = true;
-        theme = "astronaut";
-      };
-      sessionPackages = [ pkgs.hyprland ];
-    };
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
   };
+
 
   programs = {
     dconf.enable = true;

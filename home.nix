@@ -10,7 +10,6 @@ let
 in
 {
   imports = [ ./apps ];
-
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
@@ -66,8 +65,8 @@ in
     fd
     gdk
     gimp
-    file-roller
     htop
+    httpie
     kooha
     lexical
     libreoffice
@@ -78,11 +77,11 @@ in
     pavucontrol
     pgcli
     pika-backup
-    quickemu
+    ranger
     ripgrep
-    wf-recorder
     vivaldi
     vivaldi-ffmpeg-codecs
+    wf-recorder
     xorg.xhost
   ];
 

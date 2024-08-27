@@ -3,7 +3,7 @@
 {
   # Notification Daemon
   services.avizo = {
-    enable = true;
+    enable = false;
     settings = {
       default = {
         y-offset = 0.5;
@@ -12,7 +12,7 @@
   };
 
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
 
     systemd = {
       variables = [ "--all" ];

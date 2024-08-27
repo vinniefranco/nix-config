@@ -16,6 +16,7 @@
   # Bootloader.
   boot = {
     kernelParams = [
+      "amd_pstate=guided"
       "quiet"
       "systemd.show_status=auto"
     ];
@@ -32,6 +33,10 @@
       ];
     };
   };
+
+  powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "schedutil";
+
   networking.hostName = "v3"; # Define your hostname.
 
   # Networking

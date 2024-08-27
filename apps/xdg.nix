@@ -27,10 +27,10 @@ in
       enable = true;
       config = {
         common = {
-          default = [ "wlr" ];
+          default = [ "cosmic" ];
         };
       };
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+      extraPortals = [ pkgs.xdg-desktop-portal-cosmic ];
     };
     userDirs.enable = true;
   };

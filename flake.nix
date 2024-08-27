@@ -12,12 +12,18 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
-      nixpkgs,
       home-manager,
+      nixos-cosmic,
+      nixpkgs,
       stylix,
       ...
     }@inputs:
@@ -34,6 +40,13 @@
         v3 = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
+            nixos-cosmic.nixosModules.default
             stylix.nixosModules.stylix
             ./system/v3/configuration.nix
           ];
