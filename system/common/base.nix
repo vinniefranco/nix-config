@@ -154,6 +154,7 @@
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
     bat
+    caligula
     direnv
     eza
     fzf
@@ -170,6 +171,7 @@
     nixfmt-rfc-style
     nss.tools
     pciutils
+    popsicle
     pulseaudio
     silver-searcher
     spice
@@ -233,7 +235,6 @@
     desktopManager.cosmic.enable = true;
     displayManager.cosmic-greeter.enable = true;
   };
-
 
   programs = {
     dconf.enable = true;
