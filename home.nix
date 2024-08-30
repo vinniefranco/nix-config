@@ -95,6 +95,7 @@ in
     QT_QPA_PLATFORM = "wayland";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
+    DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
   };
 
   # Let Home Manager install and manage itself.
