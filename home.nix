@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
@@ -55,11 +60,12 @@ in
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    inputs.nixvim-config.packages.${system}.default
     btop
     discord
     fd
@@ -96,6 +102,7 @@ in
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
     DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
+    NIXPKGS_ALLOW_UNFREE = "1";
   };
 
   # Let Home Manager install and manage itself.

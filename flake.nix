@@ -2,16 +2,16 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     stylix.url = "github:danth/stylix";
 
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
     ucodenix.url = "github:e-tho/ucodenix";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixvim-config.url = "github:vinniefranco/nixvim-config";
 
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
@@ -32,6 +32,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        config.allowUnfreePredicate = (pkg: true);
         overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
       };
     in
@@ -56,6 +57,9 @@
         };
       };
 
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+
       homeConfigurations = {
         vinnie = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -65,7 +69,7 @@
           ];
 
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
         };
       };

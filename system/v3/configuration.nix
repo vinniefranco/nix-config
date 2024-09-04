@@ -10,12 +10,14 @@
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/fonts.nix
+    ../common/vm.nix
     inputs.ucodenix.nixosModules.ucodenix
   ];
 
   # Bootloader.
   boot = {
     kernelParams = [
+      "amd_iommu=on"
       "amd_pstate=guided"
       "quiet"
       "systemd.show_status=auto"
@@ -113,11 +115,12 @@
 
   environment.sessionVariables = {
     AMD_VULKAN_ICD = "RADV";
+    NIXPKGS_ALLOW_UNFREE = "1";
   };
 
-  hardware.graphics = {
+  hardware.opengl = {
     enable = true;
-    enable32Bit = true;
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
       rocm-opencl-icd
       rocm-opencl-runtime

@@ -10,7 +10,7 @@
       la = "eza -a --icons --git";
       ls = "eza --icons";
       ll = "eza -al --icons --git";
-      r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie";
+      r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie --impure";
       r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3";
       r-u = "cd ~/.dotfiles && nix flake update";
       v = "nvim";

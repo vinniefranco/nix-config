@@ -22,7 +22,10 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "kvm-amd"
+    "vfio-pci"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
