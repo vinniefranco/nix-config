@@ -26,9 +26,7 @@
     "vfio"
     "vfio_iommu_type1"
   ];
-  boot.kernelModules = [
-    "kvm-amd"
-  ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

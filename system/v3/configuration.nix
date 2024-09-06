@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -17,7 +22,9 @@
   # Bootloader.
   boot = {
     kernelParams = [
-      "amd_iommu=on" "iommu=pt" "vfio-pci.ids=10de:1e84,10de:10f8"
+      "amd_iommu=on"
+      "iommu=pt"
+      "vfio-pci.ids=10de:1e84,10de:10f8"
       "amd_pstate=guided"
       "systemd.show_status=auto"
     ];
@@ -35,9 +42,7 @@
     };
   };
 
-  systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -"
-  ];
+  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -" ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
 
