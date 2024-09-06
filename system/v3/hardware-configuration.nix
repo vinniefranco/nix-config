@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -21,10 +20,14 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [
+    "amdgpu"
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+  ];
   boot.kernelModules = [
     "kvm-amd"
-    "vfio-pci"
   ];
   boot.extraModulePackages = [ ];
 

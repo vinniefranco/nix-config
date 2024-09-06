@@ -30,10 +30,11 @@ in
       enable = true;
       config = {
         common = {
-          default = [ "cosmic" ];
+          default = [ "cosmic" "gtk" ];
         };
       };
-      extraPortals = [ pkgs.xdg-desktop-portal-cosmic ];
+      extraPortals = [ pkgs.xdg-desktop-portal-cosmic pkgs.xdg-desktop-portal-gtk ];
+      xdgOpenUsePortal = true;
     };
     userDirs.enable = true;
   };

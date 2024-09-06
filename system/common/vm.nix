@@ -14,7 +14,10 @@
   virtualisation = {
     libvirtd = {
       enable = true;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
       qemu = {
+        runAsRoot = false;
         swtpm.enable = true;
         ovmf.enable = true;
         ovmf.packages = [ pkgs.OVMFFull.fd ];

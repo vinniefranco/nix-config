@@ -167,6 +167,7 @@
     kitty
     libnotify
     libqalculate
+    looking-glass-client
     lm_sensors
     neovim
     nixfmt-rfc-style
