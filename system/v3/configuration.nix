@@ -24,7 +24,7 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
-      "vfio-pci.ids=10de:1e84,10de:10f8"
+      "vfio-pci.ids=8086:1576,10de:1e84,10de:10f8"
       "amd_pstate=guided"
       "systemd.show_status=auto"
     ];
