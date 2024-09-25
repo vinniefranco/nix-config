@@ -16,6 +16,7 @@
     ../common/base.nix
     ../common/fonts.nix
     ../common/vm.nix
+    ../common/freecad.nix
     inputs.ucodenix.nixosModules.ucodenix
   ];
 
@@ -24,7 +25,6 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
-      "vfio-pci.ids=8086:1576,10de:1e84,10de:10f8"
       "amd_pstate=guided"
       "systemd.show_status=auto"
     ];
@@ -88,6 +88,10 @@
   hardware.pulseaudio.enable = false;
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -105,8 +109,10 @@
       "docker"
       "input"
       "libvirtd"
+      "lp"
       "networkmanager"
       "plugdev"
+      "scanner"
       "video"
       "wheel"
     ];

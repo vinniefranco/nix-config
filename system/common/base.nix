@@ -158,6 +158,7 @@
     caligula
     direnv
     eza
+    freecad
     fzf
     git
     git-lfs
@@ -170,6 +171,7 @@
     looking-glass-client
     lm_sensors
     neovim
+    nomachine-client
     nixfmt-rfc-style
     nss.tools
     pciutils

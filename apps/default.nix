@@ -3,7 +3,6 @@
 {
   imports = [
     ./chromium.nix
-    ./fuzzel.nix
     ./git.nix
     ./kitty.nix
     ./theme.nix
