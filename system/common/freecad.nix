@@ -1,14 +1,14 @@
 { pkgs, ... }:
 let
-  frecadv1 = pkgs.freecad.overrideAttrs (
+  freecadv1 = pkgs.freecad.overrideAttrs (
     final: prev: {
 
-      version = "1.0rc1";
+      version = "1.0rc2";
       src = pkgs.fetchFromGitHub {
         owner = "FreeCAD";
         repo = "FreeCAD";
-        rev = "1.0rc1";
-        hash = "sha256-bhRqWjYtwQ1mzZg03OmTFCt4eVgbc+YZnMNgwvRGvjc=";
+        rev = "1.0rc2";
+        hash = "sha256-3/78HJbxhCtwCDgrAGFRV2E0a51OQwsEQ4KZ3If7OQU=";
       };
 
       prePatch =
@@ -35,6 +35,11 @@ let
           chmod -R +w tests/lib
         '';
 
+      patches = [
+        ./0001-NIXOS-don-t-ignore-PYTHONPATH.patch
+        ./0002-FreeCad-OndselSolver-pkgconfig.patch
+      ];
+
       buildInputs = prev.buildInputs or [] ++ [
         pkgs.yaml-cpp
         pkgs.microsoft-gsl
@@ -54,6 +59,6 @@ let
 in
 {
   environment.systemPackages =  [
-    frecadv1
+    freecadv1
   ];
 }
