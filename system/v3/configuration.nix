@@ -106,6 +106,7 @@
     description = "Vincent Franco";
     extraGroups = [
       "audio"
+      "dialout"
       "docker"
       "input"
       "libvirtd"

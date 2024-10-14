@@ -40,7 +40,7 @@
         name = "Ubuntu Nerd Font";
       };
       sizes = {
-        terminal = 10;
+        terminal = 11;
         applications = 11;
         popups = 11;
       };
@@ -155,6 +155,7 @@
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
     bat
+    bitwig-studio
     caligula
     direnv
     eza
@@ -184,6 +185,7 @@
     swaynotificationcenter
     tldr
     traceroute
+    tytools
     unzip
     usbutils
     v4l-utils
