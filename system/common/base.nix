@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -12,6 +17,10 @@
       experimental-features = [
         "nix-command"
         "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "@wheel"
       ];
     };
   };
@@ -156,10 +165,11 @@
   environment.systemPackages = with pkgs; [
     bat
     bitwig-studio
+    blender
     caligula
     direnv
     eza
-    freecad
+    pkgs-unstable.freecad-wayland
     fzf
     git
     git-lfs
@@ -176,18 +186,20 @@
     nixfmt-rfc-style
     nss.tools
     pciutils
-    popsicle
     pulseaudio
     silver-searcher
+    qmk
     spice
     spice-gtk
     spice-protocol
     swaynotificationcenter
     tldr
+    teensy-loader-cli
     traceroute
     tytools
     unzip
     usbutils
+    via
     v4l-utils
     vulkan-tools
     wget
@@ -200,6 +212,8 @@
   hardware.bluetooth.powerOnBoot = true;
   # https://github.com/NixOS/nixpkgs/issues/114222
   systemd.user.services.telephony_client.enable = false;
+
+  hardware.keyboard.qmk.enable = true;
 
   virtualisation.docker = {
     enable = true;
@@ -215,6 +229,15 @@
   programs.zsh.enable = true;
 
   services = {
+    samba = {
+      enable = true;
+      securityType = "user";
+      openFirewall = true;
+    };
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -232,10 +255,15 @@
       implementation = "broker";
     };
     gnome.gnome-keyring.enable = true;
-    gvfs.enable = true;
+    gvfs = {
+      enable = true;
+      package = pkgs.lib.mkForce pkgs.gnome3.gvfs;
+    };
     # Automounts
     devmon.enable = true;
     udisks2.enable = true;
+
+    udev.packages = [ pkgs.via ];
 
     xserver.enable = true;
     desktopManager.cosmic.enable = true;

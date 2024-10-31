@@ -80,6 +80,7 @@ in
     neofetch
     networkmanagerapplet
     obsidian
+    open-webui
     pavucontrol
     pgcli
     pika-backup

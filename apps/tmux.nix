@@ -10,6 +10,9 @@
       set-environment -g COLORTERM "truecolor"
       set-option -g focus-events on
       set-window-option -g xterm-keys on
+      set-window-option -g mode-keys vi
+      set -s copy-command 'wl-copy'
+      set -g @yank_action 'copy-pipe-no-clear'
 
       # Smart pane switching with awareness of vim splits
       is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|(n)?vim?)(diff)?$"'

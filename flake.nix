@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     stylix.url = "github:danth/stylix/release-24.05";
 
@@ -24,6 +25,7 @@
       home-manager,
       nixos-cosmic,
       nixpkgs,
+      nixpkgs-unstable,
       stylix,
       ...
     }@inputs:
@@ -34,6 +36,11 @@
         config.allowUnfree = true;
         config.allowUnfreePredicate = (pkg: true);
         overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
+      };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = (pkg: true);
       };
     in
     {
@@ -52,7 +59,7 @@
             ./system/v3/configuration.nix
           ];
           specialArgs = {
-            inherit inputs system;
+            inherit inputs pkgs-unstable system;
           };
         };
       };

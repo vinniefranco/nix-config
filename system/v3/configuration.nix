@@ -16,7 +16,6 @@
     ../common/base.nix
     ../common/fonts.nix
     ../common/vm.nix
-    ../common/freecad.nix
     inputs.ucodenix.nixosModules.ucodenix
   ];
 
@@ -108,6 +107,7 @@
       "audio"
       "dialout"
       "docker"
+      "disk"
       "input"
       "libvirtd"
       "lp"
