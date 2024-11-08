@@ -11,7 +11,7 @@
     gc = {
       automatic = true;
       randomizedDelaySec = "14m";
-      options = "--delete-older-than 1w";
+      options = "--delete-older-than 7d";
     };
     settings = {
       experimental-features = [
@@ -143,6 +143,17 @@
   security = {
     # allow wayland lockers to unlock the screen
     pam = {
+      services = {
+        sddm = {
+          text = ''
+            auth 			sufficient  	pam_fprintd.so
+          '';
+        };
+        hyprlock = {
+          text = "auth include login";
+          fprintAuth = if config.networking.hostName == "v3" then true else false;
+        };
+      };
       loginLimits = [
         {
           domain = "@users";
@@ -164,12 +175,14 @@
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
     bat
+    bear
     bitwig-studio
     blender
     caligula
     direnv
     eza
     pkgs-unstable.freecad-wayland
+    ffmpeg-full
     fzf
     git
     git-lfs
@@ -179,7 +192,9 @@
     kitty
     libnotify
     libqalculate
-    looking-glass-client
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nomachine-client
@@ -266,8 +281,16 @@
     udev.packages = [ pkgs.via ];
 
     xserver.enable = true;
-    desktopManager.cosmic.enable = true;
-    displayManager.cosmic-greeter.enable = true;
+    #desktopManager.cosmic.enable = true;
+    #displayManager.cosmic-greeter.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+        wayland.enable = true;
+      };
+      sessionPackages = [ pkgs.hyprland ];
+    };
   };
 
   programs = {

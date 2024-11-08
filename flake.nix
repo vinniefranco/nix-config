@@ -35,12 +35,14 @@
         inherit system;
         config.allowUnfree = true;
         config.allowUnfreePredicate = (pkg: true);
+        config.chromium.enableWideVine = true;
         overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
         config.allowUnfreePredicate = (pkg: true);
+        overlays = [ (final: prev: { chromium = prev.chromium.override { enableWideVine = true; }; }) ];
       };
     in
     {

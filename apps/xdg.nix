@@ -19,11 +19,11 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = "chromium.desktop";
-        "x-scheme-handler/https" = "chromium.desktop";
-        "text/html" = "chromium.desktop";
-        "application/xhtml+xml" = "chromium.desktop";
-        "application/xhtml_xml" = "chromium.desktop";
+        "x-scheme-handler/http" = [ "chromium.desktop" ];
+        "x-scheme-handler/https" = [ "chromium.desktop" ];
+        "text/html" = [ "chromium.desktop" ];
+        "application/xhtml+xml" = [ "chromium.desktop" ];
+        "application/xhtml_xml" = [ "chromium.desktop" ];
       };
     };
     portal = {
@@ -31,13 +31,13 @@ in
       config = {
         common = {
           default = [
-            "cosmic"
+            "wlr"
             "gtk"
           ];
         };
       };
       extraPortals = [
-        pkgs.xdg-desktop-portal-cosmic
+        pkgs.xdg-desktop-portal-wlr
         pkgs.xdg-desktop-portal-gtk
       ];
       xdgOpenUsePortal = true;
