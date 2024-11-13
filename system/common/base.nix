@@ -25,43 +25,6 @@
     };
   };
 
-  stylix = {
-    autoEnable = true;
-    cursor = {
-      package = pkgs.vimix-cursors;
-      name = "Vimix-cursors";
-      size = 24;
-    };
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
-    image = builtins.fetchurl {
-      url = "https://w.wallhaven.cc/full/9d/wallhaven-9dpxew.jpg";
-      sha256 = "03sag4hsp2kvkim5l5msisj8bn5i46agcmmsgq6dqim0v4sjxn5p";
-    };
-    polarity = "dark";
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts;
-        name = "FiraCode Nerd Font";
-      };
-      sansSerif = {
-        package = pkgs.nerdfonts;
-        name = "Ubuntu Nerd Font";
-      };
-      sizes = {
-        terminal = 11;
-        applications = 11;
-        popups = 11;
-      };
-    };
-    opacity = {
-      desktop = 0.8;
-      popups = 0.8;
-      terminal = 0.8;
-    };
-    targets.plymouth.enable = false;
-  };
-
   # Enable networking
   networking = {
     firewall = {
@@ -144,11 +107,6 @@
     # allow wayland lockers to unlock the screen
     pam = {
       services = {
-        sddm = {
-          text = ''
-            auth 			sufficient  	pam_fprintd.so
-          '';
-        };
         hyprlock = {
           text = "auth include login";
           fprintAuth = if config.networking.hostName == "v3" then true else false;
@@ -176,8 +134,7 @@
   environment.systemPackages = with pkgs; [
     bat
     bear
-    bitwig-studio
-    blender
+    pkgs-unstable.bitwig-studio
     caligula
     direnv
     eza
@@ -187,9 +144,9 @@
     git
     git-lfs
     jq
-    kicad
+    pkgs-unstable.kicad
     killall
-    kitty
+    pkgs-unstable.kitty
     libnotify
     libqalculate
     libsForQt5.qt5.qtgraphicaleffects
@@ -218,7 +175,7 @@
     v4l-utils
     vulkan-tools
     wget
-    widevine-cdm
+    pkgs-unstable.widevine-cdm
     wl-clipboard
   ];
 
@@ -281,16 +238,7 @@
     udev.packages = [ pkgs.via ];
 
     xserver.enable = true;
-    #desktopManager.cosmic.enable = true;
-    #displayManager.cosmic-greeter.enable = true;
-    displayManager = {
-      sddm = {
-        enable = true;
-        enableHidpi = true;
-        wayland.enable = true;
-      };
-      sessionPackages = [ pkgs.hyprland ];
-    };
+    xserver.displayManager.lightdm.enable = false;
   };
 
   programs = {

@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  pkgs-unstable,
   system,
   ...
 }:
@@ -18,41 +19,6 @@ in
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
-  stylix = {
-    autoEnable = true;
-    cursor = {
-      package = pkgs.vimix-cursors;
-      name = "Vimix-cursors";
-      size = 24;
-    };
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
-    image = builtins.fetchurl {
-      url = "https://w.wallhaven.cc/full/9d/wallhaven-9dpxew.jpg";
-      sha256 = "03sag4hsp2kvkim5l5msisj8bn5i46agcmmsgq6dqim0v4sjxn5p";
-    };
-    polarity = "dark";
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts;
-        name = "FiraCode Nerd Font";
-      };
-      sansSerif = {
-        package = pkgs.nerdfonts;
-        name = "Ubuntu Nerd Font";
-      };
-      sizes = {
-        terminal = 10;
-        applications = 11;
-        popups = 11;
-      };
-    };
-    opacity = {
-      desktop = 0.8;
-      terminal = 0.8;
-    };
-  };
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -66,8 +32,9 @@ in
   # environment.
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${system}.default
+    inputs.mcmojave-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
-    discord
+    pkgs-unstable.discord
     fd
     gdk
     gimp
@@ -76,20 +43,19 @@ in
     kooha
     lexical
     libreoffice
-    moonlight-qt
     neofetch
     networkmanagerapplet
-    obsidian
+    pkgs-unstable.obsidian
     open-webui
     pavucontrol
     pgcli
     pika-backup
     ranger
     ripgrep
-    vivaldi
-    vivaldi-ffmpeg-codecs
-    wf-recorder
-    xorg.xhost
+    pkgs-unstable.vivaldi
+    pkgs-unstable.vivaldi-ffmpeg-codecs
+    pkgs-unstable.wf-recorder
+    pkgs-unstable.xorg.xhost
   ];
 
   home.file = {
@@ -104,6 +70,7 @@ in
     XDG_SESSION_TYPE = "wayland";
     DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
     NIXPKGS_ALLOW_UNFREE = "1";
+    HYPRCURSOR_THEME = "McMojave";
   };
 
   # Let Home Manager install and manage itself.

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs-unstable, ... }:
 
 {
   programs.hyprlock = {
@@ -8,6 +8,7 @@
       general = {
         disable_loading_bar = true;
         hide_cursor = false;
+        pam_module = "hyprlock";
       };
 
       backgrounds = [

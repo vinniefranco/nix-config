@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs-unstable, pkgs, ... }:
 
 {
   # Notification Daemon
@@ -12,6 +12,7 @@
   };
 
   wayland.windowManager.hyprland = {
+    package = pkgs-unstable.hyprland;
     enable = true;
 
     systemd = {
@@ -60,7 +61,6 @@
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         fullscreen_opacity = 1.0;
-        drop_shadow = false;
         blurls = [
           "gtk-layer-shell"
           "lockscreen"
@@ -68,7 +68,6 @@
       };
 
       dwindle = {
-        no_gaps_when_only = false;
         pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true;
       };

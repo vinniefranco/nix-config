@@ -3,12 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   inputs,
   pkgs,
+  pkgs-unstable,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -16,7 +15,7 @@
     ../common/base.nix
     ../common/fonts.nix
     ../common/vm.nix
-    inputs.ucodenix.nixosModules.ucodenix
+    inputs.ucodenix.nixosModules.default
   ];
 
   # Bootloader.
@@ -34,9 +33,9 @@
     };
     plymouth = {
       enable = true;
-      theme = "hexagon_dots";
+      theme = "seal_2";
       themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+        (adi1090x-plymouth-themes.override { selected_themes = [ "seal_2" ]; })
       ];
     };
   };
@@ -76,11 +75,6 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
-  };
-
-  services.ucodenix = {
-    enable = true;
-    cpuSerialNumber = "00A7-0F52-0000-0000-0000-0000";
   };
 
   # Enable sound with pipewire.
@@ -134,11 +128,16 @@
 
   hardware.opengl = {
     enable = true;
+    package = pkgs-unstable.mesa.drivers;
+    driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      rocm-opencl-icd
-      rocm-opencl-runtime
+    extraPackages = with pkgs-unstable; [
+      amdvlk
+      libvdpau-va-gl
+      vaapiVdpau
+      rocmPackages.clr.icd
     ];
+    extraPackages32 = with pkgs-unstable; [ driversi686Linux.amdvlk ];
   };
 
   services.hardware.bolt.enable = true;
@@ -149,6 +148,11 @@
     enable = true;
     permitCertUid = "vinnie";
     extraUpFlags = [ "--accept-routes" ];
+  };
+
+  services.ucodenix = {
+    enable = true;
+    cpuModelId = "00A70F52";
   };
 
   services.fstrim.enable = true;

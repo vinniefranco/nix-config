@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   screenshoter = import ./screenshoter.nix { inherit pkgs; };
@@ -31,12 +31,14 @@ in
       config = {
         common = {
           default = [
+            "hyprland"
             "wlr"
             "gtk"
           ];
         };
       };
       extraPortals = [
+        pkgs.xdg-desktop-portal-hyprland
         pkgs.xdg-desktop-portal-wlr
         pkgs.xdg-desktop-portal-gtk
       ];
