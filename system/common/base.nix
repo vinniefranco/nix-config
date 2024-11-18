@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -102,6 +97,39 @@
     "net.core.default_qdisc" = "cake";
   };
 
+  xdg = {
+    portal = {
+      enable = true;
+      config = {
+        common = {
+          default = [
+            "wlr"
+            "gtk"
+          ];
+          hyprland = [
+            "wlr"
+            "gtk"
+          ];
+        };
+      };
+      wlr = {
+        enable = true;
+        settings = {
+          screencast = {
+            chooser_type = "simple";
+            chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";
+          };
+        };
+      };
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-kde
+        xdg-desktop-portal-gtk
+      ];
+      xdgOpenUsePortal = true;
+    };
+  };
+
   boot.kernelModules = [ "tcp_bbr" ];
   security = {
     # allow wayland lockers to unlock the screen
@@ -110,6 +138,11 @@
         hyprlock = {
           text = "auth include login";
           fprintAuth = if config.networking.hostName == "v3" then true else false;
+        };
+        sddm = {
+          text = ''
+            auth 			sufficient  	pam_fprintd.so
+          '';
         };
       };
       loginLimits = [
@@ -134,24 +167,30 @@
   environment.systemPackages = with pkgs; [
     bat
     bear
-    pkgs-unstable.bitwig-studio
+    unstable.bitwig-studio
     caligula
     direnv
     eza
-    pkgs-unstable.freecad-wayland
+    unstable.freecad-wayland
     ffmpeg-full
     fzf
     git
     git-lfs
     jq
-    pkgs-unstable.kicad
     killall
-    pkgs-unstable.kitty
+    (kicad.override {
+      addons = [
+        pkgs.kicadAddons.kikit
+        pkgs.kicadAddons.kikit-library
+      ];
+    })
+    kikit
+    kitty
     libnotify
     libqalculate
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtvirtualkeyboard
+    unstable.libsForQt5.qt5.qtgraphicaleffects
+    unstable.libsForQt5.qt5.qtquickcontrols2
+    unstable.libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nomachine-client
@@ -175,7 +214,7 @@
     v4l-utils
     vulkan-tools
     wget
-    pkgs-unstable.widevine-cdm
+    widevine-cdm
     wl-clipboard
   ];
 
@@ -196,8 +235,10 @@
     };
   };
   # I use ZSH, btw.
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
+  environment.shells = with pkgs; [
+    zsh
+    bashInteractive
+  ];
   programs.zsh.enable = true;
 
   services = {
@@ -215,18 +256,10 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber.enable = true;
     };
     blueman.enable = true;
 
-    # needed for GNOME services outside of GNOME Desktop
-    dbus = {
-      packages = with pkgs; [
-        gcr
-        gnome.gnome-settings-daemon
-      ];
-      implementation = "broker";
-    };
-    gnome.gnome-keyring.enable = true;
     gvfs = {
       enable = true;
       package = pkgs.lib.mkForce pkgs.gnome3.gvfs;
@@ -238,11 +271,20 @@
     udev.packages = [ pkgs.via ];
 
     xserver.enable = true;
-    xserver.displayManager.lightdm.enable = false;
+    displayManager = {
+      defaultSession = "plasma";
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+        wayland.enable = true;
+      };
+      sessionPackages = [ pkgs.hyprland ];
+    };
+    desktopManager.plasma6.enable = true;
   };
 
   programs = {
-    dconf.enable = true;
+    # dconf.enable = true;
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
@@ -251,10 +293,6 @@
         thunar-media-tags-plugin
         thunar-volman
       ];
-    };
-    kdeconnect = {
-      enable = true;
-      package = pkgs.gnomeExtensions.gsconnect;
     };
   };
 }

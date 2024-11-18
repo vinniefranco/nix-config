@@ -4,8 +4,8 @@
 
 {
   inputs,
+  outputs,
   pkgs,
-  pkgs-unstable,
   ...
 }:
 {
@@ -17,6 +17,16 @@
     ../common/vm.nix
     inputs.ucodenix.nixosModules.default
   ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   # Bootloader.
   boot = {
@@ -53,7 +63,6 @@
   services.xserver = {
     xkb = {
       layout = "us";
-      variant = "";
     };
   };
 
@@ -118,9 +127,6 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   environment.sessionVariables = {
     AMD_VULKAN_ICD = "RADV";
     NIXPKGS_ALLOW_UNFREE = "1";
@@ -128,16 +134,15 @@
 
   hardware.opengl = {
     enable = true;
-    package = pkgs-unstable.mesa.drivers;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs-unstable; [
+    extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl
       vaapiVdpau
       rocmPackages.clr.icd
     ];
-    extraPackages32 = with pkgs-unstable; [ driversi686Linux.amdvlk ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   services.hardware.bolt.enable = true;

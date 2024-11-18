@@ -1,12 +1,12 @@
-{ pkgs-unstable, ... }:
+{ ... }:
 
 {
   programs.kitty = {
     enable = true;
     theme = "Square";
-    package = pkgs-unstable.kitty;
     font = {
       name = "FiraCode Nerd Font Mono";
+      size = 10;
     };
     settings = {
       background_opacity = "0.8";

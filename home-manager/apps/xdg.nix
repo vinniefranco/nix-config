@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 let
   screenshoter = import ./screenshoter.nix { inherit pkgs; };
@@ -25,24 +25,6 @@ in
         "application/xhtml+xml" = [ "chromium.desktop" ];
         "application/xhtml_xml" = [ "chromium.desktop" ];
       };
-    };
-    portal = {
-      enable = true;
-      config = {
-        common = {
-          default = [
-            "hyprland"
-            "wlr"
-            "gtk"
-          ];
-        };
-      };
-      extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-gtk
-      ];
-      xdgOpenUsePortal = true;
     };
     userDirs.enable = true;
   };

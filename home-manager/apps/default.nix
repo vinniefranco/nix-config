@@ -15,6 +15,7 @@
     ./theme.nix
     ./tmux.nix
     ./waybar.nix
+    ./walker.nix
     ./wlogout.nix
     ./xdg.nix
     ./zsh.nix

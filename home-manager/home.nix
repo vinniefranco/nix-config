@@ -1,8 +1,7 @@
 {
   inputs,
+  outputs,
   pkgs,
-  pkgs-unstable,
-  system,
   ...
 }:
 let
@@ -16,6 +15,18 @@ let
 in
 {
   imports = [ ./apps ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
@@ -31,10 +42,9 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    inputs.nixvim-config.packages.${system}.default
-    inputs.mcmojave-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
-    pkgs-unstable.discord
+    vesktop
     fd
     gdk
     gimp
@@ -45,17 +55,17 @@ in
     libreoffice
     neofetch
     networkmanagerapplet
-    pkgs-unstable.obsidian
+    obsidian
     open-webui
     pavucontrol
     pgcli
     pika-backup
     ranger
     ripgrep
-    pkgs-unstable.vivaldi
-    pkgs-unstable.vivaldi-ffmpeg-codecs
-    pkgs-unstable.wf-recorder
-    pkgs-unstable.xorg.xhost
+    vivaldi
+    vivaldi-ffmpeg-codecs
+    wf-recorder
+    xorg.xhost
   ];
 
   home.file = {
@@ -63,14 +73,21 @@ in
   };
 
   home.sessionVariables = {
+    DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland";
-    SDL_VIDEODRIVER = "wayland";
-    XDG_SESSION_TYPE = "wayland";
-    DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
     NIXPKGS_ALLOW_UNFREE = "1";
-    HYPRCURSOR_THEME = "McMojave";
+    QT_QPA_PLATFORM = "wayland";
+  };
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
   };
 
   # Let Home Manager install and manage itself.

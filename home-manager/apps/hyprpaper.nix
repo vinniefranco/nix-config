@@ -1,4 +1,4 @@
-{ config, pkgs-unstable, ... }:
+{ ... }:
 let
   image = builtins.fetchurl {
     url = "https://w.wallhaven.cc/full/yx/wallhaven-yxdrex.png";
@@ -10,7 +10,6 @@ in
 
   services.hyprpaper = {
     enable = true;
-    package = pkgs-unstable.hyprpaper;
     settings = {
       preload = [ image ];
 

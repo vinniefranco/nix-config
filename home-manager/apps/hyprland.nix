@@ -1,4 +1,4 @@
-{ pkgs-unstable, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Notification Daemon
@@ -12,18 +12,21 @@
   };
 
   wayland.windowManager.hyprland = {
-    package = pkgs-unstable.hyprland;
     enable = true;
 
     systemd = {
       variables = [ "--all" ];
-      extraCommands = [
-        "systemctl --user stop graphical-session.target"
-        "systemctl --user start hyprland-session.target"
-      ];
     };
     settings = {
-      env = [ "XDG_SESSION_TYPE,wayland" ];
+      env = [
+        "AQ_DRM_DEVICES=/dev/dri/card1"
+        "CLUTTER_BACKEND,wayland"
+        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        "SDL_VIDEODRIVER,wayland"
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+      ];
       exec-once = [
         "blueman-applet"
         "hyprpaper"
@@ -45,8 +48,8 @@
       general = {
         "$browser" = "chromium";
         "$files" = "thunar";
-        "$term" = "kitty";
-        "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
+        "$term" = "kitty zsh";
+        "$menu" = "walker";
         border_size = 1;
         gaps_in = 10;
         gaps_out = 10;
