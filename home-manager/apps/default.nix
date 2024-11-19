@@ -4,7 +4,6 @@
   imports = [
     ./ags.nix
     ./chromium.nix
-    ./fuzzel.nix
     ./git.nix
     ./hypridle.nix
     ./hyprland.nix
