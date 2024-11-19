@@ -2,7 +2,6 @@
   description = "Nixos config flake";
 
   nixConfig = {
-    trusted-public-keys = [ "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM=" ];
     extra-substituters = [
       "https://walker.cachix.org"
       "https://walker-git.cachix.org"
