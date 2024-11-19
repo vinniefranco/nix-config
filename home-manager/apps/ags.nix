@@ -1,16 +1,5 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 
 {
-  imports = [ inputs.ags.homeManagerModules.default ];
-
-  programs.ags = {
-    enable = true;
-
-    extraPackages = with pkgs; [
-      accountsservice
-      gnome.gvfs
-      gtksourceview
-      webkitgtk
-    ];
-  };
+  home.packages = [ inputs.ags-bar.packages.x86_64-linux.default ];
 }

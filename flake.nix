@@ -19,6 +19,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    ags-bar = {
+      url = "path:/home/vinnie/.dotfiles/pkgs/ags";
+    };
+
     ucodenix.url = "github:e-tho/ucodenix";
     walker.url = "github:abenz1267/walker";
 
@@ -34,6 +38,7 @@
     {
       self,
       nixpkgs,
+      ags-bar,
       home-manager,
       ...
     }@inputs:

@@ -31,7 +31,7 @@
         "blueman-applet"
         "hyprpaper"
         "nm-applet"
-        "waybar"
+        "ags-bar"
       ];
       input = {
         kb_options = "caps:escape";
