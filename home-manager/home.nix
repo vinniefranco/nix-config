@@ -76,11 +76,10 @@ in
   };
 
   home.sessionVariables = {
-    DEFAULT_BROWSER = "${pkgs.chromium}/bin/chromium";
+    DEFAULT_BROWSER = "${pkgs.lib.getExe pkgs.firefox}";
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
-    QT_QPA_PLATFORM = "wayland";
   };
 
   home.pointerCursor = {

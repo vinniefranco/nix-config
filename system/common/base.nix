@@ -279,7 +279,7 @@
         enableHidpi = true;
         wayland.enable = true;
       };
-      sessionPackages = [ pkgs.hyprland ];
+      sessionPackages = [ pkgs.unstable.hyprland ];
     };
     desktopManager.plasma6.enable = true;
   };

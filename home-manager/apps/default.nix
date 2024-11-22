@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./ags.nix
+    ./astal.nix
     ./chromium.nix
     ./git.nix
     ./hypridle.nix

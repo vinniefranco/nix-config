@@ -19,11 +19,11 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = [ "chromium.desktop" ];
-        "x-scheme-handler/https" = [ "chromium.desktop" ];
-        "text/html" = [ "chromium.desktop" ];
-        "application/xhtml+xml" = [ "chromium.desktop" ];
-        "application/xhtml_xml" = [ "chromium.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "text/html" = [ "firefox.desktop" ];
+        "application/xhtml+xml" = [ "firefox.desktop" ];
+        "application/xhtml_xml" = [ "firefox.desktop" ];
       };
     };
     userDirs.enable = true;

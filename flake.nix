@@ -19,9 +19,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    ags-bar = {
-      url = "path:/home/vinnie/.dotfiles/pkgs/ags";
-    };
+    astal-bar.url = "github:vinniefranco/astal-for-hypr";
 
     ucodenix.url = "github:e-tho/ucodenix";
     walker.url = "github:abenz1267/walker";
@@ -30,15 +28,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";
-
-    ags.url = "github:Aylur/ags";
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      ags-bar,
       home-manager,
       ...
     }@inputs:

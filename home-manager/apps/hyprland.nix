@@ -1,16 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  # Notification Daemon
-  services.avizo = {
-    enable = true;
-    settings = {
-      default = {
-        y-offset = 0.5;
-      };
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -19,19 +9,20 @@
     };
     settings = {
       env = [
-        "AQ_DRM_DEVICES=/dev/dri/card1"
         "CLUTTER_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "QT_QPA_PLATFORM,wayland"
         "SDL_VIDEODRIVER,wayland"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
       ];
       exec-once = [
-        "blueman-applet"
-        "hyprpaper"
-        "nm-applet"
         "ags-bar"
+        "hyprpaper"
+        "blueman-tray"
+        "nm-applet"
       ];
       input = {
         kb_options = "caps:escape";
@@ -46,7 +37,7 @@
       };
 
       general = {
-        "$browser" = "chromium";
+        "$browser" = "firefox";
         "$files" = "thunar";
         "$term" = "kitty zsh";
         "$menu" = "walker";
@@ -132,8 +123,8 @@
         "SUPER,X,exec,wlogout"
         ",XF86MonBrightnessUp,exec,light --inc"
         ",XF86MonBrightnessDown,exec,light --dec"
-        ",XF86AudioRaiseVolume,exec,volumectl -d up"
-        ",XF86AudioLowerVolume,exec,volumectl -d down"
+        ",XF86AudioRaiseVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ +5%"
+        ",XF86AudioLowerVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ -5%"
         ",XF86AudioMute,exec,volumectl -d toggle-mute"
         ",XF86AudioNext,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
         ",XF86AudioPrev,exec,dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
