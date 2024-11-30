@@ -1,8 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    package = pkgs.unstable.hyprland;
 
     systemd = {
       variables = [ "--all" ];
@@ -19,9 +20,9 @@
         "XDG_SESSION_TYPE,wayland"
       ];
       exec-once = [
-        "ags-bar"
+        "astal-bar"
         "hyprpaper"
-        "blueman-tray"
+        "blueman-applet"
         "nm-applet"
       ];
       input = {
@@ -40,7 +41,7 @@
         "$browser" = "firefox";
         "$files" = "thunar";
         "$term" = "kitty zsh";
-        "$menu" = "walker";
+        "$menu" = "fuzzel";
         border_size = 1;
         gaps_in = 10;
         gaps_out = 10;

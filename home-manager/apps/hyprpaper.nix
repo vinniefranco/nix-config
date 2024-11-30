@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   image = builtins.fetchurl {
     url = "https://w.wallhaven.cc/full/yx/wallhaven-yxdrex.png";

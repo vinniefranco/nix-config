@@ -1,14 +1,14 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, ... }:
 
 let
   screenshoter = import ./screenshoter.nix { inherit pkgs; };
 in
 {
   home.packages = with pkgs; [
-    grim
-    satty
+    unstable.grim
+    unstable.satty
     screenshoter
-    slurp
+    unstable.slurp
     sweet
     xdg-user-dirs
   ];

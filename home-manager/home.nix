@@ -47,10 +47,10 @@ in
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
-    vesktop
+    unstable.vesktop
     fd
     gdk
-    gimp
+    unstable.gimp
     htop
     httpie
     kooha
@@ -58,16 +58,16 @@ in
     libreoffice
     neofetch
     networkmanagerapplet
-    obsidian
+    unstable.obsidian
     open-webui
     pavucontrol
     pgcli
     pika-backup
     ranger
     ripgrep
-    vivaldi
-    vivaldi-ffmpeg-codecs
-    wf-recorder
+    unstable.vivaldi
+    unstable.vivaldi-ffmpeg-codecs
+    unstable.wf-recorder
     xorg.xhost
   ];
 
@@ -76,6 +76,7 @@ in
   };
 
   home.sessionVariables = {
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     DEFAULT_BROWSER = "${pkgs.lib.getExe pkgs.firefox}";
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";

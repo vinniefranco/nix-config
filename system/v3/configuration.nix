@@ -30,13 +30,18 @@
 
   # Bootloader.
   boot = {
+    consoleLogLevel = 0;
+    initrd.verbose = false;
     kernelParams = [
+      "quiet"
+      "splash"
       "amd_iommu=on"
       "iommu=pt"
       "amd_pstate=guided"
-      "systemd.show_status=auto"
+      "rd.systemd.show_status=false"
+      "boot.shell_on_fail"
     ];
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -48,6 +53,20 @@
         (adi1090x-plymouth-themes.override { selected_themes = [ "seal_2" ]; })
       ];
     };
+  };
+
+  console = {
+    font = "ter-132n";
+    packages = with pkgs; [ terminus_font ];
+  };
+
+  services.kmscon = {
+    enable = true;
+    hwRender = true;
+    extraConfig = ''
+      font-name=MesloLGS NF
+      font-size=14
+    '';
   };
 
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -" ];
@@ -121,9 +140,9 @@
       "wheel"
     ];
     packages = with pkgs; [
-      slack
-      spotify
-      firefox
+      unstable.slack
+      unstable.spotify
+      unstable.firefox
     ];
   };
 
@@ -134,6 +153,7 @@
 
   hardware.opengl = {
     enable = true;
+    package = pkgs.unstable.mesa.drivers;
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [
@@ -143,6 +163,7 @@
       rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    package32 = pkgs.unstable.driversi686Linux.mesa.drivers;
   };
 
   services.hardware.bolt.enable = true;

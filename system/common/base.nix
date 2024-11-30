@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -165,6 +170,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
+    arduino-ide
     bat
     bear
     unstable.bitwig-studio
@@ -172,20 +178,19 @@
     direnv
     eza
     unstable.freecad-wayland
-    ffmpeg-full
+    unstable.ffmpeg-full
     fzf
     git
     git-lfs
     jq
     killall
-    (kicad.override {
+    (unstable.kicad.override {
       addons = [
-        pkgs.kicadAddons.kikit
-        pkgs.kicadAddons.kikit-library
+        unstable.kicadAddons.kikit
+        unstable.kicadAddons.kikit-library
       ];
     })
     kikit
-    kitty
     libnotify
     libqalculate
     unstable.libsForQt5.qt5.qtgraphicaleffects
@@ -199,6 +204,7 @@
     nss.tools
     pciutils
     pulseaudio
+    python3
     silver-searcher
     qmk
     spice
@@ -241,6 +247,10 @@
     bashInteractive
   ];
   programs.zsh.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.unstable.hyprland;
+  };
 
   services = {
     samba = {
@@ -269,7 +279,11 @@
     devmon.enable = true;
     udisks2.enable = true;
 
-    udev.packages = [ pkgs.via ];
+    udev.packages = with pkgs; [
+      via
+      platformio-core
+      openocd
+    ];
 
     xserver.enable = true;
     displayManager = {
@@ -277,11 +291,11 @@
       sddm = {
         enable = true;
         enableHidpi = true;
-        wayland.enable = true;
       };
-      sessionPackages = [ pkgs.unstable.hyprland ];
     };
-    desktopManager.plasma6.enable = true;
+    desktopManager.plasma6 = {
+      enable = true;
+    };
   };
 
   programs = {

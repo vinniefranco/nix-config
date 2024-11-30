@@ -1,8 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.kitty = {
     enable = true;
+    package = pkgs.unstable.kitty;
     theme = "Square";
     font = {
       name = "FiraCode Nerd Font Mono";

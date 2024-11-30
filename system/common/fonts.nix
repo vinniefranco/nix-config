@@ -10,15 +10,15 @@
           "JetBrainsMono"
         ];
       })
+      corefonts
+      font-awesome
       helvetica-neue-lt-std
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      font-awesome
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-      corefonts
       vistafonts
     ];
     fontconfig.subpixel.rgba = "rgb";
