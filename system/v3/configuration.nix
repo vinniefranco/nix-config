@@ -139,6 +139,7 @@
       "video"
       "wheel"
     ];
+    shell = pkgs.unstable.nushell;
     packages = with pkgs; [
       unstable.slack
       unstable.spotify
@@ -151,11 +152,10 @@
     NIXPKGS_ALLOW_UNFREE = "1";
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     package = pkgs.unstable.mesa.drivers;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl

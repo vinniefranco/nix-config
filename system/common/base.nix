@@ -32,6 +32,9 @@
       allowedTCPPorts = [
         80
         443
+        # Spotify and casting devices
+        57621
+        5353
       ];
       trustedInterfaces = [ "virbr0" ];
       extraCommands = ''
@@ -61,10 +64,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  # Enable CUPS to print documents.
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
 
   boot.kernel.sysctl = {
     ## TCP hardening
@@ -250,12 +249,15 @@
   programs.hyprland = {
     enable = true;
     package = pkgs.unstable.hyprland;
+    xwayland.enable = true;
   };
 
   services = {
     samba = {
       enable = true;
-      securityType = "user";
+      settings = {
+        global.security = "user";
+      };
       openFirewall = true;
     };
     samba-wsdd = {
@@ -273,7 +275,7 @@
 
     gvfs = {
       enable = true;
-      package = pkgs.lib.mkForce pkgs.gnome3.gvfs;
+      package = pkgs.lib.mkForce pkgs.gnome.gvfs;
     };
     # Automounts
     devmon.enable = true;
@@ -291,6 +293,7 @@
       sddm = {
         enable = true;
         enableHidpi = true;
+        wayland.enable = true;
       };
     };
     desktopManager.plasma6 = {

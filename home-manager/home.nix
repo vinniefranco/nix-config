@@ -58,11 +58,12 @@ in
     libreoffice
     neofetch
     networkmanagerapplet
+    unstable.orca-slicer
     unstable.obsidian
     open-webui
     pavucontrol
     pgcli
-    pika-backup
+    unstable.pika-backup
     ranger
     ripgrep
     unstable.vivaldi

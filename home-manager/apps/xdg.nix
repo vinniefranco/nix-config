@@ -15,6 +15,7 @@ in
 
   xdg = {
     enable = true;
+    configFile."electron-flags.conf".source = ./config/electron-apps.conf;
     mime.enable = true;
     mimeApps = {
       enable = true;

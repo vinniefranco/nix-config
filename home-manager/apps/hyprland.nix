@@ -22,7 +22,7 @@
       exec-once = [
         "astal-bar"
         "hyprpaper"
-        "blueman-applet"
+        "blueman-tray"
         "nm-applet"
       ];
       input = {
@@ -40,7 +40,7 @@
       general = {
         "$browser" = "firefox";
         "$files" = "thunar";
-        "$term" = "kitty zsh";
+        "$term" = "kitty nu";
         "$menu" = "fuzzel";
         border_size = 1;
         gaps_in = 10;

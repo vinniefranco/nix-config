@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
     package = pkgs.unstable.kitty;
-    theme = "Square";
+    themeFile = "Square";
     font = {
       name = "FiraCode Nerd Font Mono";
       size = 10;
