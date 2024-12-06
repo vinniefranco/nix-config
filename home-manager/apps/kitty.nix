@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
     package = pkgs.unstable.kitty;
-    themeFile = "Square";
+    themeFile = "ayu";
     font = {
       name = "FiraCode Nerd Font Mono";
       size = 10;
@@ -16,4 +16,8 @@
       hide_window_decorations = "yes";
     };
   };
+
+  home.packages = with pkgs; [
+    unstable.kitty-themes
+  ];
 }

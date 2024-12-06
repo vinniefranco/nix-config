@@ -4,6 +4,7 @@
   programs = {
     nushell = {
       enable = true;
+      package = pkgs.unstable.nushell;
       shellAliases = {
         ff = "fzp | xargs nvim";
         v = "nvim";
@@ -20,7 +21,7 @@
         PROMPT_INDICATOR_VI_INSERT = ": ";
         PROMPT_INDICATOR_VI_NORMAL = "〉 ";
         DIRENV_LOG_FORMAT = ''""''; # make direnv quiet
-        SHELL = ''"${pkgs.unstable.nushell}/bin/nu"'';
+        SHELL = ''"${lib.getExe pkgs.unstable.nushell}"'';
         EDITOR = ''"nvim"'';
       };
       extraConfig =
@@ -106,6 +107,7 @@
 
     starship = {
       enable = true;
+      package = pkgs.unstable.starship;
       settings = {
         add_newline = true;
         character = {
@@ -114,54 +116,94 @@
         };
 
         format = lib.concatStrings [
-          "$shlvl"
+          "[](#9A348E)"
+          "$os"
+          "$username"
+          "[](bg:#DA627D fg:#9A348E)"
           "$directory"
-          "$vcsh"
+          "[](fg:#DA627D bg:#FCA17D)"
           "$git_branch"
-          "$git_commit"
-          "$git_state"
-          "$git_metrics"
           "$git_status"
-          "$hg_branch"
-          "$pijul_channel"
-          "$package"
+          "[](fg:#FCA17D bg:#86BBD8)"
           "$c"
-          "$cobol"
           "$elixir"
-          "$elm"
-          "$erlang"
-          "$haskell"
-          "$helm"
-          "$kotlin"
-          "$lua"
-          "$nim"
           "$nodejs"
-          "$perl"
-          "$purescript"
-          "$python"
-          "$quarto"
-          "$raku"
-          "$rlang"
           "$rust"
-          "$scala"
-          "$solidity"
-          "$typst"
-          "$vlang"
-          "$nix_shell"
-          "$spack"
-          "$nats"
-          "$direnv"
-          "$env_var"
-          "$custom"
-          "$sudo"
-          "$cmd_duration"
-          "$line_break"
-          "$jobs"
+          "[](fg:#86BBD8 bg:#06969A)"
+          "$docker_context"
+          "[](fg:#06969A bg:#33658A)"
           "$time"
-          "$status"
-          "$shell"
-          "$character"
+          "[ ](fg:#33658A)"
         ];
+
+        username = {
+          show_always = false;
+          style_user = "bg:#9A348E";
+          style_root = "bg:#9A348E";
+          format = "[$user ]($style)";
+          disabled = false;
+        };
+
+        os = {
+          style = "bg:#9A348E";
+          disabled = true; # Disabled by default
+        };
+
+        directory = {
+          style = "bg:#DA627D";
+          format = "[ $path ]($style)";
+          truncation_length = 3;
+          truncation_symbol = "…/";
+        };
+
+        directory.substitutions = {
+          "Documents" = "󰈙 ";
+          "Downloads" = " ";
+          "Music" = " ";
+          "Pictures" = " ";
+        };
+
+        c = {
+          symbol = " ";
+          style = "bg:#86BBD8";
+          format = "[ $symbol ($version) ]($style)";
+        };
+
+        elixir = {
+          symbol = " ";
+          style = "bg:#86BBD8";
+          format = "[ $symbol ($version) ]($style)";
+        };
+
+        git_branch = {
+          symbol = "";
+          style = "bg:#FCA17D";
+          format = "[ $symbol $branch ]($style)";
+        };
+
+        git_status = {
+          style = "bg:#FCA17D";
+          format = "[$all_status$ahead_behind ]($style)";
+        };
+
+        nodejs = {
+          symbol = "";
+          style = "bg:#86BBD8";
+          format = "[ $symbol ($version) ]($style)";
+        };
+
+        rust = {
+          symbol = "";
+          style = "bg:#86BBD8";
+          format = "[ $symbol ($version) ]($style)";
+        };
+
+        time = {
+          disabled = false;
+          time_format = "%R"; # Hour:Minute Format
+          style = "bg:#33658A";
+          format = "[ ♥ $time ]($style)";
+        };
       };
     };
   };

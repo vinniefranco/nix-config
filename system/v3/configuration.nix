@@ -41,7 +41,7 @@
       "rd.systemd.show_status=false"
       "boot.shell_on_fail"
     ];
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
