@@ -52,8 +52,6 @@ in
     gdk
     unstable.gimp
     htop
-    httpie
-    kooha
     lexical
     libreoffice
     neofetch
@@ -69,6 +67,7 @@ in
     unstable.vivaldi
     unstable.vivaldi-ffmpeg-codecs
     unstable.wf-recorder
+    wl-screenrec
     xorg.xhost
   ];
 

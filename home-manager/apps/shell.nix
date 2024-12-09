@@ -16,11 +16,13 @@
         find = lib.getExe pkgs.fd;
         grep = lib.getExe pkgs.ripgrep;
         tree = lib.getExe pkgs.eza;
+        ggpull = "git pull origin $'(git branch --show-current)'";
+        ggpush = "git push origin $'(git branch --show-current)'";
       };
       environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = ": ";
         PROMPT_INDICATOR_VI_NORMAL = "〉 ";
-        DIRENV_LOG_FORMAT = ''""''; # make direnv quiet
+        DIRENV_LOG_FORMAT = ''''; # make direnv quiet
         SHELL = ''"${lib.getExe pkgs.unstable.nushell}"'';
         EDITOR = ''"nvim"'';
       };
@@ -82,6 +84,10 @@
             "man"
             "cargo"
           ]}
+
+          def record_screen [] {
+            wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4" 
+          }
         '';
     };
 
@@ -109,7 +115,7 @@
       enable = true;
       package = pkgs.unstable.starship;
       settings = {
-        add_newline = true;
+        add_newline = false;
         character = {
           success_symbol = "[➜](bold green)";
           error_symbol = "[➜](bold red)";
@@ -130,9 +136,7 @@
           "$nodejs"
           "$rust"
           "[](fg:#86BBD8 bg:#06969A)"
-          "$docker_context"
           "[](fg:#06969A bg:#33658A)"
-          "$time"
           "[ ](fg:#33658A)"
         ];
 
@@ -141,12 +145,12 @@
           style_user = "bg:#9A348E";
           style_root = "bg:#9A348E";
           format = "[$user ]($style)";
-          disabled = false;
+          disabled = true;
         };
 
         os = {
           style = "bg:#9A348E";
-          disabled = true; # Disabled by default
+          disabled = false; # Disabled by default
         };
 
         directory = {
@@ -199,7 +203,7 @@
         };
 
         time = {
-          disabled = false;
+          disabled = true;
           time_format = "%R"; # Hour:Minute Format
           style = "bg:#33658A";
           format = "[ ♥ $time ]($style)";
