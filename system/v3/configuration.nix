@@ -71,7 +71,6 @@
 
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -" ];
   powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
 
   networking.hostName = "v3"; # Define your hostname.
 
@@ -128,8 +127,8 @@
     extraGroups = [
       "audio"
       "dialout"
-      "docker"
       "disk"
+      "docker"
       "input"
       "libvirtd"
       "lp"
@@ -141,6 +140,7 @@
     ];
     shell = pkgs.unstable.nushell;
     packages = with pkgs; [
+      light
       unstable.slack
       unstable.spotify
       unstable.firefox
@@ -156,20 +156,21 @@
     enable = true;
     package = pkgs.unstable.mesa.drivers;
     enable32Bit = true;
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs.unstable; [
       amdvlk
       libvdpau-va-gl
       vaapiVdpau
       rocmPackages.clr.icd
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    extraPackages32 = with pkgs.unstable; [ driversi686Linux.amdvlk ];
     package32 = pkgs.unstable.driversi686Linux.mesa.drivers;
   };
 
   services.hardware.bolt.enable = true;
 
-  services.xserver.videoDrivers = [ "modesetting" ];
-  services.udev.packages = with pkgs; [ via ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+  ];
   services.tailscale = {
     enable = true;
     permitCertUid = "vinnie";

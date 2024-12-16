@@ -26,8 +26,9 @@
     "vfio"
     "vfio_iommu_type1"
   ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [
+    "kvm-amd"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c4528524-18e8-4664-94ef-149f8e5dc887";

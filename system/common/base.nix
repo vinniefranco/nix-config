@@ -125,7 +125,7 @@
           };
         };
       };
-      extraPortals = with pkgs; [
+      extraPortals = with pkgs.unstable; [
         xdg-desktop-portal-wlr
         xdg-desktop-portal-kde
         xdg-desktop-portal-gtk
@@ -135,6 +135,7 @@
   };
 
   boot.kernelModules = [ "tcp_bbr" ];
+
   security = {
     # allow wayland lockers to unlock the screen
     pam = {
@@ -156,6 +157,30 @@
           type = "-";
           value = 1;
         }
+        {
+          domain = "@audio";
+          item = "memlock";
+          type = "-";
+          value = "unlimited";
+        }
+        {
+          domain = "@audio";
+          item = "rtprio";
+          type = "-";
+          value = "99";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "soft";
+          value = "99999";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "hard";
+          value = "99999";
+        }
       ];
     };
     # userland niceness
@@ -172,7 +197,6 @@
     arduino-ide
     bat
     bear
-    unstable.bitwig-studio
     caligula
     direnv
     eza
@@ -181,6 +205,7 @@
     fzf
     git
     git-lfs
+    unstable.hyprpolkitagent
     jq
     killall
     (unstable.kicad.override {
@@ -197,26 +222,25 @@
     unstable.libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
-    nomachine-client
-    nodePackages.eslint
     nixfmt-rfc-style
+    nodePackages.eslint
+    nomachine-client
     nss.tools
     pciutils
     pulseaudio
     python3
-    silver-searcher
     qmk
+    silver-searcher
     spice
     spice-gtk
     spice-protocol
     swaynotificationcenter
-    tldr
     teensy-loader-cli
+    tldr
     traceroute
     tytools
     unzip
     usbutils
-    via
     v4l-utils
     vulkan-tools
     wget
@@ -240,10 +264,10 @@
       setSocketVariable = true;
     };
   };
-  # I use ZSH, btw.
   environment.shells = with pkgs; [
-    zsh
     bashInteractive
+    nushell
+    zsh
   ];
   programs.zsh.enable = true;
   programs.hyprland = {
@@ -273,6 +297,8 @@
     };
     blueman.enable = true;
 
+    tumbler.enable = true;
+
     gvfs = {
       enable = true;
       package = pkgs.lib.mkForce pkgs.gnome.gvfs;
@@ -281,11 +307,18 @@
     devmon.enable = true;
     udisks2.enable = true;
 
-    udev.packages = with pkgs; [
-      via
-      platformio-core
-      openocd
-    ];
+    udev = {
+      extraRules = ''
+         ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.stdenv.shell} -c 'chgrp video $sys$devpath/brightness'", RUN+="${pkgs.stdenv.shell} -c 'chmod g+w $sys$devpath/brightness'"
+        KERNEL=="rtc0", GROUP="audio"
+        KERNEL=="hpet", GROUP="audio"
+      '';
+      packages = with pkgs; [
+        openocd
+        platformio-core
+        via
+      ];
+    };
 
     xserver.enable = true;
     displayManager = {
@@ -302,7 +335,8 @@
   };
 
   programs = {
-    # dconf.enable = true;
+    xfconf.enable = true;
+
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [

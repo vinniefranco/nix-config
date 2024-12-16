@@ -42,7 +42,9 @@
 
       nixosConfigurations = {
         v3 = nixpkgs.lib.nixosSystem {
-          modules = [ ./system/v3/configuration.nix ];
+          modules = [
+            ./system/v3/configuration.nix
+          ];
           specialArgs = {
             inherit inputs outputs;
           };

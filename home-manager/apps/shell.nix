@@ -6,18 +6,18 @@
       enable = true;
       package = pkgs.unstable.nushell;
       shellAliases = {
-        ff = "fzp | xargs nvim";
-        v = "nvim";
+        cat = lib.getExe pkgs.bat;
+        df = lib.getExe pkgs.duf;
+        ff = "fzf | xargs nvim";
+        find = lib.getExe pkgs.fd;
+        ggpull = "git pull origin $'(git branch --show-current)'";
+        ggpush = "git push origin $'(git branch --show-current)'";
+        grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
         r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie --impure";
         r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3";
-        cat = lib.getExe pkgs.bat;
-        df = lib.getExe pkgs.duf;
-        find = lib.getExe pkgs.fd;
-        grep = lib.getExe pkgs.ripgrep;
         tree = lib.getExe pkgs.eza;
-        ggpull = "git pull origin $'(git branch --show-current)'";
-        ggpush = "git push origin $'(git branch --show-current)'";
+        v = "nvim";
       };
       environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = ": ";

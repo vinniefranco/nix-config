@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   image = builtins.fetchurl {
-    url = "https://w.wallhaven.cc/full/v9/wallhaven-v9x6gm.jpg";
-    sha256 = "14csjsx0lbvq9pb8nn6w07awrp3xfpmcpr7wn8xa5q5hix5swgns";
+    url = "https://w.wallhaven.cc/full/2k/wallhaven-2k7pv9.jpg";
+    sha256 = "1lvnjhijkb5jz378g492s13hdqjr12fwb0bn6wxhnirpagwp445v";
   };
 in
 {

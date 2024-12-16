@@ -50,12 +50,14 @@ in
     unstable.vesktop
     fd
     gdk
+    gource
     unstable.gimp
     htop
     lexical
     libreoffice
     neofetch
     networkmanagerapplet
+    unstable.hyprsunset
     unstable.orca-slicer
     unstable.obsidian
     open-webui
@@ -85,7 +87,7 @@ in
 
   home.pointerCursor = {
     name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.adwaita-icon-theme;
     size = 24;
     x11 = {
       enable = true;

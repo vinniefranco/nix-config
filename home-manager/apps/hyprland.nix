@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   wayland.windowManager.hyprland = {
@@ -18,10 +18,13 @@
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
+        "XCURSOR_SIZE,24"
       ];
       exec-once = [
+        "systemctl --user start hyprpolkitagent"
         "astal-bar"
         "hyprpaper"
+        "${lib.getExe pkgs.unstable.hyprsunset}"
         "blueman-tray"
         "nm-applet"
       ];
@@ -42,11 +45,12 @@
         "$files" = "thunar";
         "$term" = "kitty nu";
         "$menu" = "fuzzel";
-        border_size = 1;
+        border_size = 3;
         gaps_in = 10;
         gaps_out = 10;
         layout = "dwindle";
         no_border_on_floating = true;
+        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
       };
 
       xwayland.force_zero_scaling = true;
@@ -90,10 +94,10 @@
           "windowsOut, 1, 4, smoothOut, slide"
           "windowsMove, 1, 4, default"
           "border, 1, 10, default"
+          "borderangle, 1, 8, default"
           "fade, 1, 10, smoothIn"
           "fadeDim, 1, 10, smoothIn"
           "workspaces, 1, 6, default, fade"
-          "borderangle, 1, 20, default, loop"
         ];
       };
 
@@ -177,29 +181,30 @@
         "size 800 600, title:Open File"
         "bordersize 4, title:Open File"
         "animation popin, title:Open File"
-        "float, title:branchdialog"
-        "float, Lxappearance"
-        "float, title:Bluetooth Devices"
+        "float,title:branchdialog"
+        "float,Lxappearance"
+        "float,title:Bluetooth Devices"
         "size 800 600, title:Bluetooth Devices"
-        "float, Rofi"
+        "float,Rofi"
         "animation none,wofi"
-        "float, viewnior"
-        "float, Viewnior"
-        "float, feh"
-        "float, zoom"
-        "float, pavucontrol-qt"
-        "float, pavucontrol"
-        "float, file-roller"
+        "float,viewnior"
+        "float,Viewnior"
+        "float,feh"
+        "float,zoom"
+        "float,pavucontrol-qt"
+        "float,pavucontrol"
+        "float,file-roller"
         "fullscreen, wlogout"
-        "float, title:wlogout"
+        "float,title:wlogout"
         "fullscreen, title:wlogout"
         "idleinhibit focus, mpv"
         "idleinhibit fullscreen, firefox"
-        "float, title:^(Media viewer)$"
-        "float, title:^(Volume Control)$"
-        "float, title:^(Picture-in-Picture)$"
-        "size 800 600, title:^(Volume Control)$"
-        "move 75 4%, title:^(Volume Control)$"
+        "float,title:^(FreeCAD)$"
+        "float,title:^(Media viewer)$"
+        "float,title:^(Volume Control)$"
+        "float,title:^(Picture-in-Picture)$"
+        "size 800 600,title:^(Volume Control)$"
+        "move 75 4%,title:^(Volume Control)$"
         "float,kitty-float"
         "float,yad|nm-connection-editor|pavucontrolk|blueman-manager"
         "float,xfce-polkit|kvantummanager|qt5ct"
@@ -213,7 +218,7 @@
         "size 100% 100%,wlogout"
         "animation slide,wlogout"
       ];
-
+      windowrulev2 = [ "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0" ];
       monitor = [
         "DP-3,3840x2160@60,0x0,1.5"
         "DP-2,highres,-1200x1452,1.333,transform,3"
