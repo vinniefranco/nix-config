@@ -2,9 +2,13 @@
   description = "Nixos config flake";
 
   nixConfig = {
-    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-substituters = [
+      "https://cosmic.cachix.org/"
+      "https://nix-community.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
     ];
   };
   inputs = {
@@ -13,7 +17,13 @@
 
     astal-bar.url = "github:vinniefranco/astal-for-hypr";
 
+    ghostty.url = "github:ghostty-org/ghostty";
     ucodenix.url = "github:e-tho/ucodenix";
+
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +36,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixos-cosmic,
       ...
     }@inputs:
     let
@@ -43,6 +54,7 @@
       nixosConfigurations = {
         v3 = nixpkgs.lib.nixosSystem {
           modules = [
+            nixos-cosmic.nixosModules.default
             ./system/v3/configuration.nix
           ];
           specialArgs = {

@@ -30,11 +30,8 @@
 
   # Bootloader.
   boot = {
-    consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = [
-      "quiet"
-      "splash"
       "amd_iommu=on"
       "iommu=pt"
       "amd_pstate=guided"
@@ -46,27 +43,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    plymouth = {
-      enable = true;
-      theme = "seal_2";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override { selected_themes = [ "seal_2" ]; })
-      ];
-    };
-  };
-
-  console = {
-    font = "ter-132n";
-    packages = with pkgs; [ terminus_font ];
-  };
-
-  services.kmscon = {
-    enable = true;
-    hwRender = true;
-    extraConfig = ''
-      font-name=MesloLGS NF
-      font-size=14
-    '';
   };
 
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -" ];
@@ -154,16 +130,14 @@
 
   hardware.graphics = {
     enable = true;
-    package = pkgs.unstable.mesa.drivers;
     enable32Bit = true;
-    extraPackages = with pkgs.unstable; [
+    extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl
       vaapiVdpau
       rocmPackages.clr.icd
     ];
-    extraPackages32 = with pkgs.unstable; [ driversi686Linux.amdvlk ];
-    package32 = pkgs.unstable.driversi686Linux.mesa.drivers;
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   services.hardware.bolt.enable = true;

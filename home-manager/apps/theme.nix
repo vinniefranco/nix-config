@@ -2,30 +2,53 @@
 
 {
   qt.enable = true;
-  qt.platformTheme.name = "gtk";
+  # qt.platformTheme.name = "gtk";
 
   gtk = {
     enable = true;
     cursorTheme = {
-      name = "Dracula-cursors";
-      package = pkgs.dracula-theme;
-      size = 24;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
     };
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "Tela";
+      package = pkgs.tela-icon-theme;
     };
     theme = {
-      package = pkgs.dracula-theme;
-      name = "Dracula";
+      package = pkgs.juno-theme;
+      name = "Juno";
     };
+
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-      gtk-cursor-theme-size = 24;
-      gtk-xft-hinting = 1;
-      gtk-xft-hintstyle = "slight";
-      gtk-xft-antialias = 1; # => font-antialiasing="grayscale"
-      gtk-xft-rgba = "rgb"; # => font-rgb-order="rgb"
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
     };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        theme = "Juno";
+      };
+    };
+  };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
   };
 }

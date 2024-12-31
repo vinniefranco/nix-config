@@ -18,6 +18,7 @@ in
 
   nixpkgs = {
     overlays = [
+      outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
@@ -51,14 +52,16 @@ in
     fd
     gdk
     gource
-    unstable.gimp
+    obs-studio
+    gimp
     htop
+    krita
     lexical
     libreoffice
     neofetch
     networkmanagerapplet
     unstable.hyprsunset
-    unstable.orca-slicer
+    orca-slicer
     unstable.obsidian
     open-webui
     pavucontrol
@@ -78,21 +81,11 @@ in
   };
 
   home.sessionVariables = {
-    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     DEFAULT_BROWSER = "${pkgs.lib.getExe pkgs.firefox}";
     EDITOR = "nvim";
-    NIXOS_OZONE_WL = "1";
+    # NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
-  };
-
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
   };
 
   # Let Home Manager install and manage itself.

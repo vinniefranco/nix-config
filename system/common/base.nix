@@ -1,7 +1,7 @@
 {
   config,
+  inputs,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -107,12 +107,12 @@
       config = {
         common = {
           default = [
+            "hyprland"
             "wlr"
-            "gtk"
           ];
           hyprland = [
+            "hyprland"
             "wlr"
-            "gtk"
           ];
         };
       };
@@ -125,12 +125,11 @@
           };
         };
       };
-      extraPortals = with pkgs.unstable; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-kde
-        xdg-desktop-portal-gtk
-      ];
       xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-wlr
+      ];
     };
   };
 
@@ -194,6 +193,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
+    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
     arduino-ide
     bat
     bear
@@ -205,7 +205,6 @@
     fzf
     git
     git-lfs
-    unstable.hyprpolkitagent
     jq
     killall
     (unstable.kicad.override {
@@ -217,9 +216,6 @@
     kikit
     libnotify
     libqalculate
-    unstable.libsForQt5.qt5.qtgraphicaleffects
-    unstable.libsForQt5.qt5.qtquickcontrols2
-    unstable.libsForQt5.qt5.qtvirtualkeyboard
     lm_sensors
     neovim
     nixfmt-rfc-style
@@ -227,6 +223,7 @@
     nomachine-client
     nss.tools
     pciutils
+    krohnkite
     pulseaudio
     python3
     qmk
@@ -272,7 +269,6 @@
   programs.zsh.enable = true;
   programs.hyprland = {
     enable = true;
-    package = pkgs.unstable.hyprland;
     xwayland.enable = true;
   };
 
@@ -309,7 +305,7 @@
 
     udev = {
       extraRules = ''
-         ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.stdenv.shell} -c 'chgrp video $sys$devpath/brightness'", RUN+="${pkgs.stdenv.shell} -c 'chmod g+w $sys$devpath/brightness'"
+        ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.stdenv.shell} -c 'chgrp video $sys$devpath/brightness'", RUN+="${pkgs.stdenv.shell} -c 'chmod g+w $sys$devpath/brightness'"
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"
       '';
@@ -328,23 +324,15 @@
         enableHidpi = true;
         wayland.enable = true;
       };
+
+      cosmic-greeter.enable = false;
     };
-    desktopManager.plasma6 = {
-      enable = true;
+    desktopManager = {
+      plasma6.enable = true;
     };
   };
 
   programs = {
     xfconf.enable = true;
-
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-dropbox-plugin
-        thunar-media-tags-plugin
-        thunar-volman
-      ];
-    };
   };
 }

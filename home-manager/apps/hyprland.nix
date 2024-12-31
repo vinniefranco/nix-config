@@ -3,7 +3,6 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.unstable.hyprland;
 
     systemd = {
       variables = [ "--all" ];
@@ -24,7 +23,7 @@
         "systemctl --user start hyprpolkitagent"
         "astal-bar"
         "hyprpaper"
-        "${lib.getExe pkgs.unstable.hyprsunset}"
+        "${lib.getExe pkgs.hyprsunset}"
         "blueman-tray"
         "nm-applet"
       ];
@@ -40,12 +39,17 @@
         };
       };
 
+      device = {
+        name = "pnp0c50:00-222a:550d-stylus";
+        output = "eDP-1";
+      };
+
       general = {
         "$browser" = "firefox";
         "$files" = "thunar";
         "$term" = "kitty nu";
         "$menu" = "fuzzel";
-        border_size = 3;
+        border_size = 2;
         gaps_in = 10;
         gaps_out = 10;
         layout = "dwindle";
@@ -84,20 +88,15 @@
       animations = {
         enabled = true;
         bezier = [
-          "overshot, 0.05, 0.9, 0.1, 1.05"
-          "smoothOut, 0.36, 0, 0.66, -0.56"
-          "smoothIn, 0.25, 1, 0.5, 1"
+          "overshot, 0.13,0.99,0.29,1.1"
         ];
 
         animation = [
-          "windows, 1, 5, overshot, slide"
-          "windowsOut, 1, 4, smoothOut, slide"
-          "windowsMove, 1, 4, default"
-          "border, 1, 10, default"
+          "windows,1,4,overshot,slide"
+          "fadeIn,1,10,default"
+          "workspaces,1,8.8,overshot,slide"
+          "border,1,14,default"
           "borderangle, 1, 8, default"
-          "fade, 1, 10, smoothIn"
-          "fadeDim, 1, 10, smoothIn"
-          "workspaces, 1, 6, default, fade"
         ];
       };
 
@@ -222,7 +221,7 @@
       monitor = [
         "DP-3,3840x2160@60,0x0,1.5"
         "DP-2,highres,-1200x1452,1.333,transform,3"
-        "eDP-1,highres,0x1452,1.333"
+        "eDP-1,2560x1600@60,0x1452,1.6"
       ];
     };
   };
