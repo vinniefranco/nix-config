@@ -205,6 +205,7 @@
     fzf
     git
     git-lfs
+    gphoto2
     jq
     killall
     (unstable.kicad.override {
@@ -334,5 +335,6 @@
 
   programs = {
     xfconf.enable = true;
+    gphoto2.enable = true;
   };
 }

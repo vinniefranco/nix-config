@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -28,7 +29,12 @@
   ];
   boot.kernelModules = [
     "kvm-amd"
+    "v4l2loopback"
   ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+  '';
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c4528524-18e8-4664-94ef-149f8e5dc887";

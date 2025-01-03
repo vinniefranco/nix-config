@@ -102,6 +102,7 @@
     description = "Vincent Franco";
     extraGroups = [
       "audio"
+      "camera"
       "dialout"
       "disk"
       "docker"
@@ -117,9 +118,9 @@
     shell = pkgs.unstable.nushell;
     packages = with pkgs; [
       light
-      unstable.slack
-      unstable.spotify
-      unstable.firefox
+      slack
+      spotify
+      firefox
     ];
   };
 

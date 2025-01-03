@@ -6,6 +6,7 @@
     ./chromium.nix
     ./fuzzel.nix
     ./git.nix
+    ./gphoto2.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
