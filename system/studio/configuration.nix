@@ -107,6 +107,7 @@
   users.users.vinnie = {
     isNormalUser = true;
     description = "Vincent Franco";
+    shell = pkgs.unstable.nushell;
     extraGroups = [
       "audio"
       "dialout"

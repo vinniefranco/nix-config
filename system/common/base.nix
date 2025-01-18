@@ -255,9 +255,8 @@
   environment.shells = with pkgs; [
     bashInteractive
     nushell
-    zsh
   ];
-  programs.zsh.enable = true;
+  programs.nushell.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
