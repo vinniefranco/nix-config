@@ -193,27 +193,29 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
-    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ghostty
     arduino-ide
     bat
     bear
     caligula
     direnv
     eza
-    unstable.freecad-wayland
-    unstable.ffmpeg-full
+    freecad-wayland
+    ffmpeg-full
     fzf
     git
     git-lfs
     gphoto2
     jq
     killall
-    (unstable.kicad.override {
+    (kicad.override {
       addons = [
-        unstable.kicadAddons.kikit
-        unstable.kicadAddons.kikit-library
+        kicadAddons.kikit
+        kicadAddons.kikit-library
       ];
     })
+    lxqt.lxqt-menu-data
+    shared-mime-info # optional, but nice to have
     kikit
     libnotify
     libqalculate
@@ -314,6 +316,7 @@
         openocd
         platformio-core
         via
+        vial
       ];
     };
 

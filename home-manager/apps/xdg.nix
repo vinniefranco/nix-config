@@ -5,11 +5,10 @@ let
 in
 {
   home.packages = with pkgs; [
-    unstable.grim
-    unstable.satty
+    grim
+    satty
     screenshoter
-    unstable.slurp
-    sweet
+    slurp
     xdg-user-dirs
   ];
 

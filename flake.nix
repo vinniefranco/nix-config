@@ -29,6 +29,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs =

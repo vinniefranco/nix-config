@@ -9,15 +9,19 @@
     };
     settings = {
       env = [
+        "GDK_BACKEND,wayland,x11,*"
+        "GDK_SCALE,2"
         "CLUTTER_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        # "QT_SCALE_FACTOR,1.5"
         "QT_QPA_PLATFORM,wayland"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
         "SDL_VIDEODRIVER,wayland"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
-        "XCURSOR_SIZE,24"
+        "XCURSOR_SIZE,30"
       ];
       exec-once = [
         "systemctl --user start hyprpolkitagent"
@@ -47,7 +51,7 @@
       general = {
         "$browser" = "firefox";
         "$files" = "thunar";
-        "$term" = "kitty nu";
+        "$term" = "ghostty";
         "$menu" = "fuzzel";
         border_size = 2;
         gaps_in = 10;
@@ -219,7 +223,7 @@
       ];
       windowrulev2 = [ "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0" ];
       monitor = [
-        "DP-3,3840x2160@60,0x0,1.5"
+        "DP-3,3840x2160,0x0,1.5"
         "DP-2,highres,-1200x1452,1.333,transform,3"
         "eDP-1,2560x1600@60,0x1452,1.6"
       ];

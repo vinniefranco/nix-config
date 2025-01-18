@@ -47,20 +47,24 @@ in
   # environment.
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
-    unstable.vesktop
+    vesktop
     fd
     gdk
     gource
     obs-studio
     gimp
+    gcc
     htop
     krita
     lexical
     libreoffice
     neofetch
+    nnn
     networkmanagerapplet
-    unstable.hyprsunset
+    nodePackages.jsonlint
+    hyprsunset
     orca-slicer
     unstable.obsidian
     open-webui
@@ -71,9 +75,10 @@ in
     ripgrep
     unstable.vivaldi
     unstable.vivaldi-ffmpeg-codecs
-    unstable.wf-recorder
+    wf-recorder
     wl-screenrec
     xorg.xhost
+    vial
   ];
 
   home.file = {
@@ -81,10 +86,10 @@ in
   };
 
   home.sessionVariables = {
-    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     DEFAULT_BROWSER = "${pkgs.lib.getExe pkgs.firefox}";
     EDITOR = "nvim";
-    # NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
   };
 

@@ -45,7 +45,10 @@
     };
   };
 
-  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -" ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -"
+  ];
   powerManagement.enable = true;
 
   networking.hostName = "v3"; # Define your hostname.
@@ -121,6 +124,7 @@
       slack
       spotify
       firefox
+      blender-hip
     ];
   };
 
