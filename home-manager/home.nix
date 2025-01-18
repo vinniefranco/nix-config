@@ -71,6 +71,7 @@
 
   home.file = {
     ".config/swaync".source = ./apps/config/swaync;
+    ".config/ghostty/config".source = ./apps/config/ghostty.conf;
   };
 
   home.sessionVariables = {
