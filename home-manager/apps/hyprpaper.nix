@@ -15,6 +15,7 @@ in
       wallpaper = [
         "DP-3,${image}"
         "DP-2,${image}"
+        "DP-1,${image}"
         "eDP-1,${image}"
       ];
     };

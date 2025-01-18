@@ -8,22 +8,13 @@
   pkgs,
   ...
 }:
-let
-  gdk = pkgs.google-cloud-sdk.withExtraComponents (
-    with pkgs.google-cloud-sdk.components;
-    [
-      gke-gcloud-auth-plugin
-      kubectl
-    ]
-  );
-in
+
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/fonts.nix
-    ../common/vm.nix
     inputs.ucodenix.nixosModules.default
   ];
 
@@ -38,15 +29,9 @@ in
   };
 
   # Bootloader.
+
   boot = {
     initrd.verbose = false;
-    kernelParams = [
-      "amd_iommu=on"
-      "iommu=pt"
-      "amd_pstate=guided"
-      "rd.systemd.show_status=false"
-      "boot.shell_on_fail"
-    ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     loader = {
       systemd-boot.enable = true;
@@ -54,22 +39,38 @@ in
     };
   };
 
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-    "f /dev/shm/looking-glass 0660 vinnie qemu-libvirtd -"
-  ];
-  powerManagement.enable = true;
+  networking.hostName = "nixos"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.hostName = "v3"; # Define your hostname.
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Networking
+  # Enable networking
   networking.networkmanager.enable = true;
 
+  # Set your time zone.
+  time.timeZone = "America/Chicago";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
   # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us";
-    };
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -86,6 +87,7 @@ in
     '';
     drivers = [ pkgs.hplipWithPlugin ];
   };
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -94,19 +96,12 @@ in
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
-
-  hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
   };
 
   users.users.vinnie = {
@@ -114,7 +109,6 @@ in
     description = "Vincent Franco";
     extraGroups = [
       "audio"
-      "camera"
       "dialout"
       "disk"
       "docker"
@@ -127,53 +121,40 @@ in
       "video"
       "wheel"
     ];
-    shell = pkgs.unstable.nushell;
     packages = with pkgs; [
-      light
-      slack
       spotify
-      firefox
-      blender-hip
     ];
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
 
   environment.sessionVariables = {
-    AMD_VULKAN_ICD = "RADV";
     NIXPKGS_ALLOW_UNFREE = "1";
   };
-  environment.systemPackages = [
-    gdk
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    arduino-ide
+    blender-hip
+    teensy-loader-cli
+    freecad-wayland
+    (kicad.override {
+      addons = [
+        kicadAddons.kikit
+        kicadAddons.kikit-library
+      ];
+    })
+    kikit
   ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      amdvlk
-      libvdpau-va-gl
-      vaapiVdpau
-      rocmPackages.clr.icd
-    ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
-  };
-
-  services.hardware.bolt.enable = true;
-
-  services.xserver.videoDrivers = [
-    "modesetting"
-  ];
-  services.tailscale = {
-    enable = true;
-    permitCertUid = "vinnie";
-    extraUpFlags = [ "--accept-routes" ];
-  };
 
   services.ucodenix = {
     enable = true;
-    cpuModelId = "00A70F52";
+    cpuModelId = "00A60F12";
   };
 
   services.fstrim.enable = true;
-  services.fprintd.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
+
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

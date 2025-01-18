@@ -1,18 +1,10 @@
 {
   inputs,
   outputs,
+  config,
   pkgs,
   ...
 }:
-let
-  gdk = pkgs.google-cloud-sdk.withExtraComponents (
-    with pkgs.google-cloud-sdk.components;
-    [
-      gke-gcloud-auth-plugin
-      kubectl
-    ]
-  );
-in
 {
   imports = [ ./apps ];
 
@@ -41,17 +33,15 @@ in
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "24.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
     vesktop
     fd
-    gdk
     gource
     obs-studio
     gimp
@@ -66,15 +56,13 @@ in
     nodePackages.jsonlint
     hyprsunset
     orca-slicer
-    unstable.obsidian
+    obsidian
     open-webui
     pavucontrol
     pgcli
-    unstable.pika-backup
+    pika-backup
     ranger
     ripgrep
-    unstable.vivaldi
-    unstable.vivaldi-ffmpeg-codecs
     wf-recorder
     wl-screenrec
     xorg.xhost
@@ -95,6 +83,7 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  systemd.user.startServices = "sd-switch";
 
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;

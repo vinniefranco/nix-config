@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -141,7 +140,7 @@
       services = {
         hyprlock = {
           text = "auth include login";
-          fprintAuth = if config.networking.hostName == "v3" then true else false;
+          fprintAuth = config.networking.hostName == "v3";
         };
         sddm = {
           text = ''
@@ -193,30 +192,21 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
-    ghostty
-    arduino-ide
     bat
     bear
     caligula
     direnv
     eza
-    freecad-wayland
     ffmpeg-full
     fzf
+    ghostty
+    ghostty
     git
     git-lfs
     gphoto2
     jq
     killall
-    (kicad.override {
-      addons = [
-        kicadAddons.kikit
-        kicadAddons.kikit-library
-      ];
-    })
-    lxqt.lxqt-menu-data
-    shared-mime-info # optional, but nice to have
-    kikit
+    krohnkite
     libnotify
     libqalculate
     lm_sensors
@@ -226,7 +216,6 @@
     nomachine-client
     nss.tools
     pciutils
-    krohnkite
     pulseaudio
     python3
     qmk
@@ -235,7 +224,6 @@
     spice-gtk
     spice-protocol
     swaynotificationcenter
-    teensy-loader-cli
     tldr
     traceroute
     tytools
@@ -257,7 +245,7 @@
   hardware.keyboard.qmk.enable = true;
 
   virtualisation.docker = {
-    enable = true;
+    enable = config.networking.hostName == "v3";
     storageDriver = "btrfs";
     rootless = {
       enable = true;
@@ -328,8 +316,6 @@
         enableHidpi = true;
         wayland.enable = true;
       };
-
-      cosmic-greeter.enable = false;
     };
     desktopManager = {
       plasma6.enable = true;

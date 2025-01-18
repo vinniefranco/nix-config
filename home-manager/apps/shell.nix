@@ -15,7 +15,7 @@
         grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
         r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie --impure";
-        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3";
+        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles";
         tree = lib.getExe pkgs.eza;
         v = "nvim";
       };

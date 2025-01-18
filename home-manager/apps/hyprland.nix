@@ -9,19 +9,21 @@
     };
     settings = {
       env = [
-        "GDK_BACKEND,wayland,x11,*"
-        "GDK_SCALE,2"
         "CLUTTER_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        "GDK_BACKEND,wayland,x11,*"
+        "GDK_SCALE,2"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-        # "QT_SCALE_FACTOR,1.5"
+        "QT_ENABLE_HIGHDPI_SCALING,1"
         "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "SDL_VIDEODRIVER,wayland"
+        "XCURSOR_SIZE,24"
+        "XCURSOR_SIZE,30"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
-        "XCURSOR_SIZE,30"
       ];
       exec-once = [
         "systemctl --user start hyprpolkitagent"
@@ -225,6 +227,7 @@
       monitor = [
         "DP-3,3840x2160,0x0,1.5"
         "DP-2,highres,-1200x1452,1.333,transform,3"
+        "DP-1,3840x2160@60,0x0,1.5"
         "eDP-1,2560x1600@60,0x1452,1.6"
       ];
     };
