@@ -28,7 +28,6 @@
         "XDG_SESSION_TYPE,wayland"
       ];
       exec-once = [
-        "hyprctl setcursor Bibata-Modern-Classic 24"
         "systemctl --user start hyprpolkitagent"
         "astal-bar"
         "hyprpaper"

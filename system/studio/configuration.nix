@@ -130,6 +130,7 @@
   };
 
   programs = {
+    lutris.enable = true;
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -170,7 +171,8 @@
     teensy-loader-cli
     freecad-wayland
     protonup
-    lutris
+    davinci-resolve-studio
+    ollama-cuda
     (kicad.override {
       addons = [
         kicadAddons.kikit
