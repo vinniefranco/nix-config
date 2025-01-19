@@ -4,7 +4,6 @@
   programs = {
     nushell = {
       enable = true;
-      package = pkgs.unstable.nushell;
       shellAliases = {
         cat = lib.getExe pkgs.bat;
         df = lib.getExe pkgs.duf;
@@ -23,7 +22,7 @@
         PROMPT_INDICATOR_VI_INSERT = ": ";
         PROMPT_INDICATOR_VI_NORMAL = "〉 ";
         DIRENV_LOG_FORMAT = ''''; # make direnv quiet
-        SHELL = ''"${lib.getExe pkgs.unstable.nushell}"'';
+        SHELL = ''${lib.getExe pkgs.nushell}'';
         EDITOR = ''"nvim"'';
       };
       extraConfig =

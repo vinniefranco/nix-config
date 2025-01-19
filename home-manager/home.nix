@@ -80,6 +80,7 @@
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
   };
 
   # Let Home Manager install and manage itself.

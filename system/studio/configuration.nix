@@ -21,6 +21,7 @@
 
   nixpkgs = {
     overlays = [
+      outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
@@ -170,6 +171,7 @@
   environment.systemPackages = with pkgs; [
     arduino-ide
     blender-hip
+    davinci-resolve
     teensy-loader-cli
     freecad-wayland
     lutris

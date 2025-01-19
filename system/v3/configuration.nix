@@ -127,7 +127,7 @@ in
       "video"
       "wheel"
     ];
-    shell = pkgs.unstable.nushell;
+    shell = pkgs.nushell;
     packages = with pkgs; [
       light
       slack
