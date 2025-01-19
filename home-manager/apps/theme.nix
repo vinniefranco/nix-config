@@ -21,6 +21,7 @@
     cursorTheme = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
+      size = 24;
     };
     iconTheme = {
       name = "Papirus-Dark";
@@ -35,11 +36,11 @@
     };
 
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+      gtk-cursor-theme-size = 24;
     };
 
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+      gtk-cursor-theme-size = 24;
     };
   };
 
@@ -56,7 +57,6 @@
 
   home.pointerCursor = {
     gtk.enable = true;
-    x11.enable = true;
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
     size = 24;

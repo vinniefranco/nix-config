@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  config,
   inputs,
   outputs,
   pkgs,
@@ -102,6 +103,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   users.users.vinnie = {
@@ -127,11 +129,37 @@
     ];
   };
 
+  programs = {
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+      args = [
+        "--steam"
+        "--expose-wayland"
+        "--rt"
+        "-W 1920"
+        "-H 1080"
+        "--force-grab-cursor"
+        "--grab"
+        "--fullscreen"
+      ];
+    };
+  };
+
   # Install firefox.
   programs.firefox.enable = true;
 
   environment.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/vinnie/.steam/root/compatibilitytools.d/";
   };
 
   # List packages installed in system profile. To search, run:
@@ -141,6 +169,8 @@
     blender-hip
     teensy-loader-cli
     freecad-wayland
+    protonup
+    lutris
     (kicad.override {
       addons = [
         kicadAddons.kikit
@@ -156,6 +186,21 @@
   };
 
   services.fstrim.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "24.11"; # Did you read the comment?
 }

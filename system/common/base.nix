@@ -256,11 +256,18 @@
     bashInteractive
     nushell
   ];
-  programs.nushell.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
+  programs.dconf.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    # pinentryFlavor = "";
+  };
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [ ];
 
   services = {
     samba = {
@@ -289,6 +296,18 @@
       enable = true;
       package = pkgs.lib.mkForce pkgs.gnome.gvfs;
     };
+    gnome = {
+      tinysparql.enable = true;
+      gnome-keyring.enable = true;
+    };
+    dbus = {
+      enable = true;
+      packages = with pkgs; [
+        gcr
+        gnome-settings-daemon
+      ];
+    };
+
     # Automounts
     devmon.enable = true;
     udisks2.enable = true;

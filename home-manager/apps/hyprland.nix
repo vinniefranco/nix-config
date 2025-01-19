@@ -12,11 +12,14 @@
         "CLUTTER_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
         "GDK_BACKEND,wayland,x11,*"
-        "GDK_SCALE,2"
+        "GDK_SCALE,1"
+        "MOZ_ENABLE_WAYLAND,1"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         "QT_ENABLE_HIGHDPI_SCALING,1"
         "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
+        "QT_QPA_PLATFORMTHEME,qt6ct"
+        "QT_SCALE_FACTOR,1"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "SDL_VIDEODRIVER,wayland"
         "XCURSOR_SIZE,24"
@@ -25,6 +28,7 @@
         "XDG_SESSION_TYPE,wayland"
       ];
       exec-once = [
+        "hyprctl setcursor Bibata-Modern-Classic 24"
         "systemctl --user start hyprpolkitagent"
         "astal-bar"
         "hyprpaper"
