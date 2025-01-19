@@ -179,6 +179,12 @@
           type = "hard";
           value = "99999";
         }
+        {
+          domain = "*";
+          item = "nofile";
+          type = "hard";
+          value = "1048576";
+        }
       ];
     };
     # userland niceness

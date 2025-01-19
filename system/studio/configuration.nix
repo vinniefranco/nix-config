@@ -40,6 +40,8 @@
     };
   };
 
+  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -130,7 +132,6 @@
   };
 
   programs = {
-    lutris.enable = true;
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -157,10 +158,11 @@
   programs.firefox.enable = true;
 
   environment.sessionVariables = {
-    NIXPKGS_ALLOW_UNFREE = "1";
     LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NIXPKGS_ALLOW_UNFREE = "1";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/vinnie/.steam/root/compatibilitytools.d/";
+    WINEESYNC = "1";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   # List packages installed in system profile. To search, run:
@@ -170,8 +172,8 @@
     blender-hip
     teensy-loader-cli
     freecad-wayland
+    lutris
     protonup
-    davinci-resolve-studio
     ollama-cuda
     (kicad.override {
       addons = [
