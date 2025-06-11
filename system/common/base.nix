@@ -212,7 +212,7 @@
     gphoto2
     jq
     killall
-    krohnkite
+    kdePackages.krohnkite
     libnotify
     libqalculate
     lm_sensors
@@ -236,6 +236,8 @@
     unzip
     usbutils
     v4l-utils
+    vivaldi
+    vivaldi-ffmpeg-codecs
     vulkan-tools
     wget
     widevine-cdm

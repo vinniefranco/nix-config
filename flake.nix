@@ -10,7 +10,7 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     astal-bar.url = "github:vinniefranco/astal-for-hypr";
@@ -18,7 +18,7 @@
     ghostty.url = "github:ghostty-org/ghostty";
     ucodenix.url = "github:e-tho/ucodenix";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";

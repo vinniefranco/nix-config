@@ -45,6 +45,7 @@ in
       "iommu=pt"
       "amd_pstate=guided"
       "rd.systemd.show_status=false"
+      "microcode.amd_sha_check=off"
       "boot.shell_on_fail"
     ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -93,7 +94,7 @@ in
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
 
@@ -175,5 +176,5 @@ in
 
   services.fstrim.enable = true;
   services.fprintd.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
