@@ -22,6 +22,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

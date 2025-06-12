@@ -53,6 +53,13 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    plymouth = {
+      enable = true;
+      theme = "hexagon_dots";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override { selected_themes = [ "hexagon_dots" ]; })
+      ];
+    };
   };
 
   systemd.tmpfiles.rules = [

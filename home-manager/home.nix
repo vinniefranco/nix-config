@@ -39,6 +39,7 @@
   # environment.
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
     vesktop
     fd
