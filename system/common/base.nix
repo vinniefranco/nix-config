@@ -326,6 +326,7 @@
         ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.stdenv.shell} -c 'chgrp video $sys$devpath/brightness'", RUN+="${pkgs.stdenv.shell} -c 'chmod g+w $sys$devpath/brightness'"
         KERNEL=="rtc0", GROUP="audio"
         KERNEL=="hpet", GROUP="audio"
+        KERNEL=="i2c-[0-9]*", TAG+="uaccess"
       '';
       packages = with pkgs; [
         openocd

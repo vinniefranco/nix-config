@@ -123,6 +123,7 @@
 
       bind = [
         "SUPER_SHIFT,P,exec,screenshoter"
+        "SUPER_SHIFT,S,exec,spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
         "SUPER,Return,exec,$term"
         "SUPER_SHIFT,Return,exec,$term -f"
         "SUPERALT,Return,exec,$term -s"

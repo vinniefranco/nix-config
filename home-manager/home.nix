@@ -41,33 +41,29 @@
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
-    vesktop
     fd
-    gource
-    obs-studio
-    gimp
     gcc
+    gimp
+    gource
     htop
+    hyprsunset
     krita
     lexical
     libreoffice
-    neofetch
-    nnn
     networkmanagerapplet
+    nnn
     nodePackages.jsonlint
-    hyprsunset
-    orca-slicer
     obsidian
-    open-webui
+    orca-slicer
     pavucontrol
     pgcli
     pika-backup
     ranger
     ripgrep
+    vesktop
     wf-recorder
     wl-screenrec
     xorg.xhost
-    vial
   ];
 
   home.file = {

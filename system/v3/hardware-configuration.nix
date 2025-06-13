@@ -30,6 +30,7 @@
   boot.kernelModules = [
     "kvm-amd"
     "v4l2loopback"
+    "i2c_dev"
   ];
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   boot.extraModprobeConfig = ''

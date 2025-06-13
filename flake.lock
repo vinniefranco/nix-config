@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732609355,
-        "narHash": "sha256-1xvpp1sst9MW6I7mMUMWNsIXOWAMAmXtXld6+xWHf8g=",
+        "lastModified": 1749729210,
+        "narHash": "sha256-CwlWtY52bYH/5EiX9ZClfPwITQSTq9c2mJdRrDAMWGc=",
         "owner": "aylur",
         "repo": "astal",
-        "rev": "12fa0fbf1c05319a6b7a9a772a7b1f03e7ca4cae",
+        "rev": "822c0d649f39d7c71ab8a9915ddf5779a8a08d11",
         "type": "github"
       },
       "original": {
@@ -27,11 +27,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1732771295,
-        "narHash": "sha256-SnFxSoTk9j0cDvSAK/5nWPytSyfHIUK8NTMI7tP4DXk=",
+        "lastModified": 1749741050,
+        "narHash": "sha256-slHI38ZKGIKz93rXQx+4M4LjjWzwjtWVd6OPQ3Kpfd4=",
         "owner": "vinniefranco",
         "repo": "astal-for-hypr",
-        "rev": "aa29ebb5063d76634d3b13edc7f36fb60942af5e",
+        "rev": "a5a7353c2c6b3b229204548786732586394a1b29",
         "type": "github"
       },
       "original": {
@@ -224,11 +224,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1732521221,
-        "narHash": "sha256-2ThgXBUXAE1oFsVATK1ZX9IjPcS4nKFOAjhPNKuiMn0=",
+        "lastModified": 1749285348,
+        "narHash": "sha256-frdhQvPbmDYaScPFiCnfdh3B/Vh81Uuoo0w5TkWmmjU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4633a7c72337ea8fd23a4f2ba3972865e3ec685d",
+        "rev": "3e3afe5174c561dee0df6f2c2b2236990146329f",
         "type": "github"
       },
       "original": {
@@ -325,11 +325,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1749644591,
-        "narHash": "sha256-v72hZJvAA78+LWohTzTwk/OnzsNxbkoTM+G7+iXwdl0=",
+        "lastModified": 1749685505,
+        "narHash": "sha256-qAyDUuYvVoSl4hAq3Ho8vTKG/ms7i7qx+8jqS6beUuw=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "64f0d3c86a7894cad9b09bb1015375ffb9949d70",
+        "rev": "1b08a4d97632a8c3500469ae7e2db91769425ddf",
         "type": "github"
       },
       "original": {
@@ -345,11 +345,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1749665278,
-        "narHash": "sha256-k7Pffcv0jClvAO3Zm8arTBypMMEtQsuKh8bmTSuYGKk=",
+        "lastModified": 1749748856,
+        "narHash": "sha256-jmYRCCyVF105D7GNO+JMFaPpDgdc6TuoKLocK2t0+tY=",
         "owner": "vinniefranco",
         "repo": "nixvim-config",
-        "rev": "580487ebc5c7bc8a12ce9b752228368e03e689ae",
+        "rev": "c83214edbab5d9fc1be167514aa9c69ffb37c472",
         "type": "github"
       },
       "original": {
@@ -389,11 +389,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749533342,
-        "narHash": "sha256-cQzKzqsPQmDBRDjcX4UFEQKNeAyibLIKkF+BBhE2JnI=",
+        "lastModified": 1749729711,
+        "narHash": "sha256-AehIzIDy134s3XlXyXnRAhLTh9V4Px4VcWnU74bbV2M=",
         "ref": "refs/heads/master",
-        "rev": "2b01a75679a03bd6557cf11c20b1588f436d6b94",
-        "revCount": 571,
+        "rev": "0fb809b1493cee321a51e5bb78b7a5f9f455c772",
+        "revCount": 575,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       },

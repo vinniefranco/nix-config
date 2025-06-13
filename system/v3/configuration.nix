@@ -52,6 +52,7 @@ in
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      grub.enable = false;
     };
     plymouth = {
       enable = true;
@@ -61,6 +62,11 @@ in
       ];
     };
   };
+
+   console = {
+     font = "Lat2-Terminus16";
+     keyMap = "us";
+   };
 
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -137,11 +143,12 @@ in
     ];
     shell = pkgs.nushell;
     packages = with pkgs; [
+      ddcutil
+      gparted
+      firefox
       light
       slack
       spotify
-      firefox
-      blender-hip
     ];
   };
 
@@ -152,6 +159,8 @@ in
   environment.systemPackages = [
     gdk
   ];
+
+  hardware.i2c.enable = true;
 
   hardware.graphics = {
     enable = true;
