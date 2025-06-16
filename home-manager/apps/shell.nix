@@ -85,7 +85,7 @@
           ]}
 
           def record_screen [] {
-            wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4" 
+            wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4"
           }
         '';
     };
@@ -122,7 +122,6 @@
 
         format = lib.concatStrings [
           "[](#9A348E)"
-          "$os"
           "$username"
           "[](bg:#DA627D fg:#9A348E)"
           "$directory"
@@ -154,7 +153,7 @@
 
         directory = {
           style = "bg:#DA627D";
-          format = "[ $path ]($style)";
+          format = "[ $path ](bg:#DA627D fg:#11111b)($style)";
           truncation_length = 3;
           truncation_symbol = "…/";
         };
@@ -181,12 +180,12 @@
         git_branch = {
           symbol = "";
           style = "bg:#FCA17D";
-          format = "[ $symbol $branch ]($style)";
+          format = "[ $symbol $branch ](bg:#FCA17D fg:#11111b)($style)";
         };
 
         git_status = {
           style = "bg:#FCA17D";
-          format = "[$all_status$ahead_behind ]($style)";
+          format = "[$all_status$ahead_behind ](bg:#FCA17D fg:#11111b)($style)";
         };
 
         nodejs = {
