@@ -260,15 +260,22 @@
       setSocketVariable = true;
     };
   };
+
   environment.shells = with pkgs; [
     bashInteractive
     nushell
   ];
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
   };
+
+  programs.sway = {
+    enable = true;
+  };
+
   programs.dconf.enable = true;
   programs.gnupg.agent = {
     enable = true;
