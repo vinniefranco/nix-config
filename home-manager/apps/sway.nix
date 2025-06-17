@@ -14,9 +14,22 @@ in
           "eDP-1"
           "DP-2"
         ];
-        modules-left = [ "sway/workspaces" "sway/mode" ];
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+        ];
         modules-center = [ "sway/window" ];
-        modules-right = [ "idle_inhibitor" "clock" "cpu" "battery" "bluetooth" "backlight" "temperature" "tray" ];
+        modules-right = [
+          "idle_inhibitor"
+          "clock"
+          "pulseaudio/slider"
+          "cpu"
+          "battery"
+          "bluetooth"
+          "backlight"
+          "temperature"
+          "tray"
+        ];
 
         "sway/workspaces" = {
           format = "{icon}";
@@ -33,14 +46,22 @@ in
             "default" = "";
           };
           persistent-workspaces = {
-            "1" = ["DP-2"];
-            "2" = ["DP-2"];
-            "3" = ["DP-2"];
-            "4" = ["eDP-1"];
-            "5" = ["eDP-1"];
-            "6" = ["eDP-1"];
+            "1" = [ "DP-2" ];
+            "2" = [ "DP-2" ];
+            "3" = [ "DP-2" ];
+            "4" = [ "eDP-1" ];
+            "5" = [ "eDP-1" ];
+            "6" = [ "eDP-1" ];
           };
           sort-by-number = true;
+        };
+
+        backlight = {
+          format = "{percent}% {icon}";
+          format-icons = [
+            ""
+            ""
+          ];
         };
 
         battery = {
@@ -50,13 +71,14 @@ in
             critical = 15;
           };
           format = "{capacity}% {icon}";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           max-length = 25;
-        };
-
-        backlight = {
-          format = "{percent}% {icon}";
-          format-icons = ["" ""];
         };
 
         bluetooth = {
@@ -100,6 +122,12 @@ in
             activated = "";
             deactivated = "";
           };
+        };
+
+        "pulseaudio/slider" = {
+          min = 0;
+          max = 100;
+          orientation = "horizontal";
         };
 
         tray = {
@@ -207,7 +235,7 @@ in
       #tray {
       }
 
-      #backlight-slider slider {
+      #pulseaudio-slider slider {
         min-height: 2px;
         min-width: 2px;
         background: #aaaaaa;
@@ -216,14 +244,14 @@ in
         box-shadow: none;
       }
 
-      #backlight-slider trough {
+      #pulseaudio-slider trough {
         min-height: 5px;
-        min-width: 50px;
+        min-width: 100px;
         border-radius: 5px;
         background: #000000;
       }
 
-      #backlight-slider highlight {
+      #pulseaudio-slider highlight {
         min-width: 5px;
         border-radius: 5px;
         background: #ffffff;
@@ -244,7 +272,10 @@ in
       };
 
       bars = [
-        {id = "bar"; command = "waybar";}
+        {
+          id = "bar";
+          command = "waybar";
+        }
       ];
 
       output = {
@@ -276,34 +307,67 @@ in
 
       window = {
         titlebar = false;
+
+        commands = [
+          {
+            criteria = {
+              app_id = "dropdown";
+            };
+            command = "floating enable";
+          }
+          {
+            criteria = {
+              app_id = "dropdown";
+            };
+            command = "resize set 1000 640";
+          }
+          {
+            criteria = {
+              app_id = "dropdown";
+            };
+            command = "move scratchpad";
+          }
+          {
+            criteria = {
+              app_id = "dropdown";
+            };
+            command = "border pixel 1";
+          }
+        ];
       };
 
       workspaceOutputAssign = [
-       {
-         workspace = "1";
-         output = "DP-2";
-       }
-       {
-         workspace = "2";
-         output = "DP-2";
-       }
-       {
-         workspace = "3";
-         output = "DP-2";
-       }
-       {
-         workspace = "4";
-         output = "eDP-1";
-       }
-       {
-         workspace = "5";
-         output = "eDP-1";
-       }
-       {
-         workspace = "6";
-         output = "eDP-1";
-       }
+        {
+          workspace = "1";
+          output = "DP-2";
+        }
+        {
+          workspace = "2";
+          output = "DP-2";
+        }
+        {
+          workspace = "3";
+          output = "DP-2";
+        }
+        {
+          workspace = "4";
+          output = "eDP-1";
+        }
+        {
+          workspace = "5";
+          output = "eDP-1";
+        }
+        {
+          workspace = "6";
+          output = "eDP-1";
+        }
       ];
+
+      floating = {
+        criteria = [
+          { title = "Bluetooth Devices"; }
+        ];
+      };
     };
 
     systemd = {

@@ -218,6 +218,7 @@
     lm_sensors
     neovim
     nixfmt-rfc-style
+    nixfmt-trer
     nodePackages.eslint
     nomachine-client
     nss.tools

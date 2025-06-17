@@ -37,31 +37,34 @@
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/dbe17f81-174a-415b-92b1-687604e3488a";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/dbe17f81-174a-415b-92b1-687604e3488a";
+    fsType = "btrfs";
+    options = [ "subvol=@" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D0A1-519F";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/594f9f81-61fc-4113-aa8d-78baa376f704";
-      fsType = "btrfs";
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/7fc8b1e8-f26f-4533-b47c-c561353e6865";
-      fsType = "btrfs";
-    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/7631ecc4-ca46-4e5b-8fb7-7dcd3b5d49d5"; }
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/D0A1-519F";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
     ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/594f9f81-61fc-4113-aa8d-78baa376f704";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/7fc8b1e8-f26f-4533-b47c-c561353e6865";
+    fsType = "btrfs";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/7631ecc4-ca46-4e5b-8fb7-7dcd3b5d49d5"; }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
