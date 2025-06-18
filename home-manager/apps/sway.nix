@@ -81,7 +81,9 @@ in
 
         clock = {
           interval = 60;
-          format = "{:%I:%M %d %h }";
+          format = "{:%OI:%M %d %h }";
+          format-alt = "{:%A, %B %d, %Y (%R)}  ";
+          timezone = "America/Chicago";
           max-length = 25;
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -127,11 +129,14 @@ in
             phone-muted = "";
             portable = "";
             car = "";
-            default = ["" ""];
+            default = [
+              ""
+              ""
+            ];
           };
           scroll-step = 1;
           on-click = "pavucontrol";
-          ignored-sinks = ["Easy Effects Sink"];
+          ignored-sinks = [ "Easy Effects Sink" ];
         };
 
         tray = {
@@ -378,6 +383,7 @@ in
       floating = {
         criteria = [
           { title = "Bluetooth Devices"; }
+          { title = "MainPicker"; }
         ];
       };
     };
