@@ -1,4 +1,4 @@
-{ pgs, ... }:
+{ pkgs, ... }:
 
 let
   screenshoter = import ./screenshoter.nix { inherit pkgs; };

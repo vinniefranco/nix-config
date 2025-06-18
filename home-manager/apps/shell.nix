@@ -173,7 +173,7 @@
 
         elixir = {
           symbol = " ";
-          style = "bg:#86BBD8";
+          style = "bg:#86BBD8 fg:#11111b";
           format = "[ $symbol ($version) ]($style)";
         };
 
