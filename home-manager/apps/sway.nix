@@ -21,13 +21,11 @@ in
         modules-center = [ "sway/window" ];
         modules-right = [
           "idle_inhibitor"
-          "clock"
-          "pulseaudio/slider"
+          "pulseaudio"
           "cpu"
           "battery"
-          "bluetooth"
           "backlight"
-          "temperature"
+          "clock"
           "tray"
         ];
 
@@ -81,18 +79,9 @@ in
           max-length = 25;
         };
 
-        bluetooth = {
-          format = " {status}";
-          format-disabled = "";
-          format-connected = " {num_connections} connected";
-          tooltip-format = "{controller_alias}\t{controller_address}";
-          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-        };
-
         clock = {
           interval = 60;
-          format = "{:%h, %d  %I:%M}";
+          format = "{:%I:%M %d %h }";
           max-length = 25;
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -124,10 +113,25 @@ in
           };
         };
 
-        "pulseaudio/slider" = {
-          min = 0;
-          max = 100;
-          orientation = "horizontal";
+        pulseaudio = {
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% ";
+          format-muted = "";
+          format-icons = {
+            "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
+            "alsa_output.pci-0000_00_1f.3.analog-stereo-muted" = "";
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            phone-muted = "";
+            portable = "";
+            car = "";
+            default = ["" ""];
+          };
+          scroll-step = 1;
+          on-click = "pavucontrol";
+          ignored-sinks = ["Easy Effects Sink"];
         };
 
         tray = {
@@ -141,13 +145,13 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-family: "Ubuntu Nerd Font";
+        font-family: "FiraCode Nerd Font";
         font-size: 13px;
         min-height: 0;
       }
 
       .module {
-        padding: 0 10px;
+        padding: 0 8px;
       }
 
       window#waybar {
@@ -165,8 +169,8 @@ in
       }
 
       #workspaces button.focused {
-        color: #c9545d;
-        border-top: 2px solid #c9545d;
+        color: #29e4ad;
+        border-bottom: 2px solid #29e4ad;
       }
 
       #mode {
@@ -175,7 +179,6 @@ in
       }
 
       #clock, #battery, #cpu, #memory, #network, #battery, #backlight, #tray, #mode {
-        padding: 0 3px;
         margin: 0 2px;
       }
 
@@ -248,7 +251,7 @@ in
         min-height: 5px;
         min-width: 100px;
         border-radius: 5px;
-        background: #000000;
+        background: rgba(0, 0, 0, 0.8);
       }
 
       #pulseaudio-slider highlight {
@@ -303,6 +306,15 @@ in
       keybindings = lib.mkOptionDefault {
         "${modifier}+Shift+w" = "exec ${lib.getExe pkgs.firefox}";
         "${modifier}+Shift+p" = "exec screenshoter";
+        "${modifier}+Shift+x" = "exec wlogout";
+        XF86MonBrightnessUp = "exec light --inc";
+        XF86MonBrightnessDown = "exec light --dec";
+        XF86AudioRaiseVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        XF86AudioLowerVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        XF86AudioMute = "exec volumectl -d toggle-mute";
+        XF86AudioNext = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
+        XF86AudioPrev = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
+        XF86AudioPlay = "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
       };
 
       window = {
