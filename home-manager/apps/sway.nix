@@ -271,7 +271,7 @@ in
     enable = true;
 
     config = rec {
-      terminal = "ghostty";
+      terminal = "kitty";
 
       input = {
         "type:keyboard" = {

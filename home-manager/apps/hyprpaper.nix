@@ -6,7 +6,6 @@ let
   };
 in
 {
-
   services.hyprpaper = {
     enable = true;
     settings = {

@@ -8,7 +8,6 @@
     ./git.nix
     ./gphoto2.nix
     ./hypridle.nix
-    ./hyprland.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./kitty.nix

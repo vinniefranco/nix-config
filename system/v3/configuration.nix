@@ -156,6 +156,7 @@ in
     AMD_VULKAN_ICD = "RADV";
     NIXPKGS_ALLOW_UNFREE = "1";
   };
+
   environment.systemPackages = [
     gdk
   ];

@@ -4,9 +4,12 @@
   config,
   pkgs,
   ...
-}:
-{
-  imports = [ ./apps ];
+}: let
+  secretspath = builtins.toString inputs.nix-secrets;
+in {
+  imports = [ ./apps
+    inputs.sops-nix.homeManagerModules.sops
+  ];
 
   nixpkgs = {
     overlays = [
@@ -26,6 +29,13 @@
   home.username = "vinnie";
   home.homeDirectory = "/home/vinnie";
 
+  sops = {
+    defaultSopsFile = "${secretspath}/secrets.yaml";
+    age.keyFile = "/home/vinnie/.config/sops/age/keys.txt";
+    secrets.openrouter_api = {
+      path = "%r/openrouter_api.key";
+    };
+  };
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -39,7 +49,7 @@
   # environment.
   home.packages = with pkgs; [
     inputs.nixvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    age
     btop
     fd
     gcc
@@ -57,9 +67,11 @@
     orca-slicer
     pavucontrol
     pgcli
+    sops
     pika-backup
     ranger
     ripgrep
+    unstable.claude-code
     vesktop
     wf-recorder
     wl-screenrec
@@ -78,6 +90,7 @@
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
     STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
+    OPENROUTER_API_KEY = (builtins.readFile "/run/user/1000/openrouter_api.key");
   };
 
   # Let Home Manager install and manage itself.

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs = {
@@ -24,6 +24,7 @@
         DIRENV_LOG_FORMAT = ''''; # make direnv quiet
         SHELL = ''${lib.getExe pkgs.nushell}'';
         EDITOR = ''"nvim"'';
+        OPENROUTER_API_KEY = (builtins.readFile "/run/user/1000/openrouter_api.key");
       };
       extraConfig =
         let

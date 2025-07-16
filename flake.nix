@@ -23,17 +23,22 @@
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";
 
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-secrets = {
+      url = "git+ssh://git@github.com/vinniefranco/nix-secrets?shallow=1&ref=main";
+      flake = false;
     };
   };
 
   outputs =
     {
       self,
-      nixpkgs,
       home-manager,
+      nixpkgs,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -59,15 +64,6 @@
             inherit inputs outputs;
           };
         };
-
-        nixos = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./system/studio/configuration.nix
-          ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
       };
 
       home-manager.useGlobalPkgs = true;
@@ -76,7 +72,9 @@
       homeConfigurations = {
         vinnie = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [ ./home-manager/home.nix ];
+          modules = [
+            ./home-manager/home.nix
+          ];
 
           extraSpecialArgs = {
             inherit inputs outputs;

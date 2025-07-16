@@ -1,9 +1,14 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}:
-{
+}: let
+  v3_image = builtins.fetchurl {
+    url = "https://w.wallhaven.cc/full/ly/wallhaven-ly95v2.jpg";
+    sha256 = "07ndns085zkxdclfjz1if0var95pvisvl7b6hsqhfx496vadmpnw";
+  };
+in {
   boot.tmp.cleanOnBoot = true;
 
   nix = {
@@ -106,11 +111,6 @@
       config = {
         common = {
           default = [
-            "hyprland"
-            "wlr"
-          ];
-          hyprland = [
-            "hyprland"
             "wlr"
           ];
         };
@@ -126,7 +126,6 @@
       };
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
         xdg-desktop-portal-wlr
       ];
     };
@@ -141,11 +140,6 @@
         hyprlock = {
           text = "auth include login";
           fprintAuth = config.networking.hostName == "v3";
-        };
-        sddm = {
-          text = ''
-            auth 			sufficient  	pam_fprintd.so
-          '';
         };
       };
       loginLimits = [
@@ -206,19 +200,17 @@
     ffmpeg-full
     fzf
     ghostty
-    ghostty
     git
     git-lfs
     gphoto2
     jq
     killall
-    kdePackages.krohnkite
     libnotify
     libqalculate
     lm_sensors
     neovim
     nixfmt-rfc-style
-    nixfmt-trer
+    nixfmt-tree
     nodePackages.eslint
     nomachine-client
     nss.tools
@@ -267,14 +259,26 @@
     nushell
   ];
 
-  programs.hyprland = {
+  programs.sway.enable = true;
+  programs.regreet = {
     enable = true;
-    xwayland.enable = true;
-    withUWSM = true;
-  };
-
-  programs.sway = {
-    enable = true;
+    theme = {
+      name = "Numix";
+      package = pkgs.numix-gtk-theme;
+    };
+    iconTheme = {
+      name = "Numix";
+      package = pkgs.numix-icon-theme;
+    };
+    settings = {
+      GTK = {
+        application_prefer_dark_theme = true;
+      };
+      background = {
+        path = v3_image;
+        fit = "Contain";
+      };
+    };
   };
 
   programs.dconf.enable = true;
@@ -284,7 +288,6 @@
     # pinentryFlavor = "";
   };
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ ];
 
   services = {
     samba = {
@@ -346,15 +349,7 @@
 
     xserver.enable = true;
     displayManager = {
-      defaultSession = "plasma";
-      sddm = {
-        enable = true;
-        enableHidpi = true;
-        wayland.enable = true;
-      };
-    };
-    desktopManager = {
-      plasma6.enable = true;
+      defaultSession = "sway";
     };
   };
 
