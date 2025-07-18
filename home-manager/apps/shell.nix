@@ -19,85 +19,36 @@
         v = "nvim";
       };
       environmentVariables = {
-        PROMPT_INDICATOR_VI_INSERT = ": ";
-        PROMPT_INDICATOR_VI_NORMAL = "〉 ";
         DIRENV_LOG_FORMAT = ''''; # make direnv quiet
-        SHELL = ''${lib.getExe pkgs.nushell}'';
         EDITOR = ''"nvim"'';
         OPENROUTER_API_KEY = (builtins.readFile "/run/user/1000/openrouter_api.key");
+        PROMPT_INDICATOR_VI_INSERT = ": ";
+        PROMPT_INDICATOR_VI_NORMAL = "〉 ";
+        SHELL = ''${lib.getExe pkgs.nushell}'';
+        CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense";
       };
-      extraConfig =
-        let
-          conf = builtins.toJSON {
-            show_banner = false;
-            edit_mode = "vi";
+      settings = {
+        show_banner = false;
+        edit_mode = "vi";
+        history.file_format = "sqlite";
 
-            ls.clickable_links = true;
-            rm.always_trash = true;
+        ls.clickable_links = true;
+        rm.always_trash = true;
 
-            table = {
-              mode = "rounded";
-              index_mode = "always";
-              header_on_separator = false;
-            };
-
-            cursor_shape = {
-              vi_insert = "line";
-              vi_normal = "block";
-            };
-
-            menus = [
-              {
-                name = "completion_menu";
-                only_buffer_difference = false;
-                marker = "? ";
-                type = {
-                  layout = "columnar"; # list, description
-                  columns = 4;
-                  col_padding = 2;
-                };
-                style = {
-                  text = "magenta";
-                  selected_text = "blue_reverse";
-                  description_text = "yellow";
-                };
-              }
-            ];
-          };
-          completion = name: ''
-            source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
-          '';
-          completions =
-            names:
-            builtins.foldl' (prev: str: ''
-              ${prev}
-              ${str}'') "" (map completion names);
-        in
-        ''
-          let carapace_completer = {|spans|
-            carapace $spans.0 nushell $spans | from json
-          }
-          $env.config = ${conf};
-          ${completions [
-            "git"
-            "nix"
-            "man"
-            "cargo"
-          ]}
-
-          def record_screen [] {
-            wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4"
-          }
-        '';
+        cursor_shape = {
+          vi_insert = "line";
+          vi_normal = "block";
+        };
+      };
     };
 
     atuin = {
       enable = true;
-      enableNushellIntegration = true;
+      enableNushellIntegration = false;
     };
 
     carapace = {
-      enable = true;
+      enable = false;
       enableNushellIntegration = true;
     };
 
@@ -113,7 +64,7 @@
 
     starship = {
       enable = true;
-      package = pkgs.unstable.starship;
+      enableNushellIntegration = true;
       settings = {
         add_newline = false;
         character = {

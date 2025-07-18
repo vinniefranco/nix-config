@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 let
   modifier = "Mod4";
+
+  v3_image = builtins.fetchurl {
+    url = "https://w.wallhaven.cc/full/ly/wallhaven-ly95v2.jpg";
+    sha256 = "07ndns085zkxdclfjz1if0var95pvisvl7b6hsqhfx496vadmpnw";
+  };
 in
 {
   programs.waybar = {
@@ -391,6 +396,11 @@ in
     systemd = {
       enable = true;
       xdgAutostart = true;
+      extraCommands = [
+        "systemctl --user import-environment PATH"
+        "systemctl --user restart xdg-desktop-portal.service"
+        "swaybg -i ${v3_image} -m fit"
+      ];
     };
 
     extraSessionCommands = ''

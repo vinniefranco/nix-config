@@ -64,10 +64,10 @@ in {
     nnn
     nodePackages.jsonlint
     obsidian
-    orca-slicer
     pavucontrol
     pgcli
     sops
+    swaybg
     pika-backup
     ranger
     ripgrep
