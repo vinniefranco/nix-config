@@ -18,6 +18,7 @@ in {
       options = "--delete-older-than 7d";
     };
     settings = {
+      download-buffer-size = 524288000;
       experimental-features = [
         "nix-command"
         "flakes"
@@ -195,8 +196,11 @@ in {
     bat
     bear
     caligula
+    clamav
+    clamtk
     direnv
     eza
+    file-roller
     ffmpeg-full
     fzf
     ghostty
@@ -223,6 +227,8 @@ in {
     spice-gtk
     spice-protocol
     swaynotificationcenter
+    swift
+    swayimg
     tldr
     traceroute
     tytools
@@ -233,7 +239,6 @@ in {
     vivaldi-ffmpeg-codecs
     vulkan-tools
     wget
-    widevine-cdm
     wl-clipboard
   ];
 
@@ -260,6 +265,17 @@ in {
   ];
 
   programs.sway.enable = true;
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-media-tags-plugin
+      thunar-vcs-plugin
+      thunar-volman
+    ];
+  };
+
   programs.regreet = {
     enable = true;
     theme = {

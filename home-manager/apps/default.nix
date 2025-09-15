@@ -3,7 +3,6 @@
 {
   imports = [
     ./astal.nix
-    ./chromium.nix
     ./fuzzel.nix
     ./git.nix
     ./kitty.nix

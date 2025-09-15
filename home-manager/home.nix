@@ -62,10 +62,12 @@ in {
     libreoffice
     networkmanagerapplet
     nnn
+    nu_scripts
     nodePackages.jsonlint
     obsidian
     pavucontrol
     pgcli
+    postman
     sops
     swaybg
     pika-backup

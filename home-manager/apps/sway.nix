@@ -173,8 +173,6 @@ in
 
       #workspaces button {
         padding: 0 10px;
-        background: transparent;
-        color: white;
         border-top: 2px solid transparent;
       }
 
@@ -391,6 +389,9 @@ in
           { title = "MainPicker"; }
         ];
       };
+      startup = [
+        { command = "exec ${pkgs.blueman}/bin/blueman-applet"; always = true; }
+      ];
     };
 
     systemd = {

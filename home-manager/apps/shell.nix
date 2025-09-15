@@ -1,6 +1,13 @@
-{ config, pkgs, lib, ... }:
-
-{
+{ config, pkgs, lib, ... }: let
+  completion = name: ''
+    source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
+  '';
+  completions =
+    names:
+    builtins.foldl' (prev: str: ''
+      ${prev}
+      ${str}'') "" (map completion names);
+in {
   programs = {
     nushell = {
       enable = true;
@@ -27,6 +34,22 @@
         SHELL = ''${lib.getExe pkgs.nushell}'';
         CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense";
       };
+      extraEnv = ''
+        use ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+        ${completions [
+          "bat"
+          "cargo"
+          "docker"
+          "git"
+          "mix"
+          "nix"
+          "tar"
+        ]}
+
+        def record_screen [] {
+          wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4"
+        }
+      '';
       settings = {
         show_banner = false;
         edit_mode = "vi";
@@ -44,7 +67,7 @@
 
     atuin = {
       enable = true;
-      enableNushellIntegration = false;
+      enableNushellIntegration = true;
     };
 
     carapace = {

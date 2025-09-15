@@ -181,7 +181,7 @@ in
     "modesetting"
   ];
   services.tailscale = {
-    enable = true;
+    enable = false;
     permitCertUid = "vinnie";
     extraUpFlags = [ "--accept-routes" ];
   };
