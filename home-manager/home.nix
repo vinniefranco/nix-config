@@ -4,10 +4,13 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   secretspath = builtins.toString inputs.nix-secrets;
-in {
-  imports = [ ./apps
+in
+{
+  imports = [
+    ./apps
     inputs.sops-nix.homeManagerModules.sops
   ];
 

@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   v3_image = builtins.fetchurl {
     url = "https://w.wallhaven.cc/full/ly/wallhaven-ly95v2.jpg";
     sha256 = "07ndns085zkxdclfjz1if0var95pvisvl7b6hsqhfx496vadmpnw";
   };
-in {
+in
+{
   boot.tmp.cleanOnBoot = true;
 
   nix = {
@@ -265,6 +267,7 @@ in {
   ];
 
   programs.sway.enable = true;
+  programs.niri.enable = true;
 
   programs.thunar = {
     enable = true;

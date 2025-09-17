@@ -390,7 +390,10 @@ in
         ];
       };
       startup = [
-        { command = "exec ${pkgs.blueman}/bin/blueman-applet"; always = true; }
+        {
+          command = "exec ${pkgs.blueman}/bin/blueman-applet";
+          always = true;
+        }
       ];
     };
 

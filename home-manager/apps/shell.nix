@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
   completion = name: ''
     source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
   '';
@@ -7,7 +13,8 @@
     builtins.foldl' (prev: str: ''
       ${prev}
       ${str}'') "" (map completion names);
-in {
+in
+{
   programs = {
     nushell = {
       enable = true;

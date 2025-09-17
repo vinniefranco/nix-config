@@ -155,6 +155,7 @@ in
   environment.sessionVariables = {
     AMD_VULKAN_ICD = "RADV";
     NIXPKGS_ALLOW_UNFREE = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   environment.systemPackages = [
