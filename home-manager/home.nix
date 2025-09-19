@@ -18,7 +18,7 @@ in
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      inputs.niri.overlays.niri
     ];
 
     config = {
@@ -76,7 +76,7 @@ in
     pika-backup
     ranger
     ripgrep
-    unstable.claude-code
+    claude-code
     vesktop
     wf-recorder
     wl-screenrec

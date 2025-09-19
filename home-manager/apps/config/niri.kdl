@@ -18,6 +18,8 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
+prefer-no-csd
+
 output "DP-2" {
     mode "3840x2160@59.997"
     scale 1.6
@@ -71,7 +73,7 @@ layout {
 
 spawn-at-startup "waybar"
 
-spawn-at-startup "swaybg -i @v3_image@ -m fit"
+spawn-sh-at-startup "swaybg -i @v3_image@ -m fit"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -124,6 +126,10 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    XF86AudioNext allow-when-locked=true { spawn-sh "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"; }
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }

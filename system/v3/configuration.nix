@@ -30,7 +30,7 @@ in
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      inputs.niri.overlays.niri
     ];
     config = {
       allowUnfree = true;

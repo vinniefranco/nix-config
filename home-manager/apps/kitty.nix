@@ -3,7 +3,6 @@
 {
   programs.kitty = {
     enable = true;
-    package = pkgs.unstable.kitty;
     themeFile = "ayu";
     font = {
       name = "FiraCode Nerd Font Mono";
@@ -18,6 +17,6 @@
   };
 
   home.packages = with pkgs; [
-    unstable.kitty-themes
+    kitty-themes
   ];
 }

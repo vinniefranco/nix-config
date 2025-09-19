@@ -224,6 +224,7 @@ in
     pulseaudio
     python3
     qmk
+    quickshell
     silver-searcher
     spice
     spice-gtk
@@ -266,8 +267,12 @@ in
     nushell
   ];
 
-  programs.sway.enable = true;
-  programs.niri.enable = true;
+  programs.sway.enable = false;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
+  programs.xwayland.enable = true;
 
   programs.thunar = {
     enable = true;

@@ -9,7 +9,6 @@
     ./niri.nix
     ./shell.nix
     ./spotify.nix
-    ./sway.nix
     ./theme.nix
     ./tmux.nix
     ./wlogout.nix
