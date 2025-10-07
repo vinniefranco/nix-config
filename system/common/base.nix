@@ -224,18 +224,15 @@ in
     pciutils
     pulseaudio
     python3
-    qmk
     quickshell
     silver-searcher
     spice
     spice-gtk
     spice-protocol
     swaynotificationcenter
-    swift
     swayimg
     tldr
     traceroute
-    tytools
     unzip
     usbutils
     v4l-utils

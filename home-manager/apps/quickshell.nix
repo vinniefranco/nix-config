@@ -5,14 +5,14 @@
 }:
 {
   imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell
+    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
   ];
 
   programs.dankMaterialShell = {
     enable = true;
-    enableSpawn = true;
     enableCalendarEvents = false;
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    enableSystemd = true;
+    quickshell.package = inputs.quickshell.packages.${pkgs.system}.default;
   };
 
   # Service used by DMS
