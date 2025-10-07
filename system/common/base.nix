@@ -130,6 +130,7 @@ in
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-wlr
+        xdg-desktop-portal-gnome
       ];
     };
   };
@@ -243,6 +244,7 @@ in
     vulkan-tools
     wget
     wl-clipboard
+    xwayland-satellite
   ];
 
   # Bluetooth

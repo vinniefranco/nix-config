@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ./astal.nix
     ./fuzzel.nix
     ./git.nix
     ./kitty.nix
     ./niri.nix
+    ./quickshell.nix
     ./shell.nix
     ./spotify.nix
     ./theme.nix

@@ -2,9 +2,8 @@
   pkgs,
   inputs,
   ...
-}: let
-  quickshell = inputs.quickshell.packages.${pkgs.system}.default;
-in {
+}:
+{
   imports = [
     inputs.dankMaterialShell.homeModules.dankMaterialShell
   ];
@@ -13,8 +12,7 @@ in {
     enable = true;
     enableSpawn = true;
     enableCalendarEvents = false;
-
-    quickshell.package = quickshell;
+    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
   # Service used by DMS

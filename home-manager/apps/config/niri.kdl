@@ -1,5 +1,6 @@
 input {
     keyboard {
+
         xkb {
         }
 
@@ -71,9 +72,7 @@ layout {
     }
 }
 
-spawn-at-startup "waybar"
-
-spawn-sh-at-startup "swaybg -i @v3_image@ -m fit"
+spawn-sh-at-startup  "qs -c /home/vinnie/.config/quickshell/dms"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

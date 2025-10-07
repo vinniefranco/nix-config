@@ -84,18 +84,25 @@ in
   ];
 
   home.file = {
-    ".config/swaync".source = ./apps/config/swaync;
     ".config/ghostty/config".source = ./apps/config/ghostty.conf;
   };
 
   home.sessionVariables = {
-    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    CLUTTER_BACKEND = "wayland";
     DEFAULT_BROWSER = "${pkgs.lib.getExe pkgs.firefox}";
+    DISPLAY = ":0";
     EDITOR = "nvim";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    GDK_BACKEND = "wayland,x11";
+    MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
-    STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
     OPENROUTER_API_KEY = (builtins.readFile "/run/user/1000/openrouter_api.key");
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   # Let Home Manager install and manage itself.

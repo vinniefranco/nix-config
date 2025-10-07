@@ -168,12 +168,10 @@ in
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       libvdpau-va-gl
       vaapiVdpau
       rocmPackages.clr.icd
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   services.hardware.bolt.enable = true;
