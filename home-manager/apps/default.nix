@@ -4,14 +4,11 @@
   imports = [
     ./fuzzel.nix
     ./git.nix
+    ./gnome.nix
     ./kitty.nix
-    ./niri.nix
-    ./quickshell.nix
     ./shell.nix
     ./spotify.nix
-    ./theme.nix
     ./tmux.nix
-    ./wlogout.nix
     ./xdg.nix
   ];
 }

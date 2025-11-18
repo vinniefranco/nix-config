@@ -4,27 +4,20 @@
   lib,
   ...
 }:
-let
-  completion = name: ''
-    source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
-  '';
-  completions =
-    names:
-    builtins.foldl' (prev: str: ''
-      ${prev}
-      ${str}'') "" (map completion names);
-in
 {
   programs = {
-    nushell = {
+    zsh = {
       enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
       shellAliases = {
         cat = lib.getExe pkgs.bat;
         df = lib.getExe pkgs.duf;
         ff = "fzf | xargs nvim";
         find = lib.getExe pkgs.fd;
-        ggpull = "git pull origin $'(git branch --show-current)'";
-        ggpush = "git push origin $'(git branch --show-current)'";
+        ggpull = "git pull origin $(git branch --show-current)";
+        ggpush = "git push origin $(git branch --show-current)";
         grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
         r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie --impure";
@@ -32,43 +25,10 @@ in
         tree = lib.getExe pkgs.eza;
         v = "nvim";
       };
-      environmentVariables = {
-        DIRENV_LOG_FORMAT = ''''; # make direnv quiet
-        EDITOR = ''"nvim"'';
-        OPENROUTER_API_KEY = (builtins.readFile "/run/user/1000/openrouter_api.key");
-        PROMPT_INDICATOR_VI_INSERT = ": ";
-        PROMPT_INDICATOR_VI_NORMAL = "〉 ";
-        SHELL = ''${lib.getExe pkgs.nushell}'';
-        CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense";
-      };
-      extraEnv = ''
-        use ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
-        ${completions [
-          "bat"
-          "cargo"
-          "docker"
-          "git"
-          "mix"
-          "nix"
-          "tar"
-        ]}
-
-        def record_screen [] {
-          wl-screenrec -g $"(slurp)" -f $"screen(date now | format date "%Y-%m-%d-%H%M%S").mp4"
-        }
-      '';
-      settings = {
-        show_banner = false;
-        edit_mode = "vi";
-        history.file_format = "sqlite";
-
-        ls.clickable_links = true;
-        rm.always_trash = true;
-
-        cursor_shape = {
-          vi_insert = "line";
-          vi_normal = "block";
-        };
+      oh-my-zsh = {
+        enable = true;
+        plugins = ["git"];
+        theme = "robbyrussell";
       };
     };
 
@@ -94,7 +54,6 @@ in
 
     starship = {
       enable = true;
-      enableNushellIntegration = true;
       settings = {
         add_newline = false;
         character = {

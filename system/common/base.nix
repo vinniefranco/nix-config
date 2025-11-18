@@ -1,15 +1,10 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
   ...
 }:
-let
-  v3_image = builtins.fetchurl {
-    url = "https://w.wallhaven.cc/full/ly/wallhaven-ly95v2.jpg";
-    sha256 = "07ndns085zkxdclfjz1if0var95pvisvl7b6hsqhfx496vadmpnw";
-  };
-in
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -114,7 +109,7 @@ in
       config = {
         common = {
           default = [
-            "wlr"
+            "gnome"
           ];
         };
       };
@@ -129,8 +124,9 @@ in
       };
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
         xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
       ];
     };
   };
@@ -141,10 +137,6 @@ in
     # allow wayland lockers to unlock the screen
     pam = {
       services = {
-        hyprlock = {
-          text = "auth include login";
-          fprintAuth = config.networking.hostName == "v3";
-        };
       };
       loginLimits = [
         {
@@ -196,6 +188,7 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
+    inputs.expert-ls.packages.${pkgs.system}.default
     bat
     bear
     caligula
@@ -211,6 +204,7 @@ in
     git-lfs
     gphoto2
     jq
+    inkscape
     killall
     libnotify
     libqalculate
@@ -219,7 +213,6 @@ in
     nixfmt-rfc-style
     nixfmt-tree
     nodePackages.eslint
-    nomachine-client
     nss.tools
     pciutils
     pulseaudio
@@ -229,7 +222,6 @@ in
     spice
     spice-gtk
     spice-protocol
-    swaynotificationcenter
     swayimg
     tldr
     traceroute
@@ -263,46 +255,8 @@ in
 
   environment.shells = with pkgs; [
     bashInteractive
-    nushell
+    zsh
   ];
-
-  programs.sway.enable = false;
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-  };
-  programs.xwayland.enable = true;
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-media-tags-plugin
-      thunar-vcs-plugin
-      thunar-volman
-    ];
-  };
-
-  programs.regreet = {
-    enable = true;
-    theme = {
-      name = "Numix";
-      package = pkgs.numix-gtk-theme;
-    };
-    iconTheme = {
-      name = "Numix";
-      package = pkgs.numix-icon-theme;
-    };
-    settings = {
-      GTK = {
-        application_prefer_dark_theme = true;
-      };
-      background = {
-        path = v3_image;
-        fit = "Contain";
-      };
-    };
-  };
 
   programs.dconf.enable = true;
   programs.gnupg.agent = {
@@ -340,8 +294,9 @@ in
       package = pkgs.lib.mkForce pkgs.gnome.gvfs;
     };
     gnome = {
-      tinysparql.enable = true;
+      games.enable = false;
       gnome-keyring.enable = true;
+      tinysparql.enable = true;
     };
     dbus = {
       enable = true;
@@ -371,9 +326,8 @@ in
     };
 
     xserver.enable = true;
-    displayManager = {
-      defaultSession = "sway";
-    };
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
   programs = {

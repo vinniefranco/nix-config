@@ -2,12 +2,12 @@
 
 {
   environment.systemPackages = with pkgs; [
-    virt-manager
-    virt-viewer
     spice
     spice-gtk
     spice-protocol
-    win-virtio
+    virt-manager
+    virt-viewer
+    virtio-win
     win-spice
   ];
 

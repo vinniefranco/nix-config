@@ -12,8 +12,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    astal-bar.url = "github:vinniefranco/astal-for-hypr";
-
     ghostty.url = "github:ghostty-org/ghostty";
     ucodenix.url = "github:e-tho/ucodenix";
 
@@ -23,17 +21,17 @@
     nixvim-config.url = "github:vinniefranco/nixvim-config";
     niri.url = "github:sodiboo/niri-flake";
 
-    # Quickshell
+    expert-ls.url = "github:elixir-lang/expert";
+
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Dank Material Shell - Quickshell
-    dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
+      inputs.quickshell.follows = "quickshell";  # Use same quickshell version
     };
 
     sops-nix = {

@@ -6,7 +6,7 @@
     escapeTime = 0;
     enable = true;
     extraConfig = ''
-      set -g default-command ${lib.getExe pkgs.nushell}
+      set -g default-command ${lib.getExe pkgs.zsh}
       set-option -sa terminal-features ',xterm-kitty:RGB'
       set-environment -g COLORTERM "truecolor"
       set-option -g focus-events on

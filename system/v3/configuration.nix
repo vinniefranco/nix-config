@@ -30,7 +30,7 @@ in
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      inputs.niri.overlays.niri
+      #inputs.niri.overlays.niri
     ];
     config = {
       allowUnfree = true;
@@ -141,7 +141,7 @@ in
       "video"
       "wheel"
     ];
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
     packages = with pkgs; [
       ddcutil
       gparted
@@ -151,6 +151,8 @@ in
       spotify
     ];
   };
+  # System-wide shell needs to be enabled
+  programs.zsh.enable = true;
 
   environment.sessionVariables = {
     AMD_VULKAN_ICD = "RADV";
@@ -168,7 +170,7 @@ in
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      vaapiVdpau
+      libva-vdpau-driver
       rocmPackages.clr.icd
     ];
   };
