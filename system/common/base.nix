@@ -5,6 +5,12 @@
   lib,
   ...
 }:
+let
+  v3_image = builtins.fetchurl {
+    url = "https://w.wallhaven.cc/full/ly/wallhaven-ly95v2.jpg";
+    sha256 = "07ndns085zkxdclfjz1if0var95pvisvl7b6hsqhfx496vadmpnw";
+  };
+in
 {
   boot.tmp.cleanOnBoot = true;
 
@@ -109,7 +115,7 @@
       config = {
         common = {
           default = [
-            "gnome"
+            "wlr"
           ];
         };
       };
@@ -124,9 +130,8 @@
       };
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
         xdg-desktop-portal-wlr
+        xdg-desktop-portal-gnome
       ];
     };
   };
@@ -189,6 +194,7 @@
   nixpkgs.config.chromium.enableWideVine = true;
   environment.systemPackages = with pkgs; [
     inputs.expert-ls.packages.${pkgs.system}.default
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     bat
     bear
     caligula
@@ -219,6 +225,7 @@
     python3
     quickshell
     silver-searcher
+    kdePackages.skanpage
     spice
     spice-gtk
     spice-protocol
@@ -265,6 +272,11 @@
     # pinentryFlavor = "";
   };
   programs.nix-ld.enable = true;
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
 
   services = {
     samba = {
@@ -326,8 +338,28 @@
     };
 
     xserver.enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+    system76-scheduler.enable = true;
+  };
+
+  programs.regreet = {
+    enable = true;
+    theme = {
+      name = "Numix";
+      package = pkgs.numix-gtk-theme;
+    };
+    iconTheme = {
+      name = "Numix";
+      package = pkgs.numix-icon-theme;
+    };
+    settings = {
+      GTK = {
+        application_prefer_dark_theme = true;
+      };
+      background = {
+        path = v3_image;
+        fit = "Contain";
+      };
+    };
   };
 
   programs = {

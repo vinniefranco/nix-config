@@ -30,7 +30,6 @@ in
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      #inputs.niri.overlays.niri
     ];
     config = {
       allowUnfree = true;
@@ -150,6 +149,10 @@ in
       slack
       spotify
     ];
+  };
+  programs.firefox.preferences = {
+    # disable libadwaita theming for Firefox
+    "widget.gtk.libadwaita-colors.enabled" = false;
   };
   # System-wide shell needs to be enabled
   programs.zsh.enable = true;

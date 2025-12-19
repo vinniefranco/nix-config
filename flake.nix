@@ -20,19 +20,12 @@
 
     nixvim-config.url = "github:vinniefranco/nixvim-config";
     niri.url = "github:sodiboo/niri-flake";
-
-    expert-ls.url = "github:elixir-lang/expert";
-
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";  # Use same quickshell version
     };
+
+    expert-ls.url = "github:elixir-lang/expert";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
