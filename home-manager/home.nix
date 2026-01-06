@@ -103,7 +103,6 @@ in
     DISPLAY = ":0";
     EDITOR = "nvim";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    GDK_BACKEND = "wayland,x11";
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";

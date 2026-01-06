@@ -51,6 +51,7 @@ in
       };
 
       outputs."eDP-1" = {
+        scale = 1.6;
         mode = {
           width = 2560;
           height = 1600;
@@ -58,12 +59,13 @@ in
         };
 
         position = {
-          x = 0;
-          y = 1320;
+          x = 500;
+          y = 1360;
         };
       };
 
       outputs."DP-2" = {
+        scale = 1.6;
         mode = {
           width = 3840;
           height = 2160;
@@ -128,7 +130,7 @@ in
           ];
           center = [
             {
-              formatHorizontal = "HH:mm";
+              formatHorizontal = "MMM d - h:mm a";
               formatVertical = "HH mm";
               id = "Clock";
               useMonospacedFont = true;
@@ -137,27 +139,24 @@ in
           ];
           right = [
             {
+              id = "Notifications";
+            }
+            {
               id = "WiFi";
             }
             {
               id = "Bluetooth";
             }
             {
-              alwaysShowPercentage = false;
-              id = "Battery";
-              warningThreshold = 30;
-            }
-            {
-              id = "Notifications";
-            }
-            {
-              id = "PowerProfile";
-            }
-            {
               id = "KeepAwake";
             }
             {
               id = "NightLight";
+            }
+            {
+              alwaysShowPercentage = true;
+              id = "Battery";
+              warningThreshold = 30;
             }
           ];
         };

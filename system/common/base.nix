@@ -109,33 +109,6 @@ in
     "net.core.default_qdisc" = "cake";
   };
 
-  xdg = {
-    portal = {
-      enable = true;
-      config = {
-        common = {
-          default = [
-            "gnome"
-          ];
-        };
-      };
-      wlr = {
-        enable = true;
-        settings = {
-          screencast = {
-            chooser_type = "simple";
-            chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -ro";
-          };
-        };
-      };
-      xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-wlr
-      ];
-    };
-  };
-
   boot.kernelModules = [ "tcp_bbr" ];
 
   security = {
@@ -319,6 +292,10 @@ in
       gnome-keyring.enable = true;
       tinysparql.enable = true;
     };
+
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+
     dbus = {
       enable = true;
       packages = with pkgs; [
@@ -348,27 +325,6 @@ in
 
     xserver.enable = true;
     system76-scheduler.enable = true;
-  };
-
-  programs.regreet = {
-    enable = true;
-    theme = {
-      name = "Numix";
-      package = pkgs.numix-gtk-theme;
-    };
-    iconTheme = {
-      name = "Numix";
-      package = pkgs.numix-icon-theme;
-    };
-    settings = {
-      GTK = {
-        application_prefer_dark_theme = true;
-      };
-      background = {
-        path = v3_image;
-        fit = "Contain";
-      };
-    };
   };
 
   programs = {

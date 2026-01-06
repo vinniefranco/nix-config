@@ -3,6 +3,10 @@
   additions = final: _prev: import ../pkgs final.pkgs;
 
   modifications = final: prev: {
+    vivaldi = prev.vivaldi.override {
+      commandLineArgs = "--ozone-platform=wayland";
+    };
+
     vesktop = prev.vesktop.overrideAttrs (oldAttrs: {
       preBuild =
         final.lib.optionalString final.stdenv.hostPlatform.isDarwin ''
