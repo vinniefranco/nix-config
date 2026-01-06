@@ -13,6 +13,10 @@ in
   programs.niri = {
     package = pkgs.niri;
     settings = {
+      cursor = {
+        size = 32;
+      };
+
       binds = with config.lib.niri.actions; {
         "Mod+T".action.spawn = "ghostty";
         "Mod+D".action.spawn = noctalia "launcher toggle";
@@ -85,6 +89,8 @@ in
         };
       };
 
+      prefer-no-csd = true;
+
       window-rules = [
         {
           geometry-corner-radius = {
@@ -105,41 +111,53 @@ in
     systemd.enable = true;
     settings = {
       bar = {
-        density = "compact";
-        position = "right";
-        showCapsule = false;
+        density = "default";
+        position = "top";
+        shrightowCapsule = false;
         widgets = {
           left = [
             {
               id = "ControlCenter";
-              useDistroLogo = true;
+              useDistroLogo = false;
             }
-            {
-              id = "WiFi";
-            }
-            {
-              id = "Bluetooth";
-            }
-          ];
-          center = [
             {
               hideUnoccupied = false;
               id = "Workspace";
               labelMode = "none";
             }
           ];
-          right = [
-            {
-              alwaysShowPercentage = false;
-              id = "Battery";
-              warningThreshold = 30;
-            }
+          center = [
             {
               formatHorizontal = "HH:mm";
               formatVertical = "HH mm";
               id = "Clock";
               useMonospacedFont = true;
               usePrimaryColor = true;
+            }
+          ];
+          right = [
+            {
+              id = "WiFi";
+            }
+            {
+              id = "Bluetooth";
+            }
+            {
+              alwaysShowPercentage = false;
+              id = "Battery";
+              warningThreshold = 30;
+            }
+            {
+              id = "Notifications";
+            }
+            {
+              id = "PowerProfile";
+            }
+            {
+              id = "KeepAwake";
+            }
+            {
+              id = "NightLight";
             }
           ];
         };

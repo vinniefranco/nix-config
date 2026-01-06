@@ -115,7 +115,7 @@ in
       config = {
         common = {
           default = [
-            "wlr"
+            "gnome"
           ];
         };
       };
@@ -130,8 +130,8 @@ in
       };
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
         xdg-desktop-portal-gnome
+        xdg-desktop-portal-wlr
       ];
     };
   };
@@ -278,7 +278,16 @@ in
     package = pkgs.niri;
   };
 
+  programs.thunar = with pkgs.xfce; {
+    enable = true;
+    plugins = [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
   services = {
+    upower.enable = true;
     samba = {
       enable = true;
       settings = {
