@@ -32,6 +32,9 @@ in
         "Mod+Shift+Up".action = move-window-up;
         "Mod+Shift+Down".action = move-window-down;
 
+        "Mod+Shift+0".action.move-window-to-workspace = "work";
+        "Mod+Shift+1".action.move-window-to-workspace = "chat";
+
         "Mod+Ctrl+Right".action.set-column-width = "+10%";
         "Mod+Ctrl+Left".action.set-column-width = "-10%";
 
@@ -42,12 +45,12 @@ in
         "Mod+Shift+P".action.spawn = "screenshoter";
         "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
         "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
-        "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
-        "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
-        "XF86AudioNext".action.spawn = ["playerctl" "next"];
+        "XF86AudioPlay".action.spawn = ["playerctl" "-p" "spotify" "play-pause"];
+        "XF86AudioPrev".action.spawn = ["playerctl" "-p" "spotify" "previous"];
+        "XF86AudioNext".action.spawn = ["playerctl" "-p" "spotify" "next"];
       };
       input = {
-        focus-follows-mouse.enable = true;
+        focus-follows-mouse.enable = false;
       };
 
       outputs."eDP-1" = {
@@ -105,6 +108,16 @@ in
           draw-border-with-background = false;
         }
       ];
+
+      workspaces = {
+        "chat" = {
+          open-on-output = "eDP-1";
+        };
+
+        "work" = {
+          open-on-output = "DP-2";
+        };
+      };
     };
   };
 
@@ -127,6 +140,9 @@ in
               id = "Workspace";
               labelMode = "none";
             }
+            {
+              id = "MediaMini";
+            }
           ];
           center = [
             {
@@ -139,7 +155,13 @@ in
           ];
           right = [
             {
-              id = "Notifications";
+              id = "Tray";
+            }
+            {
+              id = "NotificationHistory";
+            }
+            {
+              id = "Volume";
             }
             {
               id = "WiFi";
@@ -168,6 +190,7 @@ in
       location = {
         monthBeforeDay = true;
         name = "Sussex, United States";
+        useFahrenheit = true;
       };
     };
   };

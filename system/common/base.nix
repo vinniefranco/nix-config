@@ -196,6 +196,7 @@ in
     nss.tools
     pciutils
     pulseaudio
+    playerctl
     python3
     quickshell
     silver-searcher
