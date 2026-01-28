@@ -76,7 +76,10 @@ in
   networking.hostName = "v3"; # Define your hostname.
 
   # Networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = false;
+  };
 
   # Configure keymap in X11
   services.xserver = {

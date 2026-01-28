@@ -73,7 +73,7 @@ in
     postman
     sops
     swaybg
-    pika-backup
+    #pika-backup
     ranger
     ripgrep
     claude-code
@@ -116,7 +116,4 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
-
-  services.kdeconnect.enable = true;
-  services.kdeconnect.indicator = true;
 }

@@ -63,12 +63,12 @@ in
 
         position = {
           x = 500;
-          y = 1360;
+          y = 1680;
         };
       };
 
       outputs."DP-2" = {
-        scale = 1.6;
+        scale = 1.3;
         mode = {
           width = 3840;
           height = 2160;
