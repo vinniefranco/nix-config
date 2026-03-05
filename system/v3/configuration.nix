@@ -148,7 +148,7 @@ in
       ddcutil
       gparted
       firefox
-      light
+      brightnessctl
       slack
       spotify
     ];

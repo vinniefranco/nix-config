@@ -180,6 +180,7 @@ in
     ffmpeg-full
     fzf
     ghostty
+    google-chrome
     git
     git-lfs
     gphoto2

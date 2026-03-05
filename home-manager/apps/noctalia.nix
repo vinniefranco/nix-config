@@ -54,7 +54,7 @@ in
       };
 
       outputs."eDP-1" = {
-        scale = 1.6;
+        scale = 1.7;
         mode = {
           width = 2560;
           height = 1600;
@@ -63,12 +63,12 @@ in
 
         position = {
           x = 500;
-          y = 1680;
+          y = 1600;
         };
       };
 
       outputs."DP-2" = {
-        scale = 1.3;
+        scale = 1.4;
         mode = {
           width = 3840;
           height = 2160;
@@ -126,6 +126,9 @@ in
     systemd.enable = true;
     settings = {
       bar = {
+        frameThickness = 8;
+        frameRadius = 12;
+        barType = "framed";
         density = "default";
         position = "top";
         shrightowCapsule = false;
@@ -189,7 +192,7 @@ in
       };
       location = {
         monthBeforeDay = true;
-        name = "Sussex, United States";
+        name = "Sussex, Wisconsin";
         useFahrenheit = true;
       };
     };
