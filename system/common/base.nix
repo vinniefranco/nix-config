@@ -208,6 +208,7 @@ in
     swayimg
     tldr
     traceroute
+    tailscale
     unzip
     usbutils
     v4l-utils

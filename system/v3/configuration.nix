@@ -79,7 +79,11 @@ in
   networking.networkmanager = {
     enable = true;
     wifi.powersave = false;
+
   };
+  services.resolved.enable = true;
+  networking.useNetworkd = false;
+  networking.firewall.checkReversePath = "loose";
 
   # Configure keymap in X11
   services.xserver = {
@@ -187,8 +191,9 @@ in
     "modesetting"
   ];
   services.tailscale = {
-    enable = false;
+    enable = true;
     permitCertUid = "vinnie";
+    useRoutingFeatures = "client";
     extraUpFlags = [ "--accept-routes" ];
   };
 

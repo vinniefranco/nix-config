@@ -82,6 +82,7 @@ in
       };
 
       layout = {
+        always-center-single-column = true;
         focus-ring = {
           width = 1;
           active = {
