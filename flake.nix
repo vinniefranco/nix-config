@@ -12,7 +12,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    ghostty.url = "github:ghostty-org/ghostty";
     ucodenix.url = "github:e-tho/ucodenix";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -67,25 +66,17 @@
       nixosConfigurations = {
         v3 = nixpkgs.lib.nixosSystem {
           modules = [
-            ./system/v3/configuration.nix
+            ./hosts/v3
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.vinnie = import ./home;
+              home-manager.extraSpecialArgs = { inherit inputs outputs; };
+            }
           ];
           specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-      };
-
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-
-      homeConfigurations = {
-        vinnie = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            ./home-manager/home.nix
-          ];
-
-          extraSpecialArgs = {
             inherit inputs outputs;
           };
         };

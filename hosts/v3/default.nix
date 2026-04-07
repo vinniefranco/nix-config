@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   inputs,
   outputs,
@@ -19,21 +15,27 @@ let
 in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../common/base.nix
-    ../common/fonts.nix
-    ../common/vm.nix
+    ../../system/audio.nix
+    ../../system/bluetooth.nix
+    ../../system/desktop.nix
+    ../../system/docker.nix
+    ../../system/fonts.nix
+    ../../system/networking.nix
+    ../../system/nix.nix
+    ../../system/packages.nix
+    ../../system/security.nix
+    ../../system/vm.nix
     inputs.ucodenix.nixosModules.default
   ];
 
   nixpkgs = {
     overlays = [
+      outputs.overlays.additions
       outputs.overlays.modifications
+      inputs.niri.overlays.niri
     ];
-    config = {
-      allowUnfree = true;
-    };
+    config.allowUnfree = true;
   };
 
   # Bootloader.
@@ -73,24 +75,13 @@ in
   ];
   powerManagement.enable = true;
 
-  networking.hostName = "v3"; # Define your hostname.
-
-  # Networking
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = false;
-
-  };
-  services.resolved.enable = true;
+  networking.hostName = "v3";
+  networking.networkmanager.wifi.powersave = false;
   networking.useNetworkd = false;
   networking.firewall.checkReversePath = "loose";
 
   # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us";
-    };
-  };
+  services.xserver.xkb.layout = "us";
 
   # Enable CUPS to print documents.
   services.printing = {
@@ -112,67 +103,11 @@ in
     openFirewall = true;
   };
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
 
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  users.users.vinnie = {
-    isNormalUser = true;
-    description = "Vincent Franco";
-    extraGroups = [
-      "audio"
-      "camera"
-      "dialout"
-      "disk"
-      "docker"
-      "input"
-      "libvirtd"
-      "lp"
-      "networkmanager"
-      "plugdev"
-      "scanner"
-      "video"
-      "wheel"
-    ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      ddcutil
-      gparted
-      firefox
-      brightnessctl
-      slack
-      spotify
-    ];
-  };
-  programs.firefox.preferences = {
-    # disable libadwaita theming for Firefox
-    "widget.gtk.libadwaita-colors.enabled" = false;
-  };
-  # System-wide shell needs to be enabled
-  programs.zsh.enable = true;
-
-  environment.sessionVariables = {
-    AMD_VULKAN_ICD = "RADV";
-    NIXPKGS_ALLOW_UNFREE = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  environment.systemPackages = [
-    gdk
-  ];
 
   hardware.i2c.enable = true;
 
@@ -204,5 +139,48 @@ in
 
   services.fstrim.enable = true;
   services.fprintd.enable = true;
-  system.stateVersion = "25.11"; # Did you read the comment?
+
+  users.users.vinnie = {
+    isNormalUser = true;
+    description = "Vincent Franco";
+    extraGroups = [
+      "audio"
+      "camera"
+      "dialout"
+      "disk"
+      "docker"
+      "input"
+      "libvirtd"
+      "lp"
+      "networkmanager"
+      "plugdev"
+      "scanner"
+      "video"
+      "wheel"
+    ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+      ddcutil
+      gparted
+      firefox
+      brightnessctl
+      slack
+      spotify
+    ];
+  };
+  programs.firefox.preferences = {
+    "widget.gtk.libadwaita-colors.enabled" = false;
+  };
+
+  environment.sessionVariables = {
+    AMD_VULKAN_ICD = "RADV";
+    NIXPKGS_ALLOW_UNFREE = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  environment.systemPackages = [
+    gdk
+  ];
+
+  system.stateVersion = "25.11";
 }

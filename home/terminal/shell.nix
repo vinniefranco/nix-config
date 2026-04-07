@@ -8,7 +8,7 @@
   programs = {
     zsh = {
       enable = true;
-      dotDir = "${config.xdg.configHome}/zsh";
+      dotDir = ".config/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -21,8 +21,7 @@
         ggpush = "git push origin $(git branch --show-current)";
         grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
-        r-h = "home-manager switch --flake /home/vinnie/.dotfiles#vinnie --impure";
-        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles";
+        r-s = "sudo NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake /home/vinnie/.dotfiles --impure";
         tree = lib.getExe pkgs.eza;
         v = "nvim";
       };
@@ -63,21 +62,21 @@
         };
 
         format = lib.concatStrings [
-          "[](#9A348E)"
+          "[](#9A348E)"
           "$username"
-          "[](bg:#DA627D fg:#9A348E)"
+          "[](bg:#DA627D fg:#9A348E)"
           "$directory"
-          "[](fg:#DA627D bg:#FCA17D)"
+          "[](fg:#DA627D bg:#FCA17D)"
           "$git_branch"
           "$git_status"
-          "[](fg:#FCA17D bg:#86BBD8)"
+          "[](fg:#FCA17D bg:#86BBD8)"
           "$c"
           "$elixir"
           "$nodejs"
           "$rust"
-          "[](fg:#86BBD8 bg:#06969A)"
-          "[](fg:#06969A bg:#33658A)"
-          "[ ](fg:#33658A)"
+          "[](fg:#86BBD8 bg:#06969A)"
+          "[](fg:#06969A bg:#33658A)"
+          "[ ](fg:#33658A)"
         ];
 
         username = {
@@ -102,25 +101,25 @@
 
         directory.substitutions = {
           "Documents" = "󰈙 ";
-          "Downloads" = " ";
-          "Music" = " ";
-          "Pictures" = " ";
+          "Downloads" = " ";
+          "Music" = " ";
+          "Pictures" = " ";
         };
 
         c = {
-          symbol = " ";
+          symbol = " ";
           style = "bg:#86BBD8";
           format = "[ $symbol ($version) ]($style)";
         };
 
         elixir = {
-          symbol = " ";
+          symbol = " ";
           style = "bg:#86BBD8 fg:#11111b";
           format = "[ $symbol ($version) ]($style)";
         };
 
         git_branch = {
-          symbol = "";
+          symbol = "";
           style = "bg:#FCA17D";
           format = "[ $symbol $branch ](bg:#FCA17D fg:#11111b)($style)";
         };
@@ -131,13 +130,13 @@
         };
 
         nodejs = {
-          symbol = "";
+          symbol = "";
           style = "bg:#86BBD8";
           format = "[ $symbol ($version) ]($style)";
         };
 
         rust = {
-          symbol = "";
+          symbol = "";
           style = "bg:#86BBD8";
           format = "[ $symbol ($version) ]($style)";
         };

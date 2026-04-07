@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 pkgs.writeShellScriptBin "screenshoter" ''
-  ${builtins.readFile ./config/screenshoter.sh}
+  ${builtins.readFile ./screenshoter.sh}
 ''
