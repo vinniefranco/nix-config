@@ -16,7 +16,14 @@
         57621
         5353
       ];
-      trustedInterfaces = [ "virbr0" ];
+      checkReversePath = "loose";
+      trustedInterfaces = [
+        "tailscale0"
+        "virbr0"
+      ];
+      allowedUDPPorts = [
+        config.services.tailscale.port
+      ];
       extraCommands = ''
         iptables -t nat -I OUTPUT 1 -o lo -p tcp --dport 443 -j REDIRECT --to-port 8443
         iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
