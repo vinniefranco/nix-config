@@ -34,7 +34,7 @@
     neovim
     nixfmt
     nixfmt-tree
-    nodePackages.eslint
+    eslint
     nss.tools
     pciutils
     pulseaudio
