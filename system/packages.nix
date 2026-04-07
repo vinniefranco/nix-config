@@ -32,7 +32,7 @@
     libqalculate
     lm_sensors
     neovim
-    nixfmt-rfc-style
+    nixfmt
     nixfmt-tree
     nodePackages.eslint
     nss.tools

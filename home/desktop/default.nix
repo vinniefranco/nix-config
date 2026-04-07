@@ -15,7 +15,7 @@
     vesktop
     wf-recorder
     wl-screenrec
-    xorg.xhost
+    xhost
   ];
 
   home.pointerCursor = {
@@ -45,4 +45,5 @@
   gtk.gtk3.extraConfig = {
     gtk-application-prefer-dark-theme = 1;
   };
+  gtk.gtk4.theme = null;
 }

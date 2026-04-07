@@ -28,5 +28,6 @@ in
       };
     };
     userDirs.enable = true;
+    userDirs.setSessionVariables = false;
   };
 }

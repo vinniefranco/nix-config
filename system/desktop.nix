@@ -21,9 +21,9 @@
       package = pkgs.niri;
     };
 
-    thunar = with pkgs.xfce; {
+    thunar = {
       enable = true;
-      plugins = [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];
