@@ -80,6 +80,15 @@
             inherit inputs outputs;
           };
         };
+
+        rock5b = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/rock5b
+          ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
       };
     };
 }
