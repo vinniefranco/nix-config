@@ -13,6 +13,12 @@ in
   programs.niri = {
     package = pkgs.niri;
     settings = {
+      spawn-at-startup = [
+        {
+          command = [ "noctalia-shell" ];
+        }
+
+      ];
       cursor = {
         size = 32;
       };
@@ -124,7 +130,6 @@ in
 
   programs.noctalia-shell = {
     enable = true;
-    systemd.enable = true;
     settings = {
       bar = {
         frameThickness = 8;

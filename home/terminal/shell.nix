@@ -21,7 +21,7 @@
         ggpush = "git push origin $(git branch --show-current)";
         grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
-        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles --impure";
+        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3 --impure";
         tree = lib.getExe pkgs.eza;
         v = "nvim";
       };

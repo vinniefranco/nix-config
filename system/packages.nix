@@ -31,6 +31,7 @@
     libnotify
     libqalculate
     lm_sensors
+    mpv
     neovim
     nixfmt
     nixfmt-tree
@@ -52,6 +53,7 @@
     v4l-utils
     vivaldi
     vivaldi-ffmpeg-codecs
+    vlc
     vulkan-tools
     wget
     wl-clipboard
