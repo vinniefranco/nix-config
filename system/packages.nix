@@ -35,6 +35,7 @@
     neovim
     nixfmt
     nixfmt-tree
+    opencode
     eslint
     nss.tools
     pciutils
