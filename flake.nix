@@ -19,6 +19,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim-config.url = "github:vinniefranco/nixvim-config";
     niri.url = "github:sodiboo/niri-flake";
     noctalia = {
@@ -26,7 +31,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    expert-ls.url = "github:elixir-lang/expert";
+    expert-ls = {
+      url = "github:elixir-lang/expert";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";

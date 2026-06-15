@@ -21,6 +21,7 @@ in
     ../../system/desktop.nix
     ../../system/docker.nix
     ../../system/fonts.nix
+    ../../system/maintenance.nix
     ../../system/networking.nix
     ../../system/nix.nix
     ../../system/packages.nix
@@ -52,6 +53,7 @@ in
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     loader = {
       systemd-boot.enable = true;
+      systemd-boot.configurationLimit = 10;
       efi.canTouchEfiVariables = true;
       grub.enable = false;
     };
@@ -174,7 +176,6 @@ in
 
   environment.sessionVariables = {
     AMD_VULKAN_ICD = "RADV";
-    NIXPKGS_ALLOW_UNFREE = "1";
     NIXOS_OZONE_WL = "1";
   };
 

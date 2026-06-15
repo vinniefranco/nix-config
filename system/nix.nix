@@ -8,13 +8,20 @@
 {
   boot.tmp.cleanOnBoot = true;
 
-  nix = {
-    gc = {
-      automatic = true;
-      randomizedDelaySec = "14m";
-      options = "--delete-older-than 7d";
+  # nh wraps nixos-rebuild with a colorized diff of the closure and owns the
+  # automatic GC below, so nix.gc is intentionally omitted here.
+  programs.nh = {
+    enable = true;
+    flake = "/home/vinnie/.dotfiles";
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 7d --keep 5";
     };
+  };
+
+  nix = {
     settings = {
+      auto-optimise-store = true;
       download-buffer-size = 524288000;
       experimental-features = [
         "nix-command"

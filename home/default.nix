@@ -17,6 +17,7 @@ in
     inputs.sops-nix.homeManagerModules.sops
     inputs.noctalia.homeModules.default
     inputs.niri.homeModules.niri
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   home.username = "vinnie";
@@ -43,7 +44,6 @@ in
   home.sessionVariables = {
     CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense";
     EDITOR = "nvim";
-    NIXPKGS_ALLOW_UNFREE = "1";
   };
 
   programs.home-manager.enable = true;

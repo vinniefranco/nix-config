@@ -15,6 +15,7 @@
     caligula
     clamav
     clamtk
+    deadnix
     direnv
     evince
     eza
@@ -45,6 +46,7 @@
     python3
     quickshell
     kdePackages.skanpage
+    statix
     swayimg
     tldr
     traceroute

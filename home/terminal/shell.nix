@@ -21,36 +21,27 @@
         ggpush = "git push origin $(git branch --show-current)";
         grep = lib.getExe pkgs.ripgrep;
         ll = "ls -al";
-        r-s = "sudo nixos-rebuild switch --flake /home/vinnie/.dotfiles#v3 --impure";
+        r-s = "nh os switch";
         tree = lib.getExe pkgs.eza;
         v = "nvim";
       };
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"];
+        plugins = [ "git" ];
         theme = "robbyrussell";
       };
     };
 
-    atuin = {
-      enable = true;
-      enableNushellIntegration = true;
-    };
+    atuin.enable = true;
 
-    carapace = {
-      enable = false;
-      enableNushellIntegration = true;
-    };
+    carapace.enable = false;
 
-    direnv = {
-      enable = true;
-      enableNushellIntegration = true;
-    };
+    direnv.enable = true;
 
-    zoxide = {
-      enable = true;
-      enableNushellIntegration = true;
-    };
+    zoxide.enable = true;
+
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
 
     starship = {
       enable = true;
