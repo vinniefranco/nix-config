@@ -1,107 +1,150 @@
 # dotfiles
 
-NixOS flake-based system and home configuration for a development workstation.
+NixOS flake-based system and [home-manager](https://github.com/nix-community/home-manager)
+configuration for a development workstation, plus a headless ARM single-board computer.
 
 ## Overview
 
-This repository declaratively manages a full NixOS system ("v3") using flakes and home-manager. It covers everything from kernel parameters and hardware drivers to shell aliases and window manager keybindings.
+This repository declaratively manages two machines from a single flake:
 
-### Hardware
+| Host     | Arch           | Role                                                              |
+|----------|----------------|-------------------------------------------------------------------|
+| `v3`     | `x86_64-linux` | Primary AMD laptop/workstation — full desktop, dev, audio, VMs    |
+| `rock5b` | `aarch64-linux`| Radxa Rock 5B SBC — headless server (SSH, minimal CLI toolchain)  |
 
-- AMD CPU with custom microcode (ucodenix)
-- AMD GPU with ROCm compute support
-- Dual display: laptop (2560x1600) + external 4K (3840x2160)
-- QMK mechanical keyboard support
-- Btrfs filesystem with subvolumes
+Everything from kernel parameters and hardware drivers down to shell aliases and
+window-manager keybindings is managed declaratively. The `v3` host can build and
+test the `rock5b` configuration locally via `binfmt` aarch64 emulation.
 
-### Desktop
+Binary caches for [nix-community](https://nix-community.cachix.org) and
+[noctalia](https://noctalia.cachix.org) are configured in `flake.nix` to avoid
+rebuilding from source.
 
-- **Window manager:** Niri (scrollable tiling Wayland compositor)
-- **Shell panel:** Noctalia (top bar with system widgets)
+### Hardware (`v3`)
+
+- AMD CPU with custom microcode delivered through [ucodenix](https://github.com/e-tho/ucodenix)
+- AMD GPU with ROCm compute (HIP exposed under `/opt/rocm`) and RADV Vulkan
+- `linux-zen` kernel with IOMMU / `amd_pstate=guided` boot parameters
+- Plymouth boot splash (`hexagon_dots` theme)
+- Btrfs root with weekly auto-scrub; zram compressed swap
+- Fingerprint reader (`fprintd`), Thunderbolt (`bolt`), I²C/DDC display control
+- Printing and scanning (CUPS + Avahi/mDNS, SANE, HP drivers)
+- QMK/ZMK keyboard tooling (`zmk-studio`, `openocd`, `platformio`)
+- Firmware updates via `fwupd`; power profiles via `power-profiles-daemon`
+
+### Desktop (`v3`)
+
+- **Compositor:** [Niri](https://github.com/YaLTeR/niri) (scrollable-tiling Wayland)
+- **Shell/panel:** [Noctalia](https://github.com/noctalia-dev/noctalia)
+- **Display manager:** GDM (GNOME session also available)
 - **Launcher:** Fuzzel
-- **Terminal:** Ghostty, Kitty
-- **Theme:** Catppuccin with custom Starship prompt colors
+- **Terminals:** Ghostty, Kitty
+- **File management:** GVfs + Tumbler + udisks2 automounts
+- **Cursor/theme:** Vanilla-DMZ cursor, GTK dark-theme preference
 
 ### Development
 
-- Neovim (via a separate [nixvim-config](https://github.com/vinniefranco) flake)
-- Languages: Elixir, Rust, C, Node.js, Python
-- Git with rebase workflow, LFS enabled
-- Docker, libvirtd/QEMU/KVM with VFIO GPU passthrough
-- Secrets managed through sops-nix with age encryption
+- Neovim via the separate [nixvim-config](https://github.com/vinniefranco/nixvim-config) flake
+- Languages/tooling: Elixir (with [expert-ls](https://github.com/elixir-lang/expert)),
+  Rust, C/C++, Node.js, Python
+- `claude-code` and `opencode` AI CLIs (claude-code pinned via an overlay)
+- Git with rebase-only pulls, autosquash, rerere, delta diffs, and LFS
+- Docker; libvirtd / QEMU / KVM with SPICE and Looking-Glass shared memory
+- Secrets via [sops-nix](https://github.com/Mic92/sops-nix) with age encryption,
+  sourced from a private `nix-secrets` repo
 
-### Audio
+### Audio (`v3`)
 
-- PipeWire with ALSA, PulseAudio, and JACK support
-- Real-time kernel parameters and PAM limits for the audio group
+- PipeWire with ALSA (+32-bit), PulseAudio, and JACK
+- WirePlumber session manager
+- RTKit plus PAM `memlock`/`rtprio`/`nofile` limits for the `audio` group
 
 ## Structure
 
 ```
 .
-├── flake.nix              # Flake definition (inputs, outputs, overlays)
+├── flake.nix              # Inputs, outputs, overlays, nixosConfigurations
+├── flake.lock
 ├── hosts/
-│   └── v3/                # Host-specific NixOS config and hardware
-├── system/                # System-level modules
-│   ├── audio.nix          # PipeWire and real-time audio
+│   ├── v3/                # x86_64 workstation host + hardware-configuration
+│   └── rock5b/            # aarch64 SBC host + hardware-configuration
+├── system/                # System-level NixOS modules
+│   ├── audio.nix          # PipeWire + real-time audio limits
 │   ├── bluetooth.nix
-│   ├── desktop.nix        # Niri, GDM, Thunar, dconf
+│   ├── desktop.nix        # Niri, GDM/GNOME, dbus, udev, file management
 │   ├── docker.nix
-│   ├── fonts.nix          # Nerd fonts, Noto, CJK
-│   ├── networking.nix     # NetworkManager, Tailscale, Samba, firewall
-│   ├── nix.nix            # Nix daemon and store settings
+│   ├── fonts.nix          # Nerd Fonts, Noto, CJK
+│   ├── maintenance.nix    # fwupd, power-profiles, zram, btrfs autoScrub
+│   ├── networking.nix     # NetworkManager, Samba, firewall, TCP tuning
+│   ├── nix.nix            # nh, GC, nix settings, locale, timezone
 │   ├── packages.nix       # System-wide packages
-│   ├── security.nix       # Sudo, PAM limits, polkit, TCP hardening
-│   └── vm.nix             # libvirtd, QEMU, VFIO passthrough
+│   ├── security.nix       # polkit, PAM limits, passwordless sudo
+│   └── vm.nix             # libvirtd, QEMU, SPICE, Looking Glass
 ├── home/                  # Home-manager configuration
-│   ├── default.nix        # Entry point, session variables
-│   ├── desktop/           # Niri, Noctalia, GTK, cursor, wallpaper
-│   ├── terminal/          # Zsh, Starship, tmux, Atuin, zoxide
-│   ├── dev/               # Git, language tooling, editor config
-│   └── media/             # Spotify, browsers, creative apps
-├── overlays/              # Nixpkgs overlays
+│   ├── default.nix        # Entry point, sops, session vars
+│   ├── desktop/           # Niri, Fuzzel, XDG, cursor, screenshots
+│   ├── terminal/          # Zsh, Starship, tmux, Atuin, zoxide, Ghostty, Kitty
+│   ├── dev/               # Git, language/AI tooling
+│   └── media/             # Spotify, creative apps
+├── overlays/              # nixpkgs overlays (additions + modifications)
 └── pkgs/                  # Custom package definitions
 ```
 
 ## Usage
 
-Rebuild the system:
+Rebuild a host. This repo uses [`nh`](https://github.com/viperML/nh), which wraps
+`nixos-rebuild` with a colorized closure diff and owns automatic GC:
 
 ```sh
-sudo nixos-rebuild switch --flake .#v3
+nh os switch          # rebuild the current host
+
+r-s                   # zsh alias for the above
+
+sudo nixos-rebuild switch --flake .#v3   # raw equivalent
 ```
 
-Or use the built-in alias:
+Build/deploy the ARM host (from `v3`, via aarch64 emulation):
 
 ```sh
-r-s   # nixos-rebuild switch --flake ~/.dotfiles#v3
+nixos-rebuild switch --flake .#rock5b --target-host vinnie@rock5b
 ```
 
-Format nix files:
+Format Nix files:
 
 ```sh
-nix fmt
+nix fmt               # nixfmt
 ```
+
+Garbage collection runs automatically (`--keep-since 7d --keep 5`) through `nh clean`.
 
 ## Flake Inputs
 
-| Input | Description |
-|-------|-------------|
-| nixpkgs | nixos-unstable channel |
-| home-manager | Declarative user environment management |
-| niri | Wayland scrollable tiling compositor |
-| noctalia | Shell/panel components for niri |
-| nixvim-config | Neovim configuration flake |
-| zen-browser | Zen browser package |
-| expert-ls | Elixir language server tooling |
-| ucodenix | AMD CPU microcode updates |
-| sops-nix | Secrets management with age encryption |
-| nix-secrets | Private secrets repository (git+ssh) |
+| Input                | Description                                       |
+|----------------------|---------------------------------------------------|
+| `nixpkgs`            | `nixos-unstable` channel                          |
+| `home-manager`       | Declarative user environment management           |
+| `nix-index-database` | Prebuilt `nix-index` database + `comma`           |
+| `niri`               | Wayland scrollable-tiling compositor              |
+| `noctalia`           | Shell/panel components for Niri                   |
+| `nixvim-config`      | Personal Neovim configuration flake               |
+| `zen-browser`        | Zen browser package                               |
+| `expert-ls`          | Elixir language server tooling                    |
+| `ucodenix`           | AMD CPU microcode updates                         |
+| `sops-nix`           | Secrets management with age encryption            |
+| `nix-secrets`        | Private secrets repository (`git+ssh`, non-flake) |
 
 ## Notable Choices
 
-- **Wayland-first.** Session variables force Wayland for Qt, Electron, and Firefox. XWayland is available as a fallback.
-- **Modern CLI replacements.** Standard tools are aliased: `cat` to bat, `find` to fd, `grep` to ripgrep, `tree` to eza.
-- **Rebase-only git.** Pull is configured to rebase rather than merge.
-- **TCP BBR.** Congestion control is set to BBR for better throughput.
-- **Firewall on.** Open ports are limited to HTTP/HTTPS, Spotify Connect, and mDNS.
+- **Wayland-first.** Session variables force Wayland for Qt, Electron, and Firefox;
+  XWayland (via `xwayland-satellite`) is available as a fallback.
+- **`nh` over raw `nixos-rebuild`.** Colorized diffs and automatic generation cleanup.
+- **Modern CLI replacements.** Standard tools are aliased: `cat`→bat, `find`→fd,
+  `grep`→ripgrep, `tree`→eza, `df`→duf, plus Atuin history and zoxide jumping.
+- **Rebase-only git.** Pulls rebase, with autosquash and rerere enabled.
+- **TCP tuning.** BBR congestion control + CAKE qdisc, TCP Fast Open, and a set of
+  TCP/ICMP hardening sysctls.
+- **Firewall on.** Open ports limited to HTTP/HTTPS, Spotify Connect, and mDNS;
+  `tailscale0` and `virbr0` are trusted interfaces.
+- **Passwordless sudo** for the `wheel` group.
+- **Cross-arch from one flake.** A single `x86_64` machine builds and deploys the
+  `aarch64` SBC through `binfmt` emulation.
