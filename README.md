@@ -145,6 +145,5 @@ Garbage collection runs automatically (`--keep-since 7d --keep 5`) through `nh c
   TCP/ICMP hardening sysctls.
 - **Firewall on.** Open ports limited to HTTP/HTTPS, Spotify Connect, and mDNS;
   `tailscale0` and `virbr0` are trusted interfaces.
-- **Passwordless sudo** for the `wheel` group.
 - **Cross-arch from one flake.** A single `x86_64` machine builds and deploys the
   `aarch64` SBC through `binfmt` emulation.
