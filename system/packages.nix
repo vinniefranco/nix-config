@@ -16,6 +16,7 @@
     clamav
     clamtk
     direnv
+    evince
     eza
     file-roller
     ffmpeg-full
@@ -25,8 +26,8 @@
     git
     git-lfs
     gphoto2
+    gpu-screen-recorder
     jq
-    inkscape
     killall
     libnotify
     libqalculate
@@ -43,7 +44,6 @@
     playerctl
     python3
     quickshell
-    silver-searcher
     kdePackages.skanpage
     swayimg
     tldr
@@ -59,6 +59,7 @@
     wget
     wl-clipboard
     xwayland-satellite
+    zmk-studio
   ];
 
   environment.shells = with pkgs; [

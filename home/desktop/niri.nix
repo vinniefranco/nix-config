@@ -48,7 +48,7 @@ in
         "Mod+Ctrl+Down".action.set-window-height = "+10%";
 
         "Mod+Shift+W".action.spawn = "firefox";
-        "Mod+Shift+P".action.spawn = "screenshoter";
+        "Mod+Shift+P".action.spawn = noctalia "plugin:screen-toolkit annotate";
         "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
         "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
         "XF86AudioPlay".action.spawn = ["playerctl" "-p" "spotify" "play-pause"];
@@ -114,6 +114,21 @@ in
           clip-to-geometry = true;
           draw-border-with-background = false;
         }
+        {
+          matches = [
+            { title = "^Picture in Picture$"; }
+          ];
+          open-floating = true;
+        }
+        {
+          matches = [
+            {
+              app-id = "firefox$";
+              title = "^Picture-in-Picture$";
+            }
+          ];
+          open-floating = true;
+        }
       ];
 
       workspaces = {
@@ -137,7 +152,7 @@ in
         barType = "framed";
         density = "default";
         position = "top";
-        shrightowCapsule = false;
+        showCapsule = false;
         widgets = {
           left = [
             {
@@ -192,7 +207,7 @@ in
           ];
         };
       };
-      colorSchemes.predefinedScheme = "Monochrome";
+      colorSchemes.predefinedScheme = "Ayu";
       general = {
         radiusRatio = 0.2;
       };
@@ -206,7 +221,7 @@ in
 
   home.file.".cache/noctalia/wallpapers.json" = {
     text = builtins.toJSON {
-      defaultWallpaper = "/home/vinnie/Pictures/Wallpapers/pre-productive.jpg";
+      defaultWallpaper = "/home/vinnie/Pictures/Wallpapers/cornelius-dammrich_carabo_gasstation.jpg";
     };
   };
 }

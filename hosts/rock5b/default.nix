@@ -74,7 +74,6 @@
     htop
     jq
     neovim
-    silver-searcher
     tldr
     traceroute
     unzip
