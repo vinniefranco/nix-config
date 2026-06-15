@@ -34,8 +34,6 @@
       bind Down resize-pane -D 15
       bind Left resize-pane -L 25
       bind Right resize-pane -R 25
-
-      set -g @catppuccin-flavour 'macchiato'
     '';
     historyLimit = 10000;
     keyMode = "vi";
@@ -68,6 +66,6 @@
         '';
       }
     ];
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
   };
 }

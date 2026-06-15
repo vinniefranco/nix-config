@@ -51,6 +51,8 @@ in
       "boot.shell_on_fail"
     ];
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    # Emulate aarch64 so the rock5b host can be built/tested from this machine.
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader = {
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 10;
