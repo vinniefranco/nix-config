@@ -6,8 +6,6 @@
   ...
 }:
 {
-  hardware.keyboard.qmk.enable = true;
-
   programs = {
     dconf.enable = true;
     gnupg.agent = {
@@ -19,14 +17,6 @@
     niri = {
       enable = true;
       package = pkgs.niri;
-    };
-
-    thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
     };
 
     xfconf.enable = true;
@@ -72,8 +62,6 @@
       packages = with pkgs; [
         openocd
         platformio-core
-        via
-        vial
       ];
     };
 
