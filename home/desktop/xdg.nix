@@ -25,6 +25,8 @@ in
         "x-scheme-handler/http" = [ "firefox.desktop" ];
         "x-scheme-handler/https" = [ "firefox.desktop" ];
         "default-web-browser" = [ "firefox.desktop" ];
+        "inode/directory" = [ "thunar.desktop" ];
+        "x-scheme-handler/file" = [ "thunar.desktop" ];
       };
     };
     userDirs.enable = true;

@@ -6,6 +6,9 @@
   ...
 }:
 {
+  # Video thumbnails in Thunar (tumbler picks this up from PATH).
+  environment.systemPackages = [ pkgs.ffmpegthumbnailer ];
+
   programs = {
     dconf.enable = true;
     gnupg.agent = {
@@ -21,6 +24,23 @@
 
     xfconf.enable = true;
     gphoto2.enable = true;
+
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+
+    noctalia-greeter = {
+      enable = true;
+      settings.cursor = {
+        theme = "catppuccin-mocha-dark-cursors";
+        size = 32;
+        package = pkgs.catppuccin-cursors.mochaDark;
+      };
+    };
   };
 
   services = {
@@ -37,8 +57,21 @@
       tinysparql.enable = true;
     };
 
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+    # greetd is enabled and its session command is set automatically by the
+    # noctalia-greeter NixOS module. We only need to point it at the greeter
+    # user (auto-created by the greetd module).
+    greetd = {
+      enable = true;
+      restart = true;
+      settings = {
+        default_session = {
+          user = "greeter";
+        };
+      };
+    };
+
+    #desktopManager.gnome.enable = true;
+    #displayManager.gdm.enable = true;
 
     dbus = {
       enable = true;

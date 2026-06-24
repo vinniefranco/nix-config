@@ -10,7 +10,7 @@
         terminal = "${pkgs.kitty}/bin/kitty";
         horizontal-pad = 40;
         vertical-pad = 40;
-        icon-theme = "Papirus";
+        icon-theme = "Papirus-Dark";
       };
       colors = {
         background = "1e1e2edd";

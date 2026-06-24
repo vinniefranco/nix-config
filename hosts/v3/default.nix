@@ -28,6 +28,7 @@ in
     ../../system/security.nix
     ../../system/vm.nix
     inputs.ucodenix.nixosModules.default
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
   nixpkgs = {

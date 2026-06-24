@@ -99,13 +99,6 @@
         always-center-single-column = true;
         focus-ring = {
           width = 1;
-          active = {
-            gradient = {
-              from = "#80c8ff";
-              to = "#c7ff7f";
-              angle = 45;
-            };
-          };
         };
       };
 
@@ -158,6 +151,17 @@
         mode = "dark";
         source = "builtin";
         builtin = "Catppuccin";
+
+        # Let noctalia render its active palette into GTK and Qt apps so the
+        # whole desktop tracks the bar (and would follow wallpaper colors too).
+        templates = {
+          enable_builtin_templates = true;
+          builtin_ids = [
+            "gtk3"
+            "gtk4"
+            "qt"
+          ];
+        };
       };
 
       wallpaper = {
