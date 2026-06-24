@@ -17,7 +17,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
     ];
-    config.allowUnfree = true;
   };
 
   # Bootloader - extlinux for U-Boot on ARM
@@ -38,6 +37,9 @@
   };
 
   networking.hostName = "rock5b";
+
+  # Headless SBC with no interactive password set; keep wheel passwordless.
+  security.sudo.wheelNeedsPassword = false;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
@@ -61,7 +63,7 @@
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      # Add your SSH public key here
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICvqUHGy6gHOCY6Wu211TbXq2kLSqlvvPxyWvvNl3dhA vince@freshivore.net"
     ];
   };
 

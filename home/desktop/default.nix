@@ -19,17 +19,23 @@ in
 
   home.packages = with pkgs; [
     adw-gtk3 # GTK theme noctalia's gtk template recolors
+    brightnessctl
+    ddcutil
+    google-chrome
+    gparted
     hyprsunset
     networkmanagerapplet
     papirus
     pavucontrol
     libsForQt5.qt5ct
     kdePackages.qt6ct
+    slack
     swaybg
     vesktop
+    vivaldi
+    vivaldi-ffmpeg-codecs
     wf-recorder
     wl-screenrec
-    xhost
   ];
 
   home.pointerCursor = {

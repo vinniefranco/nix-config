@@ -3,7 +3,7 @@
 {
   programs.kitty = {
     enable = true;
-    themeFile = "ayu";
+    themeFile = "Catppuccin-Mocha";
     font = {
       name = "FiraCode Nerd Font Mono";
       size = 10;

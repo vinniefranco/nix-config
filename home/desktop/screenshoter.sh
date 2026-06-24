@@ -3,7 +3,7 @@ dir="$(xdg-user-dir PICTURES)/Screenshots"
 file="Screenshot_${time}.png"
 
  # notify and view screenshot
-notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i ${DIR}/picture.png"
+notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i applets-screenshooter"
 notify_view () {
   ${notify_cmd_shot} "Copied to clipboard."
   satty --filename "$dir/$file"

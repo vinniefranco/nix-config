@@ -28,13 +28,14 @@
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" ];
-        theme = "robbyrussell";
+        # Prompt comes from Starship; an omz theme here would just be overridden.
+        theme = "";
       };
     };
 
     atuin.enable = true;
 
-    carapace.enable = false;
+    carapace.enable = true;
 
     direnv = {
       enable = true;
@@ -56,39 +57,39 @@
         };
 
         format = lib.concatStrings [
-          "[](#9A348E)"
+          "[](#cba6f7)"
           "$username"
-          "[](bg:#DA627D fg:#9A348E)"
+          "[](bg:#89b4fa fg:#cba6f7)"
           "$directory"
-          "[](fg:#DA627D bg:#FCA17D)"
+          "[](fg:#89b4fa bg:#fab387)"
           "$git_branch"
           "$git_status"
-          "[](fg:#FCA17D bg:#86BBD8)"
+          "[](fg:#fab387 bg:#a6e3a1)"
           "$c"
           "$elixir"
           "$nodejs"
           "$rust"
-          "[](fg:#86BBD8 bg:#06969A)"
-          "[](fg:#06969A bg:#33658A)"
-          "[ ](fg:#33658A)"
+          "[](fg:#a6e3a1 bg:#94e2d5)"
+          "[](fg:#94e2d5 bg:#74c7ec)"
+          "[ ](fg:#74c7ec)"
         ];
 
         username = {
           show_always = false;
-          style_user = "bg:#9A348E";
-          style_root = "bg:#9A348E";
+          style_user = "bg:#cba6f7";
+          style_root = "bg:#cba6f7";
           format = "[$user ]($style)";
           disabled = true;
         };
 
         os = {
-          style = "bg:#9A348E";
+          style = "bg:#cba6f7";
           disabled = false; # Disabled by default
         };
 
         directory = {
-          style = "bg:#DA627D";
-          format = "[ $path ](bg:#DA627D fg:#11111b)($style)";
+          style = "bg:#89b4fa";
+          format = "[ $path ](bg:#89b4fa fg:#11111b)($style)";
           truncation_length = 3;
           truncation_symbol = "…/";
         };
@@ -102,43 +103,43 @@
 
         c = {
           symbol = " ";
-          style = "bg:#86BBD8";
+          style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };
 
         elixir = {
           symbol = " ";
-          style = "bg:#86BBD8 fg:#11111b";
+          style = "bg:#a6e3a1 fg:#11111b";
           format = "[ $symbol ($version) ]($style)";
         };
 
         git_branch = {
           symbol = "";
-          style = "bg:#FCA17D";
-          format = "[ $symbol $branch ](bg:#FCA17D fg:#11111b)($style)";
+          style = "bg:#fab387";
+          format = "[ $symbol $branch ](bg:#fab387 fg:#11111b)($style)";
         };
 
         git_status = {
-          style = "bg:#FCA17D";
-          format = "[$all_status$ahead_behind ](bg:#FCA17D fg:#11111b)($style)";
+          style = "bg:#fab387";
+          format = "[$all_status$ahead_behind ](bg:#fab387 fg:#11111b)($style)";
         };
 
         nodejs = {
           symbol = "";
-          style = "bg:#86BBD8";
+          style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };
 
         rust = {
           symbol = "";
-          style = "bg:#86BBD8";
+          style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };
 
         time = {
           disabled = true;
           time_format = "%R"; # Hour:Minute Format
-          style = "bg:#33658A";
+          style = "bg:#74c7ec";
           format = "[ ♥ $time ]($style)";
         };
       };

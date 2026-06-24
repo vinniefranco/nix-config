@@ -1,9 +1,13 @@
 { ... }:
 
 {
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
+
   programs.git = {
     enable = true;
-    delta.enable = true;
     settings = {
       init = {
         defaultBranch = "main";

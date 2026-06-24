@@ -42,7 +42,7 @@
       {
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
-          set -g @catppuccin_flavour 'frappe'
+          set -g @catppuccin_flavour 'mocha'
 
           set -g @catppuccin_window_left_separator ""
           set -g @catppuccin_window_right_separator " "

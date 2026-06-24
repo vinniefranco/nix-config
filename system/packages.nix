@@ -23,7 +23,6 @@
     ffmpeg-full
     fzf
     ghostty
-    google-chrome
     git
     git-lfs
     gphoto2
@@ -33,7 +32,6 @@
     libnotify
     libqalculate
     lm_sensors
-    mpv
     neovim
     nixfmt
     nixfmt-tree
@@ -54,9 +52,6 @@
     unzip
     usbutils
     v4l-utils
-    vivaldi
-    vivaldi-ffmpeg-codecs
-    vlc
     vulkan-tools
     wget
     wl-clipboard

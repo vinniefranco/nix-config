@@ -1,9 +1,4 @@
-{...}:
+_:
 {
-  programs.opencode = {
-   enable = true;
-   settings = {
-      enable = true;
-    };
-  };
+  programs.opencode.enable = true;
 }

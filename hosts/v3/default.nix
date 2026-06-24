@@ -37,7 +37,6 @@ in
       outputs.overlays.modifications
       inputs.niri.overlays.niri
     ];
-    config.allowUnfree = true;
   };
 
   # Bootloader.
@@ -82,8 +81,6 @@ in
 
   networking.hostName = "v3";
   networking.networkmanager.wifi.powersave = false;
-  networking.useNetworkd = false;
-  networking.firewall.checkReversePath = "loose";
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -145,6 +142,12 @@ in
   services.fstrim.enable = true;
   services.fprintd.enable = true;
 
+  # Sudo via the fingerprint reader, with the login password as fallback.
+  # (Replaces the previous passwordless-wheel policy.) fprintAuth defaults on
+  # whenever fprintd is enabled; the meaningful change is requiring auth at all.
+  security.sudo.wheelNeedsPassword = true;
+  security.pam.services.sudo.fprintAuth = true;
+
   users.users.vinnie = {
     isNormalUser = true;
     description = "Vincent Franco";
@@ -164,17 +167,15 @@ in
       "wheel"
     ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      ddcutil
-      gparted
-      firefox
-      brightnessctl
-      slack
-      spotify
-    ];
   };
-  programs.firefox.preferences = {
-    "widget.gtk.libadwaita-colors.enabled" = false;
+
+  # Enabling the module (rather than installing the bare package) is what makes
+  # the preferences below actually take effect.
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "widget.gtk.libadwaita-colors.enabled" = false;
+    };
   };
 
   environment.sessionVariables = {

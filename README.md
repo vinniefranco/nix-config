@@ -36,11 +36,12 @@ rebuilding from source.
 
 - **Compositor:** [Niri](https://github.com/YaLTeR/niri) (scrollable-tiling Wayland)
 - **Shell/panel:** [Noctalia](https://github.com/noctalia-dev/noctalia)
-- **Display manager:** GDM (GNOME session also available)
+- **Display manager:** greetd driven by the Noctalia greeter
 - **Launcher:** Fuzzel
 - **Terminals:** Ghostty, Kitty
 - **File management:** GVfs + Tumbler + udisks2 automounts
-- **Cursor/theme:** Vanilla-DMZ cursor, GTK dark-theme preference
+- **Theme:** Catppuccin Mocha across GTK, Qt, cursor, terminals, tmux, and the
+  Noctalia bar (GTK/Qt recolored at runtime from Noctalia's templates)
 
 ### Development
 
@@ -71,7 +72,7 @@ rebuilding from source.
 ├── system/                # System-level NixOS modules
 │   ├── audio.nix          # PipeWire + real-time audio limits
 │   ├── bluetooth.nix
-│   ├── desktop.nix        # Niri, GDM/GNOME, dbus, udev, file management
+│   ├── desktop.nix        # Niri, greetd/Noctalia greeter, dbus, udev, file management
 │   ├── docker.nix
 │   ├── fonts.nix          # Nerd Fonts, Noto, CJK
 │   ├── maintenance.nix    # fwupd, power-profiles, zram, btrfs autoScrub
