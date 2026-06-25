@@ -57,21 +57,21 @@
         };
 
         format = lib.concatStrings [
-          "[](#cba6f7)"
+          "[](#cba6f7)"
           "$username"
-          "[](bg:#89b4fa fg:#cba6f7)"
+          "[](bg:#89b4fa fg:#cba6f7)"
           "$directory"
-          "[](fg:#89b4fa bg:#fab387)"
+          "[](fg:#89b4fa bg:#fab387)"
           "$git_branch"
           "$git_status"
-          "[](fg:#fab387 bg:#a6e3a1)"
+          "[](fg:#fab387 bg:#a6e3a1)"
           "$c"
           "$elixir"
           "$nodejs"
           "$rust"
-          "[](fg:#a6e3a1 bg:#94e2d5)"
-          "[](fg:#94e2d5 bg:#74c7ec)"
-          "[ ](fg:#74c7ec)"
+          "[](fg:#a6e3a1 bg:#94e2d5)"
+          "[](fg:#94e2d5 bg:#74c7ec)"
+          "[ ](fg:#74c7ec)"
         ];
 
         username = {
@@ -96,25 +96,25 @@
 
         directory.substitutions = {
           "Documents" = "󰈙 ";
-          "Downloads" = " ";
-          "Music" = " ";
-          "Pictures" = " ";
+          "Downloads" = "󰇚 ";
+          "Music" = "󰝚 ";
+          "Pictures" = "󰋩 ";
         };
 
         c = {
-          symbol = " ";
+          symbol = " ";
           style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };
 
         elixir = {
-          symbol = " ";
+          symbol = " ";
           style = "bg:#a6e3a1 fg:#11111b";
           format = "[ $symbol ($version) ]($style)";
         };
 
         git_branch = {
-          symbol = "";
+          symbol = "";
           style = "bg:#fab387";
           format = "[ $symbol $branch ](bg:#fab387 fg:#11111b)($style)";
         };
@@ -125,13 +125,13 @@
         };
 
         nodejs = {
-          symbol = "";
+          symbol = "";
           style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };
 
         rust = {
-          symbol = "";
+          symbol = "";
           style = "bg:#a6e3a1";
           format = "[ $symbol ($version) ]($style)";
         };

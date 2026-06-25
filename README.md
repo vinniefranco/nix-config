@@ -37,11 +37,12 @@ rebuilding from source.
 - **Compositor:** [Niri](https://github.com/YaLTeR/niri) (scrollable-tiling Wayland)
 - **Shell/panel:** [Noctalia](https://github.com/noctalia-dev/noctalia)
 - **Display manager:** greetd driven by the Noctalia greeter
-- **Launcher:** Fuzzel
+- **Launcher:** Noctalia (built-in)
 - **Terminals:** Ghostty, Kitty
 - **File management:** GVfs + Tumbler + udisks2 automounts
-- **Theme:** Catppuccin Mocha across GTK, Qt, cursor, terminals, tmux, and the
-  Noctalia bar (GTK/Qt recolored at runtime from Noctalia's templates)
+- **Theme:** Catppuccin Mocha across GTK, Qt, terminals, tmux, and the Noctalia
+  bar (GTK/Qt recolored at runtime from Noctalia's templates); Bibata Modern Ice
+  cursor
 
 ### Development
 
@@ -83,7 +84,7 @@ rebuilding from source.
 │   └── vm.nix             # libvirtd, QEMU, SPICE, Looking Glass
 ├── home/                  # Home-manager configuration
 │   ├── default.nix        # Entry point, sops, session vars
-│   ├── desktop/           # Niri, Fuzzel, XDG, cursor, screenshots
+│   ├── desktop/           # Niri, XDG, cursor, screenshots
 │   ├── terminal/          # Zsh, Starship, tmux, Atuin, zoxide, Ghostty, Kitty
 │   ├── dev/               # Git, language/AI tooling
 │   └── media/             # Spotify, creative apps

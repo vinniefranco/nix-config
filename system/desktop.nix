@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  theme = import ../theme.nix { inherit pkgs; };
+in
 {
   # Video thumbnails in Thunar (tumbler picks this up from PATH).
   environment.systemPackages = [ pkgs.ffmpegthumbnailer ];
@@ -36,9 +39,9 @@
     noctalia-greeter = {
       enable = true;
       settings.cursor = {
-        theme = "catppuccin-mocha-dark-cursors";
-        size = 32;
-        package = pkgs.catppuccin-cursors.mochaDark;
+        theme = theme.cursor.name;
+        size = theme.cursor.size;
+        package = theme.cursor.package;
       };
     };
   };

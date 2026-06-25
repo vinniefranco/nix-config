@@ -148,6 +148,18 @@ in
   security.sudo.wheelNeedsPassword = true;
   security.pam.services.sudo.fprintAuth = true;
 
+  # Fingerprint-or-password on the Noctalia lock screen. Noctalia tries the
+  # "noctalia" PAM service first (then falls back to "login"); defining it here
+  # gives the lock its own minimal stack: fprintd (sufficient) -> password.
+  security.pam.services.noctalia.fprintAuth = true;
+
+  # Don't put fprintd in the greeter's auth stack. Enabling services.fprintd
+  # turns fprintAuth on for every auto-generated PAM service, including greetd.
+  # noctalia-greeter submits a password, but pam_fprintd (sufficient, first in
+  # the stack) blocks waiting for a finger swipe and only falls through to the
+  # password after its ~30s timeout — that's the freeze after hitting submit.
+  security.pam.services.greetd.fprintAuth = false;
+
   users.users.vinnie = {
     isNormalUser = true;
     description = "Vincent Franco";

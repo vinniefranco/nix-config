@@ -1,18 +1,10 @@
 { config, pkgs, ... }:
 
 let
-  # Papirus with Catppuccin Mocha folders — matches noctalia's builtin scheme
-  # and is what fuzzel already references (fuzzel.nix).
-  papirus = pkgs.catppuccin-papirus-folders.override {
-    flavor = "mocha";
-    accent = "blue";
-  };
-  cursorTheme = "catppuccin-mocha-dark-cursors";
-  cursorPkg = pkgs.catppuccin-cursors.mochaDark;
+  theme = import ../../theme.nix { inherit pkgs; };
 in
 {
   imports = [
-    ./fuzzel.nix
     ./niri.nix
     ./xdg.nix
   ];
@@ -25,7 +17,7 @@ in
     gparted
     hyprsunset
     networkmanagerapplet
-    papirus
+    theme.icons.package
     pavucontrol
     libsForQt5.qt5ct
     kdePackages.qt6ct
@@ -42,9 +34,9 @@ in
     enable = true;
     gtk.enable = true;
     x11.enable = true;
-    name = cursorTheme;
-    size = 32;
-    package = cursorPkg;
+    name = theme.cursor.name;
+    size = theme.cursor.size;
+    package = theme.cursor.package;
   };
 
   home.sessionVariables = {
@@ -65,12 +57,10 @@ in
   # templates inject the exact Catppuccin palette via an @import in gtk.css.
   gtk.enable = true;
   gtk.theme = {
-    name = "adw-gtk3-dark";
-    package = pkgs.adw-gtk3;
+    inherit (theme.gtk) name package;
   };
   gtk.iconTheme = {
-    name = "Papirus-Dark";
-    package = papirus;
+    inherit (theme.icons) name package;
   };
   gtk.gtk3.extraConfig = {
     gtk-application-prefer-dark-theme = 1;
@@ -87,14 +77,14 @@ in
       style=Fusion
       custom_palette=true
       color_scheme_path=${config.home.homeDirectory}/.config/qt6ct/colors/noctalia.conf
-      icon_theme=Papirus-Dark
+      icon_theme=${theme.icons.name}
     '';
     "qt5ct/qt5ct.conf".text = ''
       [Appearance]
       style=Fusion
       custom_palette=true
       color_scheme_path=${config.home.homeDirectory}/.config/qt5ct/colors/noctalia.conf
-      icon_theme=Papirus-Dark
+      icon_theme=${theme.icons.name}
     '';
   };
 }
