@@ -22,7 +22,6 @@
   nix = {
     settings = {
       auto-optimise-store = true;
-      download-buffer-size = 524288000;
       experimental-features = [
         "nix-command"
         "flakes"
@@ -54,5 +53,4 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.chromium.enableWideVine = true;
 }

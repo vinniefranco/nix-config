@@ -45,7 +45,6 @@
     zoxide.enable = true;
 
     nix-index.enable = true;
-    nix-index-database.comma.enable = true;
 
     starship = {
       enable = true;

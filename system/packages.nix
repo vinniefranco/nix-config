@@ -33,12 +33,12 @@
     libqalculate
     lm_sensors
     neovim
-    nixfmt
     nixfmt-tree
     opencode
     eslint
     nss.tools
     pciutils
+    pi-coding-agent
     pulseaudio
     playerctl
     python3
