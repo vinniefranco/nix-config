@@ -102,6 +102,9 @@ in
     };
 
     xserver.enable = true;
-    system76-scheduler.enable = true;
+    # Disabled: this build (2.0.2-unstable-2025-01-15) crash-loops in its
+    # PipeWire registry handler (panic across the C FFI boundary -> SIGABRT)
+    # against the current PipeWire. Re-enable once the package catches up.
+    system76-scheduler.enable = false;
   };
 }

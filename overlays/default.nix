@@ -7,6 +7,13 @@
       commandLineArgs = "--ozone-platform=wayland";
     };
 
+    # vesktop pins pnpm 10.29.2, which nixpkgs flags insecure (CVE-2026-48995
+    # et al). Build it against the non-insecure pnpm_10 instead; the fetched
+    # deps hash is unchanged across the pnpm bump.
+    vesktop = prev.vesktop.override {
+      pnpm_10_29_2 = prev.pnpm_10;
+    };
+
     claude-code = prev.claude-code.overrideAttrs (old: rec {
       version = "2.1.170";
       src = prev.fetchurl {

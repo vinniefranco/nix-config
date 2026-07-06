@@ -117,6 +117,12 @@
         }
         {
           matches = [
+            { title = "^Astrata$"; }
+          ];
+          open-floating = true;
+        }
+        {
+          matches = [
             { title = "^Picture in Picture$"; }
           ];
           open-floating = true;
