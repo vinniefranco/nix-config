@@ -30,6 +30,21 @@ in
     wl-screenrec
   ];
 
+  # Background instance for the Mod+Shift+T toggle-transcription bind
+  systemd.user.services.handy = {
+    Unit = {
+      Description = "Handy speech-to-text";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.lib.getExe pkgs.handy} --start-hidden";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
   home.pointerCursor = {
     enable = true;
     gtk.enable = true;

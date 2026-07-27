@@ -24,6 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    baud.url = "github:vinniefranco/baud";
     nixvim-config.url = "github:vinniefranco/nixvim-config";
     niri.url = "github:sodiboo/niri-flake";
     noctalia = {

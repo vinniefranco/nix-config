@@ -3,6 +3,10 @@
   additions = final: _prev: import ../pkgs final.pkgs;
 
   modifications = final: prev: {
+    # niri 26.04 vendors libdisplay-info-sys 0.3.0, which requires
+    # libdisplay-info < 0.4.0; nixpkgs bumped the default to 0.4.0.
+    niri = prev.niri.override { libdisplay-info = prev.libdisplay-info_0_2; };
+
     vivaldi = prev.vivaldi.override {
       commandLineArgs = "--ozone-platform=wayland";
     };

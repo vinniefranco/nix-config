@@ -7,7 +7,6 @@
         {
           command = [ "noctalia" ];
         }
-
       ];
       cursor = {
         size = 32;
@@ -48,6 +47,9 @@
         "XF86AudioPlay".action.spawn = ["playerctl" "-p" "spotify" "play-pause"];
         "XF86AudioPrev".action.spawn = ["playerctl" "-p" "spotify" "previous"];
         "XF86AudioNext".action.spawn = ["playerctl" "-p" "spotify" "next"];
+
+        "Mod+Shift+T".action.spawn = ["handy" "--toggle-transcription"];
+
       };
 
       input = {

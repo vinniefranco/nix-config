@@ -10,6 +10,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.expert-ls.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.baud.packages.${pkgs.stdenv.hostPlatform.system}.default
     bat
     bear
     caligula
@@ -28,6 +29,8 @@
     gphoto2
     gpu-screen-recorder
     jq
+    handy
+    herdr
     killall
     libnotify
     libqalculate
@@ -44,6 +47,7 @@
     python3
     quickshell
     kdePackages.skanpage
+    shotcut
     statix
     swayimg
     tldr
@@ -55,6 +59,7 @@
     vulkan-tools
     wget
     wl-clipboard
+    wtype # Handy pastes transcripts with this on Wayland; without it, it falls back to X11 typing
     xwayland-satellite
     zmk-studio
   ];

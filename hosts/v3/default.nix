@@ -97,7 +97,6 @@ in
 
       BrowseProtocols all
     '';
-    drivers = [ pkgs.hplipWithPlugin ];
   };
   services.avahi = {
     enable = true;
@@ -109,7 +108,6 @@ in
   hardware.enableRedistributableFirmware = true;
 
   hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
 
   hardware.i2c.enable = true;
 
