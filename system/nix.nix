@@ -53,9 +53,4 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # vesktop still pins electron 40 (EOL); allow it until nixpkgs bumps it
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-40.10.5"
-  ];
 }
